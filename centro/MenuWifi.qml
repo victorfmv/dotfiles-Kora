@@ -168,7 +168,7 @@ Rectangle {
             font { family: "Rubik"; pixelSize: 11 }
             MouseArea {
                 id: masArea; anchors.fill: parent; hoverEnabled: true; cursorShape: Qt.PointingHandCursor
-                onClicked: Quickshell.execDetached(["kitty", "-e", "nmtui"])
+                onClicked: Quickshell.execDetached(["nm-connection-editor"])
             }
         }
     }

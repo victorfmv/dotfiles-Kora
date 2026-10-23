@@ -129,7 +129,7 @@ ShellRoot {
         abierto = true;
     }
     function cerrar() { abierto = false; menu = ""; }
-    property string menu: ""            // "wifi" | "bt" | "" — menú desplegado en el panel
+    property string menu: ""            // "wifi" | "bt" | "ajustes" | "" — menú desplegado en el panel
 
     IpcHandler {
         target: "centro"
@@ -412,7 +412,9 @@ ShellRoot {
                         Interruptor {
                             Layout.fillWidth: true
                             icono: "󰒓"
-                            onClic: { root.cerrar(); Quickshell.execDetached(["kitty", "-e", "nmtui"]); }
+                            abre: true
+                            desplegado: root.menu === "ajustes"
+                            onClic: root.menu = root.menu === "ajustes" ? "" : "ajustes"
                         }
                     }
 
@@ -426,6 +428,11 @@ ShellRoot {
                         Layout.fillWidth: true
                         abierto: root.abierto && root.menu === "bt"
                         visible: root.menu === "bt"
+                    }
+                    MenuAjustes {
+                        Layout.fillWidth: true
+                        visible: root.menu === "ajustes"
+                        onAbrio: root.cerrar()
                     }
 
                     // ── Notificaciones ──
