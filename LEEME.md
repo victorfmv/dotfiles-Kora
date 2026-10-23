@@ -45,6 +45,7 @@ Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-se
 | Super + Shift + W | Elegir wallpaper |
 | Super + X (o A) / Super + Shift + A | Centro de control y notificaciones / borrar todas |
 | Super + Shift + B | Recargar Waybar |
+| Alt + F6 | Ventiladores al máximo / automático (`~/.local/bin/ventiladores`, no cambia el modo de energía) |
 | Clic en la batería | Panel de batería y modo de energía (Ahorro / Balanceado / Rendimiento) que sale bajo la barra (`centro/Energia.qml`, `scripts/energia.sh`) |
 | Impr / Super + Impr | Captura de área / pantalla completa |
 

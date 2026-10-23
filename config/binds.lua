@@ -29,6 +29,9 @@ hl.bind(mainMod .. " + Up",    hl.dsp.focus({ workspace = "r-1" })) -- workspace
 hl.bind(mainMod .. " + Down",  hl.dsp.focus({ workspace = "r+1" })) -- workspace de abajo
 hl.bind("ALT + Tab",           hl.dsp.window.cycle_next())
 
+-- Ventiladores del Alienware al máximo / automático (no cambia el modo de energía)
+hl.bind("ALT + F6",            hl.dsp.exec_cmd("~/.local/bin/ventiladores"))
+
 -- Move active window around workspaces & monitors
 hl.bind(mainMod .. " + SHIFT + Up",                   hl.dsp.window.move({ direction = "u" }))
 hl.bind(mainMod .. " + SHIFT + Right",                hl.dsp.window.move({ direction = "r" }))
