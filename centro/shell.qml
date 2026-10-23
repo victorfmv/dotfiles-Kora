@@ -431,6 +431,7 @@ ShellRoot {
                     }
                     MenuAjustes {
                         Layout.fillWidth: true
+                        abierto: root.abierto && root.menu === "ajustes"
                         visible: root.menu === "ajustes"
                         onAbrio: root.cerrar()
                     }
