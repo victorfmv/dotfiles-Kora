@@ -81,9 +81,9 @@
         "orientation": "horizontal",
         "modules": ["cpu", "memory", "disk", "temperature"]
     },
-    "cpu": { "format": "󰻠 {usage}%", "interval": 2, "tooltip": false, "on-click": "mission-center" },
-    "memory": { "format": "󰍛 {percentage}%", "interval": 3, "tooltip-format": "RAM: {used:0.1f} / {total:0.1f} GiB", "on-click": "mission-center" },
-    "disk": { "format": "󰋊 {percentage_used}%", "path": "/", "interval": 60, "tooltip-format": "Disco: {used} / {total}" },
+    "cpu": { "format": "󰻠 {usage}%", "interval": 2, "tooltip-format": "Procesador · clic: Monitor", "on-click": "~/.config/hypr-kora/scripts/monitor.sh" },
+    "memory": { "format": "󰍛 {percentage}%", "interval": 3, "tooltip-format": "RAM: {used:0.1f} / {total:0.1f} GiB · clic: Monitor", "on-click": "~/.config/hypr-kora/scripts/monitor.sh" },
+    "disk": { "format": "󰋊 {percentage_used}%", "path": "/", "interval": 60, "tooltip-format": "Disco: {used} / {total} · clic: Monitor", "on-click": "~/.config/hypr-kora/scripts/monitor.sh" },
     "temperature": {
         "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
         "input-filename": "temp1_input",
@@ -91,7 +91,8 @@
         "format": "󰔏 {temperatureC}°",
         "format-critical": "󰈸 {temperatureC}°",
         "interval": 3,
-        "tooltip": false
+        "tooltip-format": "Temperatura del procesador · clic: Monitor",
+        "on-click": "~/.config/hypr-kora/scripts/monitor.sh"
     },
     "group/estado": {
         "orientation": "horizontal",
