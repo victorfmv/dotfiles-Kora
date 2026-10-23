@@ -76,7 +76,9 @@
         "states": { "warning": 25, "critical": 12 },
         "format": "{icon} {capacity}%",
         "format-charging": "󰂄 {capacity}%",
-        "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"]
+        "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"],
+        "tooltip-format": "{timeTo}\nClic: modo de energía",
+        "on-click": "~/.config/hypr-kora/scripts/energia.sh"
     },
     "group/sistema": {
         "orientation": "horizontal",
