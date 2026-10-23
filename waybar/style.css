@@ -35,3 +35,4 @@ window#waybar { background: transparent; color: @fg; }
 #custom-power { color: @urgent; }
 
 tooltip { background: @bg; border: 1px solid @accent; border-radius: 10px; }
+#custom-workspaces { padding: 0 16px; }

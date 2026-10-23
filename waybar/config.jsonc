@@ -9,13 +9,20 @@
     "spacing": 6,
 
     "modules-left": ["custom/logo", "clock", "hyprland/window"],
-    "modules-center": ["hyprland/workspaces"],
+    "modules-center": ["custom/workspaces"],
     "modules-right": ["mpris", "tray", "network", "battery", "custom/power"],
 
     "custom/logo": {
         "format": "",
         "tooltip": false,
         "on-click": "~/.config/hypr-kora/scripts/fuzzel.sh"
+    },
+    "custom/workspaces": {
+        "exec": "~/.config/hypr-kora/scripts/workspaces.py",
+        "return-type": "json",
+        "escape": false,
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'"
     },
     "hyprland/workspaces": {
         "format": "{icon}",
