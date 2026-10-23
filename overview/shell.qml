@@ -264,14 +264,20 @@ ShellRoot {
                         anchors.fill: parent
                         radius: 18 * root.t
                         color: "#0d0c0a"
-                        clip: true
+                        // Sin recorte: como en niri, las ventanas de la fila que están fuera
+                        // de la pantalla se asoman a los lados de la tarjeta (mismo tamaño).
+                        clip: false
 
-                        Image {
+                        Item {
                             anchors.fill: parent
-                            source: root.wallpaper
-                            fillMode: Image.PreserveAspectCrop
-                            asynchronous: true
-                            sourceSize.width: vista.width
+                            clip: true
+                            Image {
+                                anchors.fill: parent
+                                source: root.wallpaper
+                                fillMode: Image.PreserveAspectCrop
+                                asynchronous: true
+                                sourceSize.width: vista.width
+                            }
                         }
 
                         MouseArea {
@@ -303,6 +309,10 @@ ShellRoot {
                                 width: (ipc?.size?.[0] ?? 0) * root.k
                                 height: (ipc?.size?.[1] ?? 0) * root.k
                                 z: (ipc?.floating ?? false) ? 2 : 1
+                                // Las que están fuera de la pantalla, un poco más tenues
+                                readonly property bool fuera: x + width <= 1 || x >= pantalla.width - 1
+                                opacity: fuera ? 0.6 : 1
+                                Behavior on opacity { NumberAnimation { duration: 150 } }
 
                                 Rectangle {
                                     anchors.fill: parent
