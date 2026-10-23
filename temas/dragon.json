@@ -1,0 +1,10 @@
+{
+ "nombre": "Dragón",
+ "descripcion": "Para dragon-fantasy: azul pizarra de tormenta con acento rojo carmesí",
+ "acento_h": 3,
+ "acento_s": 1.0,
+ "acento_l": -0.03,
+ "neutro_h": 218,
+ "neutro_s": 1.25,
+ "especiales": {"e06c5a": "f2a54a", "b84c3d": "d9822b", "f08a78": "f7c27d", "ffe6b3": "dce5f7"}
+}
