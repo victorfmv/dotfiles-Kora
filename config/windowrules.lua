@@ -2,6 +2,16 @@
 
 -- Generic floating position
 hl.window_rule({ match = { float = true }, persistent_size = true })
+-- Que ninguna ventana flotante sea más alta que el espacio debajo de la barra (si no, se mete debajo de Waybar)
+hl.window_rule({ match = { float = true }, max_size = { "monitor_w*0.95", "monitor_h*0.88" } })
+
+-- Diálogos de "Abrir/Guardar archivo" del portal: tamaño cómodo y centrados
+hl.window_rule({
+    match  = { class = "^(xdg-desktop-portal-gtk|org\\.freedesktop\\.impl\\.portal\\.desktop\\.kde)$" },
+    float  = true,
+    size   = { "monitor_w*0.5", "monitor_h*0.72" },
+    center = true,
+})
 
 -- Picture-in-Picture
 hl.window_rule({
