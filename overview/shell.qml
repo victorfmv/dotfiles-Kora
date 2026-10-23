@@ -20,8 +20,8 @@ ShellRoot {
     readonly property color gris: "#6b6255"
 
     readonly property int grupo: 5
-    readonly property real k: 0.6            // tamaño de cada pantalla en la vista
-    readonly property real separacion: 48
+    readonly property real k: 0.45           // tamaño de cada pantalla en la vista
+    readonly property real separacion: 40
 
     property bool abierto: false
     property bool saliendo: false
