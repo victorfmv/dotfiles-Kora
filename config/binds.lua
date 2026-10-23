@@ -18,13 +18,13 @@ hl.bind(mainMod .. " + Q",           hl.dsp.window.close())
 hl.bind(mainMod .. " + ALT + Space", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + H",           hl.dsp.window.fullscreen({ mode = 1 }))
 hl.bind(mainMod .. " + F",           hl.dsp.window.fullscreen())
-hl.bind(mainMod .. " + J",           hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + J",           hl.dsp.layout("colresize +conf")) -- media / completa
 
 -- Change focus
 hl.bind(mainMod .. " + Left",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + Right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + Up",    hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + Down",  hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + Up",    hl.dsp.focus({ workspace = "r-1" })) -- workspace de arriba (tipo niri)
+hl.bind(mainMod .. " + Down",  hl.dsp.focus({ workspace = "r+1" })) -- workspace de abajo
 hl.bind("ALT + Tab",           hl.dsp.window.cycle_next())
 
 -- Move active window around workspaces & monitors

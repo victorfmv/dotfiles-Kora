@@ -2,6 +2,15 @@ hl.config({
     dwindle = {
         preserve_split = true,
     },
+    -- Layout scrolling (tipo niri): cada ventana nueva ocupa toda la pantalla
+    -- y se acomoda a la derecha; Super+J alterna entre media y completa.
+    scrolling = {
+        column_width = 1.0,
+        explicit_column_widths = "0.5, 1.0",
+        fullscreen_on_one_column = true,
+        follow_focus = true,
+        focus_fit_method = 1,
+    },
     ecosystem = {
         no_update_news = true,
         no_donation_nag = true,

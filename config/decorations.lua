@@ -7,6 +7,7 @@ local LOCKED   = KORA.locked
 
 hl.config({
     general = {
+        layout = "scrolling", -- ventanas en fila horizontal, tipo niri
         gaps_in = 3,
         gaps_out = 8,
         border_size = 2,

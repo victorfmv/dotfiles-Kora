@@ -29,6 +29,11 @@ Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-se
 | Super + Enter / W / E / C | Terminal / Brave / Dolphin / VSCodium |
 | Super + Q | Cerrar ventana |
 | Super + 1…0 | Workspaces |
+| Super + ← / → | Ventana anterior / siguiente (fila horizontal tipo niri) |
+| Super + ↑ / ↓ | Workspace de arriba / abajo |
+| Super + J | Ventana a media pantalla / completa |
+| 3 dedos ← → | Recorrer ventanas · 3 dedos ↑ ↓: cambiar workspace |
+| 4 dedos ↓ / ↑ / ← | Cerrar / pantalla completa / flotante |
 | Super + M / D / O / G / S | Música / Discord / OBS / Juegos / Steam |
 | Super + V | Portapapeles |
 | Super + L | Bloquear |
