@@ -46,3 +46,9 @@ tooltip { background: @bg; border: 1px solid @accent; border-radius: 10px; }
 #custom-notif.dnd { color: @muted; }
 /* Rayitas de música (cava) */
 #custom-cava { color: @accent; padding: 0 12px; }
+/* Grupo del sistema (CPU · RAM · disco · temperatura): pareja simétrica del grupo de estado */
+#sistema > widget > * { background: transparent; padding: 0 7px; margin: 0; }
+#temperature.critical { color: @urgent; }
+/* Título de ventana y rayitas con el mismo ancho para que los lados queden en espejo */
+#window, #custom-cava { min-width: 230px; }
+#window { padding: 0 14px; }
