@@ -37,8 +37,9 @@
         "rewrite": { "": "Escritorio" }
     },
     "clock": {
-        "format": "{:%H:%M}",
-        "format-alt": "{:%A %d de %B}",
+        "format": "<span color='#ece4d4'>󰃭  {0:L%A %d de %B}</span>   <span color='#6b6255'>│</span>   <span color='#e6b450' weight='bold'>󰥔  {0:%H:%M}</span>",
+        "format-alt": "<span color='#ece4d4'>󰃭  {0:%d/%m/%Y}</span>   <span color='#6b6255'>│</span>   <span color='#e6b450' weight='bold'>󰥔  {0:%H:%M:%S}</span>",
+        "interval": 1,
         "tooltip-format": "<tt>{calendar}</tt>",
         "locale": "es_MX.UTF-8"
     },

@@ -28,7 +28,7 @@ window#waybar { background: transparent; color: @fg; }
 #workspaces button.active { color: @bg; background: @accent; border-radius: 10px; font-weight: bold; }
 #workspaces button.urgent { color: @urgent; }
 #workspaces button:hover { background: alpha(@accent, 0.15); box-shadow: none; }
-#clock { color: @accent; font-weight: bold; }
+#clock { padding: 0 16px; }
 #battery.warning { color: @accent; }
 #battery.critical { color: @urgent; }
 #custom-power { color: @urgent; }
