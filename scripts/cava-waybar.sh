@@ -4,7 +4,7 @@
 # Truco: cada barra es un "┃" de distinto tamaño, subido (rise) para que su centro
 # quede siempre a la misma altura y con letter_spacing para que todas ocupen lo mismo.
 # Medidas de CaskaydiaCove Nerd Font Mono: ascent 0.928, descent 0.235, avance 0.586 em.
-BARRAS=16          # por lado (en total se ven el doble)
+BARRAS=28          # por lado (en total se ven el doble)
 cfg="${XDG_RUNTIME_DIR:-/tmp}/kora-cava.conf"
 cat > "$cfg" <<CFG
 [general]
@@ -14,6 +14,8 @@ sleep_timer = 0
 [input]
 method = pipewire
 [output]
+channels = mono
+mono_option = average
 method = raw
 raw_target = /dev/stdout
 data_format = ascii
@@ -23,8 +25,8 @@ CFG
 pkill -f "cava -p $cfg" 2>/dev/null
 exec cava -p "$cfg" | awk -F';' '
 BEGIN {
-    smax = 15; smin = 1.6       # tamaño (pt) de la barra más alta y de la más baja
-    paso = 3.4                  # espacio fijo por barra (pt)
+    smax = 15; smin = 2.4       # tamaño (pt) de la barra más alta y de la más baja
+    paso = 3.5                  # espacio fijo por barra (pt): 56 barras llenan la pastilla (230 px)
     centro = (0.928 - 0.235) / 2
     avance = 0.586
 }
