@@ -238,21 +238,6 @@ ShellRoot {
                     readonly property bool esActivo: wsId === root.activo
                     readonly property bool esSeleccion: wsId === root.seleccion
                     readonly property var ventanas: root.abierto ? root.ventanasDe(wsId) : []
-
-                    // La fila de ventanas (modo scrolling) puede salirse de la pantalla.
-                    // Al alejarse se encoge para que quepa completa en la tarjeta;
-                    // a t=0 cada ventana vuelve a su lugar real (zoom continuo).
-                    readonly property var ajuste: {
-                        const sx = vista.screen?.x ?? 0;
-                        const mosaico = ventanas.filter(v => !(v.lastIpcObject?.floating ?? false) && v.lastIpcObject?.at);
-                        if (!mosaico.length) return { f: 1, dx: 0 };
-                        const izq = Math.min(...mosaico.map(v => v.lastIpcObject.at[0] - sx));
-                        const der = Math.max(...mosaico.map(v => v.lastIpcObject.at[0] - sx + v.lastIpcObject.size[0]));
-                        const margen = 16;
-                        if (izq >= 0 && der <= vista.width) return { f: 1, dx: 0 };
-                        const f = Math.min(1, (vista.width - 2 * margen) / (der - izq));
-                        return { f: f, dx: (vista.width - (der - izq) * f) / 2 - izq * f };
-                    }
                     readonly property real distancia: Math.abs(index - root.foco)
 
                     width: vista.anchoPantalla
@@ -313,19 +298,10 @@ ShellRoot {
                                 required property var modelData
                                 readonly property var ipc: modelData.lastIpcObject
                                 readonly property bool enfocada: modelData.activated
-                                // Lugar real en el monitor y lugar "acomodado" para que quepa la fila
-                                readonly property real rx: (ipc?.at?.[0] ?? 0) - (vista.screen?.x ?? 0)
-                                readonly property real ry: (ipc?.at?.[1] ?? 0) - (vista.screen?.y ?? 0)
-                                readonly property real rw: ipc?.size?.[0] ?? 0
-                                readonly property real rh: ipc?.size?.[1] ?? 0
-                                readonly property real f: (ipc?.floating ?? false) ? 1 : pantalla.ajuste.f
-                                readonly property real ax: (ipc?.floating ?? false) ? rx : rx * f + pantalla.ajuste.dx
-                                readonly property real ay: vista.height / 2 + (ry - vista.height / 2) * f
-                                readonly property real mezcla: root.t
-                                x: (rx + (ax - rx) * mezcla) * root.k
-                                y: (ry + (ay - ry) * mezcla) * root.k
-                                width: rw * (1 + (f - 1) * mezcla) * root.k
-                                height: rh * (1 + (f - 1) * mezcla) * root.k
+                                x: ((ipc?.at?.[0] ?? 0) - (vista.screen?.x ?? 0)) * root.k
+                                y: ((ipc?.at?.[1] ?? 0) - (vista.screen?.y ?? 0)) * root.k
+                                width: (ipc?.size?.[0] ?? 0) * root.k
+                                height: (ipc?.size?.[1] ?? 0) * root.k
                                 z: (ipc?.floating ?? false) ? 2 : 1
 
                                 Rectangle {
