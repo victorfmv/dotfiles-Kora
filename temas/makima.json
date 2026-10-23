@@ -1,0 +1,7 @@
+{
+ "nombre": "Makima",
+ "descripcion": "Para makima-control: cobre del cabello y ámbar de los ojos sobre café oscuro",
+ "acento_h": 17, "acento_s": 0.95, "acento_l": -0.02,
+ "neutro_h": 25, "neutro_s": 0.9,
+ "especiales": {"e06c5a": "f2c14e", "b84c3d": "d9a52b", "f08a78": "f7d37d"}
+}

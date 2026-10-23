@@ -1,4 +1,10 @@
 {
  "_nota": "Qué tema usa cada fondo (nombre del archivo sin extensión). Los que no están aquí usan 'dorado'.",
- "dragon-fantasy.3840x2160": "dragon"
+ "angel-de-ceniza": "ceniza",
+ "visor-dorado": "dorado",
+ "dragon-de-tormenta": "dragon",
+ "mirada-al-cielo": "cielo",
+ "ojos-de-galaxia": "galaxia",
+ "makima-control": "makima",
+ "samurai-errante": "tinta"
 }

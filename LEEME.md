@@ -64,7 +64,17 @@ Cada cambio = un commit en git (nada de `.bak`). Cambios de Caelestia van en `~/
 
 Cada fondo puede tener su propia paleta. Al elegir un fondo (Super+Shift+W o el botón del panel) se ponen sus colores solos en Waybar, el panel, la vista de workspaces, el bloqueo, los bordes y fuzzel.
 
-- `temas/<nombre>.json`: cada tema. `dorado` es el original; `dragon` es azul pizarra con acento rojo carmesí.
+- `temas/<nombre>.json`: cada tema.
+
+  | Fondo | Tema |
+  |---|---|
+  | angel-de-ceniza | ceniza: blanco y negro, acento plateado |
+  | visor-dorado | dorado: el original |
+  | dragon-de-tormenta | dragon: carmesí sobre azul pizarra |
+  | mirada-al-cielo | cielo: azul celeste |
+  | ojos-de-galaxia | galaxia: violeta sobre índigo |
+  | makima-control | makima: cobre y ámbar |
+  | samurai-errante | tinta: grises con toque jade |
 - `temas/fondos.json`: qué tema usa cada fondo (nombre del archivo sin extensión). Si un fondo no aparece, usa `dorado`.
 - `scripts/tema.py <nombre>`: cambia el tema a mano. `scripts/tema.py` solo dice cuál está puesto.
 - `temas/base.json`: todos los colores del tema dorado. Si agregas colores nuevos, ponlos en su versión dorada, con `tema.py dorado` activo, y corre `tema.py --base`.
