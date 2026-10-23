@@ -8,8 +8,8 @@
     "margin-right": 10,
     "spacing": 6,
 
-    "modules-left": ["custom/logo", "hyprland/workspaces", "hyprland/window"],
-    "modules-center": ["clock"],
+    "modules-left": ["custom/logo", "clock", "hyprland/window"],
+    "modules-center": ["hyprland/workspaces"],
     "modules-right": ["mpris", "tray", "pulseaudio", "backlight", "network", "battery", "custom/power"],
 
     "custom/logo": {
@@ -25,6 +25,7 @@
             "6": "6", "7": "7", "8": "8", "9": "9", "10": "10"
         },
         "show-special": true,
+        "persistent-workspaces": { "*": 5 },
         "on-scroll-up": "hyprctl dispatch workspace m-1",
         "on-scroll-down": "hyprctl dispatch workspace m+1"
     },
