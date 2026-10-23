@@ -1,9 +1,4 @@
 #!/usr/bin/env bash
-# Cambia el modo de energía (lo llama el menú de la batería en Waybar): energia.sh performance|balanced|power-saver
-case "$1" in
-    performance) nombre=Rendimiento ;;
-    balanced)    nombre=Balanceado ;;
-    power-saver) nombre=Ahorro ;;
-    *) exit 1 ;;
-esac
-powerprofilesctl set "$1" && notify-send -a "Energía" "Modo de energía" "$nombre"
+# Abre/cierra el panel de batería y modo de energía (clic en la batería de Waybar), centrado donde está el cursor
+x=$(hyprctl cursorpos | cut -d, -f1)
+exec ~/.config/hypr-kora/scripts/centro.sh --target energia toggle "${x:-1900}"

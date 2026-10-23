@@ -52,7 +52,3 @@ tooltip { background: @bg; border: 1px solid @accent; border-radius: 10px; }
 /* Título de ventana y rayitas con el mismo ancho para que los lados queden en espejo */
 #window, #custom-cava { min-width: 230px; }
 #window { padding: 0 14px; }
-/* Menú de modo de energía que sale de la batería */
-menu { background: @bg; border: 1px solid @accent; border-radius: 10px; padding: 6px; }
-menu menuitem { color: @fg; padding: 6px 14px; border-radius: 8px; }
-menu menuitem:hover { background: alpha(@accent, 0.2); color: @accent; }

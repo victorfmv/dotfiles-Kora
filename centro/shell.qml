@@ -561,4 +561,7 @@ ShellRoot {
             }
         }
     }
+
+    // ───────────── Batería y modo de energía (clic en la batería de Waybar) ─────────────
+    Energia {}
 }
