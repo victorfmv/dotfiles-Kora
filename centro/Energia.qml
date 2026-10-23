@@ -81,16 +81,16 @@ Scope {
         Item {
             id: recorte
             x: Math.max(10, Math.min(ventana.width - width - 10, energia.centroX - width / 2))
-            y: 44
-            width: 320
+            y: 42
+            width: 232
             height: caja.height + 20
             clip: true
 
             Rectangle {
                 id: caja
                 width: parent.width
-                height: columna.implicitHeight + 32
-                radius: 22
+                height: columna.implicitHeight + 22
+                radius: 16
                 gradient: Gradient {
                     GradientStop { position: 0.0; color: Qt.rgba(0.11, 0.095, 0.075, 0.99) }
                     GradientStop { position: 1.0; color: Qt.rgba(0.06, 0.05, 0.04, 0.99) }
@@ -109,24 +109,24 @@ Scope {
 
                 ColumnLayout {
                     id: columna
-                    anchors { left: parent.left; right: parent.right; top: parent.top; margins: 16 }
-                    spacing: 14
+                    anchors { left: parent.left; right: parent.right; top: parent.top; margins: 11 }
+                    spacing: 9
 
                     // ── Batería ──
                     RowLayout {
                         Layout.fillWidth: true
-                        spacing: 12
+                        spacing: 9
 
                         Rectangle {
-                            Layout.preferredWidth: 48; Layout.preferredHeight: 48
-                            radius: 16
+                            Layout.preferredWidth: 34; Layout.preferredHeight: 34
+                            radius: 11
                             color: Qt.rgba(0.9, 0.7, 0.31, 0.14)
                             border.width: 1; border.color: Qt.rgba(0.9, 0.7, 0.31, 0.3)
                             Text {
                                 anchors.centerIn: parent
                                 text: energia.iconoBateria
                                 color: energia.nivel < 0.15 && !energia.cargando ? "#e06c5a" : energia.oro
-                                font { family: energia.iconos; pixelSize: 24 }
+                                font { family: energia.iconos; pixelSize: 17 }
                             }
                         }
                         Column {
@@ -135,14 +135,14 @@ Scope {
                             Text {
                                 text: Math.round(energia.nivel * 100) + "%"
                                 color: "#fff8ec"
-                                font { family: "Rubik"; pixelSize: 22; bold: true }
+                                font { family: "Rubik"; pixelSize: 16; bold: true }
                             }
                             Text {
                                 width: parent.width
                                 text: energia.estado
                                 color: energia.tenue
                                 elide: Text.ElideRight
-                                font { family: "Rubik"; pixelSize: 11 }
+                                font { family: "Rubik"; pixelSize: 9 }
                             }
                         }
                     }
@@ -150,13 +150,13 @@ Scope {
                     // Barra de carga
                     Rectangle {
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 6
-                        radius: 3
+                        Layout.preferredHeight: 4
+                        radius: 2
                         color: Qt.rgba(1, 0.9, 0.7, 0.08)
                         Rectangle {
                             width: parent.width * energia.nivel
                             height: parent.height
-                            radius: 3
+                            radius: 2
                             gradient: Gradient {
                                 orientation: Gradient.Horizontal
                                 GradientStop { position: 0.0; color: "#b8862f" }
@@ -169,13 +169,13 @@ Scope {
                     Text {
                         text: "MODO DE ENERGÍA"
                         color: energia.oro
-                        font { family: "Rubik"; pixelSize: 10; weight: Font.DemiBold; letterSpacing: 1 }
+                        font { family: "Rubik"; pixelSize: 9; weight: Font.DemiBold; letterSpacing: 1 }
                     }
 
                     // ── Modos ──
                     RowLayout {
                         Layout.fillWidth: true
-                        spacing: 8
+                        spacing: 6
 
                         Repeater {
                             model: energia.modos
@@ -187,8 +187,8 @@ Scope {
                                 readonly property bool disponible: modelData.perfil !== PowerProfile.Performance || PowerProfiles.hasPerformanceProfile
 
                                 Layout.fillWidth: true
-                                Layout.preferredHeight: 86
-                                radius: 16
+                                Layout.preferredHeight: 58
+                                radius: 12
                                 opacity: disponible ? 1 : 0.35
                                 gradient: Gradient {
                                     GradientStop { position: 0.0; color: boton.activo ? "#f0c463" : Qt.rgba(0.19, 0.165, 0.13, zona.containsMouse ? 1 : 0.85) }
@@ -201,23 +201,23 @@ Scope {
 
                                 Column {
                                     anchors.centerIn: parent
-                                    spacing: 6
+                                    spacing: 3
                                     Rectangle {
                                         anchors.horizontalCenter: parent.horizontalCenter
-                                        width: 38; height: 38; radius: 19
+                                        width: 26; height: 26; radius: 13
                                         color: boton.activo ? Qt.rgba(0.08, 0.07, 0.06, 0.2) : Qt.rgba(0.9, 0.7, 0.31, 0.14)
                                         Text {
                                             anchors.centerIn: parent
                                             text: boton.modelData.ic
                                             color: boton.activo ? energia.fondo : energia.oro
-                                            font { family: energia.iconos; pixelSize: 20 }
+                                            font { family: energia.iconos; pixelSize: 14 }
                                         }
                                     }
                                     Text {
                                         anchors.horizontalCenter: parent.horizontalCenter
                                         text: boton.modelData.nombre
                                         color: boton.activo ? energia.fondo : energia.crema
-                                        font { family: "Rubik"; pixelSize: 11; weight: boton.activo ? Font.Bold : Font.Medium }
+                                        font { family: "Rubik"; pixelSize: 9; weight: boton.activo ? Font.Bold : Font.Medium }
                                     }
                                 }
 
@@ -238,7 +238,7 @@ Scope {
                         horizontalAlignment: Text.AlignHCenter
                         text: energia.modoActual.desc
                         color: energia.tenue
-                        font { family: "Rubik"; pixelSize: 11 }
+                        font { family: "Rubik"; pixelSize: 9 }
                     }
                 }
             }
