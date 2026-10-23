@@ -15,6 +15,10 @@ hl.config({
 -- 3 dedos tipo niri: a los lados recorre las ventanas, arriba/abajo cambia de workspace
 hl.gesture({ fingers = 3, direction = "horizontal", action = "scroll_move" })
 hl.gesture({ fingers = 3, direction = "vertical",   action = "workspace" })
+-- Pellizco con 4 dedos: vista general (ver todas las ventanas) y regresar
+local VISTA = os.getenv("HOME") .. "/.config/hypr-kora/scripts/vista.sh"
+hl.gesture({ fingers = 4, direction = "pinchin",  action = function() hl.exec_cmd(VISTA .. " abrir") end })
+hl.gesture({ fingers = 4, direction = "pinchout", action = function() hl.exec_cmd(VISTA .. " cerrar") end })
 -- 4 dedos: lo que antes estaba en 3
 hl.gesture({ fingers = 4, direction = "down",       action = "close" })
 hl.gesture({ fingers = 4, direction = "up",         action = "fullscreen" })

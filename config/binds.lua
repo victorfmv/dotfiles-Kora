@@ -18,6 +18,7 @@ hl.bind(mainMod .. " + Q",           hl.dsp.window.close())
 hl.bind(mainMod .. " + ALT + Space", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + H",           hl.dsp.window.fullscreen({ mode = 1 }))
 hl.bind(mainMod .. " + F",           hl.dsp.window.fullscreen())
+hl.bind(mainMod .. " + Tab",         hl.dsp.exec_cmd("~/.config/hypr-kora/scripts/vista.sh")) -- vista general
 hl.bind(mainMod .. " + J",           hl.dsp.layout("colresize +conf")) -- media / completa
 
 -- Change focus

@@ -32,6 +32,7 @@ Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-se
 | Super + ← / → | Ventana anterior / siguiente (fila horizontal tipo niri) |
 | Super + ↑ / ↓ | Workspace de arriba / abajo |
 | Super + J | Ventana a media pantalla / completa |
+| Super + Tab · pellizco 4 dedos | Vista general: ver todas las ventanas del workspace |
 | 3 dedos ← → | Recorrer ventanas · 3 dedos ↑ ↓: cambiar workspace |
 | 4 dedos ↓ / ↑ / ← | Cerrar / pantalla completa / flotante |
 | Super + M / D / O / G / S | Música / Discord / OBS / Juegos / Steam |
