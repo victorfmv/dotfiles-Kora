@@ -19,7 +19,6 @@ hl.gesture({ fingers = 3, direction = "vertical",   action = "workspace" })
 local OVERVIEW = os.getenv("HOME") .. "/.config/hypr-kora/scripts/overview.sh"
 hl.gesture({ fingers = 3, direction = "pinchin",  action = function() hl.exec_cmd(OVERVIEW .. " open") end })
 hl.gesture({ fingers = 3, direction = "pinchout", action = function() hl.exec_cmd(OVERVIEW .. " close") end })
--- 4 dedos: lo que antes estaba en 3
-hl.gesture({ fingers = 4, direction = "down",       action = "close" })
+-- 4 dedos: pantalla completa / flotante (cerrar con gesto se quitó: se cerraban ventanas sin querer)
 hl.gesture({ fingers = 4, direction = "up",         action = "fullscreen" })
 hl.gesture({ fingers = 4, direction = "left",       action = "float" })

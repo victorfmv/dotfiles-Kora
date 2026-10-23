@@ -161,8 +161,9 @@ hl.bind(mainMod .. " + CONTROL + Left",        hl.dsp.focus({ workspace = "m-1" 
 hl.bind(mainMod .. " + CONTROL + Down",        hl.dsp.focus({ workspace = "emptym" }))
 
 -- Scroll through existing workspaces & monitors
-hl.bind(mainMod .. " + mouse_down",           hl.dsp.focus({ workspace = "m-1" }))
-hl.bind(mainMod .. " + mouse_up",             hl.dsp.focus({ workspace = "m+1" }))
+-- Super + rueda: vista de workspaces tipo niri (soltar Super = ir al elegido)
+hl.bind(mainMod .. " + mouse_down",           hl.dsp.exec_cmd("~/.config/hypr-kora/scripts/overview.sh scroll 1"))
+hl.bind(mainMod .. " + mouse_up",             hl.dsp.exec_cmd("~/.config/hypr-kora/scripts/overview.sh scroll -1"))
 hl.bind(mainMod .. " + CONTROL + mouse_up",   hl.dsp.focus({ workspace = "m-1" }))
 hl.bind(mainMod .. " + CONTROL + mouse_down", hl.dsp.focus({ workspace = "m+1" }))
 

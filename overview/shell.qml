@@ -4,6 +4,7 @@
 // Al abrir, la pantalla se aleja; al elegir, la cámara se acerca hasta llenarla.
 // Abrir/cerrar:  ~/.config/hypr-kora/scripts/overview.sh [toggle|open|close]
 // Clic en ventana/pantalla = ir ahí · ↑↓ o rueda + Enter · 1-9 · Esc cierra
+// Super + rueda: abre y recorre; al soltar Super va al workspace elegido
 import QtQuick
 import QtQuick.Effects
 import Quickshell
@@ -24,6 +25,7 @@ ShellRoot {
 
     property bool abierto: false
     property bool saliendo: false
+    property bool porRueda: false           // abierta con Super + rueda: al soltar Super se elige
     property int seleccion: 1
     property int grupoInicio: 1
     property real t: 0                      // 0 = pantalla normal, 1 = vista alejada
@@ -73,6 +75,7 @@ ShellRoot {
         animFoco.stop();
         foco = seleccion - grupoInicio;
         saliendo = false;
+        porRueda = false;
         if (!abierto) t = 0;
         abierto = true;
         animar(animT, 1, 460, Easing.OutQuart);
@@ -91,6 +94,12 @@ ShellRoot {
         animar(animT, 0, 380, Easing.InOutCubic);
     }
     function cerrar() { salirA(activo, null); }
+    // Super + rueda: abre la vista y recorre los workspaces; soltar Super elige
+    function rueda(dir) {
+        if (!abierto || saliendo) abrir();
+        porRueda = true;
+        seleccionar(seleccion + dir);
+    }
     function alternar() { (abierto && !saliendo) ? cerrar() : abrir(); }
 
     IpcHandler {
@@ -98,6 +107,7 @@ ShellRoot {
         function toggle(): void { root.alternar(); }
         function open(): void { root.abrir(); }
         function close(): void { root.cerrar(); }
+        function scroll(dir: int): void { root.rueda(dir); }
     }
 
     PanelWindow {
@@ -163,6 +173,14 @@ ShellRoot {
                 else if (e.key >= Qt.Key_1 && e.key <= Qt.Key_9) root.salirA(e.key - Qt.Key_0, null);
                 else return;
                 e.accepted = true;
+            }
+            Keys.onReleased: e => {
+                if (root.porRueda && (e.key === Qt.Key_Super_L || e.key === Qt.Key_Super_R || e.key === Qt.Key_Meta)) {
+                    root.salirA(root.seleccion, null);
+                    // Soltar Super también abre el lanzador (bind de release): cerrarlo
+                    Quickshell.execDetached(["sh", "-c", "sleep 0.25; pkill -x fuzzel"]);
+                    e.accepted = true;
+                }
             }
             Connections {
                 target: root

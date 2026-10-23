@@ -34,9 +34,9 @@ Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-se
 | Super + ↑ / ↓ | Workspace de arriba / abajo |
 | Super + J | Ventana a media pantalla / completa |
 | Super + Tab | Vista de la fila: ver todas las ventanas del workspace |
-| Super + Shift + Tab · pellizco 3 dedos | Alejamiento: todos los workspaces con sus ventanas (Quickshell, `overview/shell.qml`) |
+| Super + Shift + Tab · pellizco 3 dedos · Super + rueda | Alejamiento: todos los workspaces con sus ventanas (Quickshell, `overview/shell.qml`) |
 | 3 dedos ← → | Recorrer ventanas · 3 dedos ↑ ↓: cambiar workspace |
-| 4 dedos ↓ / ↑ / ← | Cerrar / pantalla completa / flotante |
+| 4 dedos ↑ / ← | Pantalla completa / flotante |
 | Super + M / D / O / G / S | Música / Discord / OBS / Juegos / Steam |
 | Super + V | Portapapeles |
 | Super + L | Bloquear |
