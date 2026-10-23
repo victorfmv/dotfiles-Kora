@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# Rayitas verticales que se mueven con la música (Waybar). Si no suena nada, se ocultan.
+# Rayitas verticales que se mueven con la música (Waybar). Siempre visibles: en silencio quedan planas.
 cfg="${XDG_RUNTIME_DIR:-/tmp}/kora-cava.conf"
 cat > "$cfg" <<CFG
 [general]
 bars = 12
 framerate = 30
-sleep_timer = 2
+sleep_timer = 0
 [input]
 method = pipewire
 [output]
@@ -19,8 +19,8 @@ pkill -f "cava -p $cfg" 2>/dev/null
 exec cava -p "$cfg" | awk -F';' -v OFS='' '
 BEGIN { split("▁ ▂ ▃ ▄ ▅ ▆ ▇ █", b, " ") }
 {
-    s = ""; total = 0
-    for (i = 1; i < NF; i++) { s = s b[$i + 1]; total += $i }
-    print (total == 0 ? "" : s)
+    s = ""
+    for (i = 1; i < NF; i++) s = s b[$i + 1]
+    print s
     fflush()
 }'
