@@ -25,7 +25,7 @@ window#waybar { background: transparent; color: @fg; }
 
 #custom-logo { color: @accent; font-size: 16px; }
 #workspaces button { color: @muted; padding: 0 5px; background: transparent; }
-#workspaces button.active { color: @accent; }
+#workspaces button.active { color: @bg; background: @accent; border-radius: 10px; font-weight: bold; }
 #workspaces button.urgent { color: @urgent; }
 #workspaces button:hover { background: alpha(@accent, 0.15); box-shadow: none; }
 #clock { color: @accent; font-weight: bold; }

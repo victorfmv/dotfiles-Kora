@@ -21,13 +21,21 @@
         "format": "{icon}",
         "format-icons": {
             "special:music": "", "special:discord": "", "special:obs": "", "gaming": "",
-            "default": "", "active": ""
+            "1": "1", "2": "2", "3": "3", "4": "4", "5": "5",
+            "6": "6", "7": "7", "8": "8", "9": "9", "10": "10"
         },
         "show-special": true,
         "on-scroll-up": "hyprctl dispatch workspace m-1",
         "on-scroll-down": "hyprctl dispatch workspace m+1"
     },
-    "hyprland/window": { "max-length": 40, "separate-outputs": true },
+    "hyprland/window": {
+        "format": "{title}",
+        "icon": true,
+        "icon-size": 16,
+        "max-length": 50,
+        "separate-outputs": true,
+        "rewrite": { "": "Escritorio" }
+    },
     "clock": {
         "format": "{:%H:%M}",
         "format-alt": "{:%A %d de %B}",
