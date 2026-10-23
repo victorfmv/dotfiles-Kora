@@ -3,7 +3,7 @@
 F="$HOME/.config/hypr-kora/scripts/fuzzel.sh"
 pkill fuzzel && exit 0
 choice=$(printf '󰌾  Bloquear\n󰍃  Cerrar sesión\n󰤄  Suspender\n󰜉  Reiniciar\n󰐥  Apagar\n' \
-    | "$F" --dmenu --prompt "⏻  " --lines 5 --width 25)
+    | "$F" --dmenu --prompt "⏻  " --placeholder "Apagar, reiniciar…" --lines 5 --width 25)
 case "$choice" in
     *Bloquear*)      hyprlock -c "$HOME/.config/hypr-kora/hyprlock.conf" ;;
     *Cerrar*)        uwsm stop 2>/dev/null || hyprctl dispatch exit ;;

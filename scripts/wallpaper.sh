@@ -10,7 +10,7 @@ mkdir -p "$(dirname "$STATE")"
 
 if [ "$1" = pick ]; then
     pkill fuzzel && exit 0
-    name=$(ls "$IMGS" | "$HOME/.config/hypr-kora/scripts/fuzzel.sh" --dmenu --prompt "󰸉  ") || exit 0
+    name=$(ls "$IMGS" | "$HOME/.config/hypr-kora/scripts/fuzzel.sh" --dmenu --prompt "󰸉  " --placeholder "Elegir wallpaper…") || exit 0
     echo "$IMGS/$name" > "$STATE"
 fi
 
