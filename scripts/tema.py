@@ -157,8 +157,8 @@ def aplicar(nuevo):
 def recargar():
     # Quickshell (panel y vista de workspaces) se recarga solo al ver los archivos cambiar
     subprocess.run(["hyprctl", "reload"], stdout=subprocess.DEVNULL)
-    subprocess.run(["pkill", "-x", "waybar"])
-    subprocess.Popen(["sh", "-c", f"sleep 0.5; exec waybar -c {K}/waybar/config.jsonc -s {K}/waybar/style.css"],
+    # matar justo antes de lanzar, para que nunca queden dos barras
+    subprocess.Popen(["sh", "-c", f"pkill -x waybar; sleep 0.5; pkill -x waybar; exec waybar -c {K}/waybar/config.jsonc -s {K}/waybar/style.css"],
                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
 
 

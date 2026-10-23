@@ -41,9 +41,9 @@
         "rewrite": { "": "Escritorio" }
     },
     "clock": {
-        "format": "<span color='#e6b450' weight='bold'>󰥔  {0:%H:%M}</span>",
-        "format-alt": "<span color='#e6b450' weight='bold'>󰥔  {0:%H:%M:%S}</span>",
-        "tooltip-format": "<span color='#ece4d4'>{0:L%A %d de %B}</span>\n\n<tt>{calendar}</tt>",
+        "format": "<span color='#e44b43' weight='bold'>󰥔  {0:%H:%M}</span>",
+        "format-alt": "<span color='#e44b43' weight='bold'>󰥔  {0:%H:%M:%S}</span>",
+        "tooltip-format": "<span color='#d1dcef'>{0:L%A %d de %B}</span>\n\n<tt>{calendar}</tt>",
         "interval": 1,
         "locale": "es_MX.UTF-8"
     },

@@ -2,10 +2,10 @@
 -- Waybar usa los mismos valores en waybar/style.css (mantenerlos iguales).
 
 KORA = {
-    accent   = "rgba(e6b450ff)", -- dorado
-    accent2  = "rgba(b8862bff)", -- dorado oscuro
-    inactive = "rgba(3a352daa)",
+    accent   = "rgba(e44b43ff)", -- dorado
+    accent2  = "rgba(ac2f28ff)", -- dorado oscuro
+    inactive = "rgba(2b313caa)",
     locked   = "rgba(7a9fb5ff)",
-    bg       = "rgba(14120fff)",
-    fg       = "rgba(ece4d4ff)",
+    bg       = "rgba(0e1115ff)",
+    fg       = "rgba(d1dcefff)",
 }

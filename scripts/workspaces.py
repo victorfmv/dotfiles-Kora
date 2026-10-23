@@ -4,7 +4,7 @@
 import json, os, socket, subprocess
 
 GRUPO = 5
-ORO, BLANCO, GRIS = "#e6b450", "#ece4d4", "#4a443b"
+ORO, BLANCO, GRIS = "#e44b43", "#d1dcef", "#39404c"
 ICONOS = {"music": "\U000F04C7", "discord": "\U000F066F", "obs": "\U000F044B", "gaming": "\U000F02B4", "steam": "\U000F04D3"}
 
 

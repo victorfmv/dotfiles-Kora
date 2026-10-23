@@ -1,8 +1,8 @@
 # Notificaciones de Hyprland Kora
 font=JetBrains Mono NF 11
-background-color=#14120fee
-text-color=#ece4d4
-border-color=#e6b450
+background-color=#0e1115ee
+text-color=#d1dcef
+border-color=#e44b43
 border-size=2
 border-radius=12
 padding=12
@@ -12,5 +12,5 @@ default-timeout=6000
 anchor=top-right
 
 [urgency=critical]
-border-color=#e06c5a
+border-color=#f2a54a
 default-timeout=0

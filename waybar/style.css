@@ -1,9 +1,9 @@
 /* Waybar de Hyprland Kora — mismos colores que config/colors.lua */
-@define-color bg      rgba(20, 18, 15, 0.85);
-@define-color fg      #ece4d4;
-@define-color accent  #e6b450;
-@define-color muted   #6b6255;
-@define-color urgent  #e06c5a;
+@define-color bg      rgba(14, 17, 21, 0.85);
+@define-color fg      #d1dcef;
+@define-color accent  #e44b43;
+@define-color muted   #525c6e;
+@define-color urgent  #f2a54a;
 
 * {
     font-family: "JetBrains Mono NF", "JetBrainsMono Nerd Font", sans-serif;
