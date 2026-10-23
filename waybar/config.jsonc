@@ -1,0 +1,69 @@
+// Waybar de Hyprland Kora. Recargar en vivo: Super+Shift+B
+{
+    "layer": "top",
+    "position": "top",
+    "height": 34,
+    "margin-top": 6,
+    "margin-left": 10,
+    "margin-right": 10,
+    "spacing": 6,
+
+    "modules-left": ["custom/logo", "hyprland/workspaces", "hyprland/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["mpris", "tray", "pulseaudio", "backlight", "network", "battery", "custom/power"],
+
+    "custom/logo": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "~/.config/hypr-kora/scripts/fuzzel.sh"
+    },
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "special:music": "", "special:discord": "", "special:obs": "", "gaming": "",
+            "default": "", "active": ""
+        },
+        "show-special": true,
+        "on-scroll-up": "hyprctl dispatch workspace m-1",
+        "on-scroll-down": "hyprctl dispatch workspace m+1"
+    },
+    "hyprland/window": { "max-length": 40, "separate-outputs": true },
+    "clock": {
+        "format": "{:%H:%M}",
+        "format-alt": "{:%A %d de %B}",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "locale": "es_MX.UTF-8"
+    },
+    "mpris": {
+        "format": "{status_icon} {title}",
+        "status-icons": { "playing": "", "paused": "" },
+        "max-length": 30
+    },
+    "tray": { "spacing": 8 },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟",
+        "format-icons": { "default": ["", "", ""] },
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol"
+    },
+    "backlight": { "format": "󰃠 {percent}%" },
+    "network": {
+        "format-wifi": "  {essid}",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "󰖪",
+        "tooltip-format": "{ifname} {ipaddr}",
+        "on-click": "kitty -e nmtui"
+    },
+    "battery": {
+        "states": { "warning": 25, "critical": 12 },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"]
+    },
+    "custom/power": {
+        "format": "⏻",
+        "tooltip": false,
+        "on-click": "~/.config/hypr-kora/scripts/power-menu.sh"
+    }
+}

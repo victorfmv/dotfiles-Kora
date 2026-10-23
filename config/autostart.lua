@@ -1,0 +1,15 @@
+-- Programas al iniciar Hyprland Kora (nada de Caelestia aquí)
+local K = os.getenv("HOME") .. "/.config/hypr-kora"
+
+hl.on("hyprland.start", function ()
+    hl.exec_cmd("dbus-update-activation-environment --systemd --all")
+    hl.exec_cmd("wl-paste --type text --watch cliphist store")
+    hl.exec_cmd("wl-paste --type image --watch cliphist store")
+    hl.exec_cmd("systemctl --user start hyprpolkitagent")
+    hl.exec_cmd("nm-applet --indicator")
+    hl.exec_cmd("waybar -c " .. K .. "/waybar/config.jsonc -s " .. K .. "/waybar/style.css")
+    hl.exec_cmd("mako -c " .. K .. "/mako/config")
+    hl.exec_cmd("hypridle -c " .. K .. "/hypridle.conf")
+    hl.exec_cmd(K .. "/scripts/wallpaper.sh")
+    hl.exec_cmd("xhost +SI:localuser:root")
+end)

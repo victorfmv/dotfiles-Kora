@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Hyprland Kora
+Comment=Hyprland personalizado de Victor (Waybar), aparte de Caelestia
+Exec=uwsm start -e -D Hyprland -N "Hyprland Kora" -- /usr/bin/start-hyprland -- -c /home/kora/.config/hypr-kora/hyprland.lua
+TryExec=uwsm
+DesktopNames=Hyprland
+Type=Application

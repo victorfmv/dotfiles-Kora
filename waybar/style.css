@@ -1,0 +1,36 @@
+/* Waybar de Hyprland Kora — mismos colores que config/colors.lua */
+@define-color bg      rgba(20, 18, 15, 0.85);
+@define-color fg      #ece4d4;
+@define-color accent  #e6b450;
+@define-color muted   #6b6255;
+@define-color urgent  #e06c5a;
+
+* {
+    font-family: "JetBrains Mono NF", "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 13px;
+    border: none;
+    min-height: 0;
+}
+
+window#waybar { background: transparent; color: @fg; }
+
+.modules-left > widget > *,
+.modules-center > widget > *,
+.modules-right > widget > * {
+    background: @bg;
+    border-radius: 12px;
+    padding: 0 12px;
+    margin: 0 2px;
+}
+
+#custom-logo { color: @accent; font-size: 16px; }
+#workspaces button { color: @muted; padding: 0 5px; background: transparent; }
+#workspaces button.active { color: @accent; }
+#workspaces button.urgent { color: @urgent; }
+#workspaces button:hover { background: alpha(@accent, 0.15); box-shadow: none; }
+#clock { color: @accent; font-weight: bold; }
+#battery.warning { color: @accent; }
+#battery.critical { color: @urgent; }
+#custom-power { color: @urgent; }
+
+tooltip { background: @bg; border: 1px solid @accent; border-radius: 10px; }
