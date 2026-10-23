@@ -181,4 +181,5 @@ hl.bind(mainMod .. " + O",         hl.dsp.workspace.toggle_special("obs"))
 hl.bind(mainMod .. " + SHIFT + O", hl.dsp.window.move({ workspace = "special:obs" }))
 
 -- Gaming workspace (juegos de Steam)
-hl.bind(mainMod .. " + G",         hl.dsp.focus({ workspace = "name:gaming" }))
+hl.bind(mainMod .. " + G",         hl.dsp.workspace.toggle_special("gaming"))
+hl.bind(mainMod .. " + SHIFT + G", hl.dsp.window.move({ workspace = "special:gaming" }))
