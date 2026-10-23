@@ -45,7 +45,19 @@ ShellRoot {
     NumberAnimation {
         id: animT
         target: root; property: "t"
-        onFinished: if (root.t === 0) { root.abierto = false; root.saliendo = false; }
+        onFinished: if (root.t === 0) {
+            root.abierto = false;
+            root.saliendo = false;
+            // Al cerrar la vista Hyprland devuelve el foco a la ventana anterior
+            // (y con ella al workspace anterior): repetir la orden al final.
+            if (root.pendiente) reafirmar.restart();
+        }
+    }
+    property string pendiente: ""
+    Timer {
+        id: reafirmar
+        interval: 60
+        onTriggered: { root.despachar(root.pendiente); root.pendiente = ""; }
     }
     NumberAnimation { id: animFoco; target: root; property: "foco"; duration: 300; easing.type: Easing.OutCubic }
 
@@ -55,6 +67,9 @@ ShellRoot {
         anim.duration = ms; anim.easing.type = curva;
         anim.start();
     }
+
+    // Config en Lua: Hyprland.dispatch de Quickshell no sirve aquí, se usa hyprctl
+    function despachar(lua) { Quickshell.execDetached(["hyprctl", "dispatch", lua]); }
 
     function addr(t) { return t.address.startsWith("0x") ? t.address : "0x" + t.address; }
     function ventanasDe(id) {
@@ -85,10 +100,9 @@ ShellRoot {
     function salirA(wsId, toplevel) {
         if (!abierto || saliendo) return;
         saliendo = true;
-        if (toplevel)
-            Hyprland.dispatch(`hl.dsp.focus({ window = "address:${addr(toplevel)}" })`);
-        else if (wsId !== activo)
-            Hyprland.dispatch(`hl.dsp.focus({ workspace = ${wsId} })`);
+        pendiente = toplevel ? `hl.dsp.focus({ window = "address:${addr(toplevel)}" })`
+                  : wsId !== activo ? `hl.dsp.focus({ workspace = ${wsId} })` : "";
+        if (pendiente) despachar(pendiente);
         seleccion = wsId;
         animar(animFoco, wsId - grupoInicio, 380, Easing.InOutCubic);
         animar(animT, 0, 380, Easing.InOutCubic);
@@ -99,6 +113,20 @@ ShellRoot {
         if (!abierto || saliendo) abrir();
         porRueda = true;
         seleccionar(seleccion + dir);
+        entrarSolo.restart();
+    }
+
+    // Al dejar de girar la rueda, entrar solo al workspace seleccionado
+    Timer {
+        id: entrarSolo
+        interval: 650
+        onTriggered: {
+            if (root.porRueda && root.abierto && !root.saliendo) {
+                root.salirA(root.seleccion, null);
+                // Si al soltar Super se abrió el lanzador, cerrarlo
+                Quickshell.execDetached(["sh", "-c", "sleep 0.3; pkill -x fuzzel"]);
+            }
+        }
     }
     function alternar() { (abierto && !saliendo) ? cerrar() : abrir(); }
 
