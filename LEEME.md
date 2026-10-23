@@ -20,7 +20,8 @@ Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-se
 | `mako/config` | Notificaciones |
 | `fuzzel/fuzzel.ini` | Lanzador y menús |
 | `hyprlock.conf`, `hypridle.conf` | Bloqueo e inactividad |
-| `scripts/` | Portapapeles, menú de apagado, capturas, wallpaper |
+| `scripts/` | Portapapeles, menú de apagado, capturas, wallpaper, workspaces de Waybar, vistas |
+| `overview/shell.qml` | Vista de todos los workspaces (Quickshell) |
 
 ## Atajos principales
 | Atajo | Acción |
@@ -32,7 +33,8 @@ Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-se
 | Super + ← / → | Ventana anterior / siguiente (fila horizontal tipo niri) |
 | Super + ↑ / ↓ | Workspace de arriba / abajo |
 | Super + J | Ventana a media pantalla / completa |
-| Super + Tab · pellizco 4 dedos | Vista general: ver todas las ventanas del workspace |
+| Super + Tab | Vista de la fila: ver todas las ventanas del workspace |
+| Super + Shift + Tab · pellizco 4 dedos | Alejamiento: todos los workspaces con sus ventanas (Quickshell, `overview/shell.qml`) |
 | 3 dedos ← → | Recorrer ventanas · 3 dedos ↑ ↓: cambiar workspace |
 | 4 dedos ↓ / ↑ / ← | Cerrar / pantalla completa / flotante |
 | Super + M / D / O / G / S | Música / Discord / OBS / Juegos / Steam |
