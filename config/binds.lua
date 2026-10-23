@@ -129,7 +129,7 @@ hl.bind(mainMod .. " + A",         hl.dsp.exec_cmd("makoctl restore"))  -- ver l
 hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd("makoctl dismiss --all"))
 
 -- Barra: recargar Waybar si se trabó
-hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("pkill -SIGUSR2 waybar"))
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("pkill waybar; sleep 0.5; waybar -c ~/.config/hypr-kora/waybar/config.jsonc -s ~/.config/hypr-kora/waybar/style.css"))
 
 -------------------------------
 ---- WORKSPACES & MONITORS ----
