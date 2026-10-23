@@ -74,4 +74,4 @@ tooltip label { color: @fg; }
 #mpris.paused { color: @muted; }
 #custom-logo { padding: 0 14px 0 12px; }
 /* Rayitas de música (cava) */
-#custom-cava { color: @accent; font-family: "CaskaydiaCove Nerd Font"; letter-spacing: 1px; padding: 0 12px; }
+#custom-cava { color: @accent; padding: 0 12px; }
