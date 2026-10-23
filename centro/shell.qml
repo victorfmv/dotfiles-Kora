@@ -218,8 +218,8 @@ ShellRoot {
             anchors { top: parent.top; right: parent.right; topMargin: 48; rightMargin: 10 }
             radius: 24
             gradient: Gradient {
-                GradientStop { position: 0.0; color: Qt.rgba(0.11, 0.095, 0.075, 0.96) }
-                GradientStop { position: 1.0; color: Qt.rgba(0.06, 0.05, 0.04, 0.96) }
+                GradientStop { position: 0.0; color: Qt.rgba(0.11, 0.095, 0.075, 0.99) }
+                GradientStop { position: 1.0; color: Qt.rgba(0.06, 0.05, 0.04, 0.99) }
             }
             border.width: 1
             border.color: Qt.rgba(0.9, 0.7, 0.31, 0.5)
@@ -319,7 +319,9 @@ ShellRoot {
                                     required property var modelData
                                     Layout.preferredWidth: 32; Layout.preferredHeight: 32
                                     radius: 16
-                                    color: Qt.rgba(0.08, 0.07, 0.06, a.containsMouse ? 0.95 : 0.7)
+                                    color: Qt.rgba(0.08, 0.07, 0.06, a.containsMouse ? 0.95 : 0.72)
+                                    border.width: 1
+                                    border.color: a.containsMouse ? "#e6b450" : Qt.rgba(1, 0.9, 0.7, 0.22)
                                     Text { anchors.centerIn: parent; text: modelData.ic; color: root.crema; font { family: root.iconos; pixelSize: 15 } }
                                     MouseArea {
                                         id: a; anchors.fill: parent; hoverEnabled: true
@@ -474,7 +476,12 @@ ShellRoot {
                                 Rectangle {
                                     Layout.fillWidth: true; Layout.preferredHeight: 34
                                     radius: 17
-                                    color: Qt.rgba(1, 1, 1, 0.05)
+                                    gradient: Gradient {
+                                        GradientStop { position: 0.0; color: Qt.rgba(1, 0.95, 0.85, 0.09) }
+                                        GradientStop { position: 1.0; color: Qt.rgba(1, 0.95, 0.85, 0.03) }
+                                    }
+                                    border.width: 1
+                                    border.color: root.cuantas > 0 ? Qt.rgba(0.9, 0.7, 0.31, 0.45) : Qt.rgba(1, 0.9, 0.7, 0.10)
                                     Text {
                                         anchors.centerIn: parent
                                         text: root.cuantas === 1 ? "1 notificación" : root.cuantas + " notificaciones"

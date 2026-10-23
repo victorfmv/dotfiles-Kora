@@ -68,7 +68,9 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 42
                     radius: 12
-                    color: red.modelData.connected ? Qt.rgba(0.9, 0.7, 0.31, 0.16) : Qt.rgba(1, 1, 1, filaArea.containsMouse ? 0.07 : 0.0)
+                    color: red.modelData.connected ? Qt.rgba(0.9, 0.7, 0.31, 0.18) : Qt.rgba(1, 0.95, 0.85, filaArea.containsMouse ? 0.07 : 0.025)
+                    border.width: 1
+                    border.color: red.modelData.connected ? Qt.rgba(0.9, 0.7, 0.31, 0.6) : Qt.rgba(1, 0.9, 0.7, filaArea.containsMouse ? 0.22 : 0.06)
                     Behavior on color { ColorAnimation { duration: 120 } }
 
                     RowLayout {
