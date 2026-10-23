@@ -1,4 +1,4 @@
--- Hyprland Kora — config propia de Victor, aparte de Caelestia (~/.config/hypr).
+-- Hyprland Kora — config propia de Victor. ~/.config/hypr es un enlace a esta carpeta.
 -- Arranca con: start-hyprland -- -c ~/.config/hypr-kora/hyprland.lua
 -- Cada archivo de config/ es un tema; ver LEEME.md.
 
