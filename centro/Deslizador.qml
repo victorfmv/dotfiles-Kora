@@ -10,16 +10,30 @@ Rectangle {
 
     implicitHeight: 38
     radius: height / 2
-    color: Qt.rgba(1, 1, 1, 0.07)
+    color: Qt.rgba(0, 0, 0, 0.28)
+    border.width: 1
+    border.color: Qt.rgba(1, 0.9, 0.7, 0.10)
     clip: true
 
     Rectangle {
         anchors { left: parent.left; top: parent.top; bottom: parent.bottom }
         width: Math.max(parent.height, parent.width * Math.max(0, Math.min(1, raiz.value)))
         radius: parent.radius
-        color: raiz.apagado ? "#6b6255" : "#e6b450"
+        gradient: Gradient {
+            orientation: Gradient.Horizontal
+            GradientStop { position: 0.0; color: raiz.apagado ? "#5a5246" : "#d9a23e" }
+            GradientStop { position: 1.0; color: raiz.apagado ? "#6b6255" : "#f3cc78" }
+        }
+        border.width: 1
+        border.color: raiz.apagado ? "#7a7062" : "#f7dc9e"
         Behavior on width { enabled: !arrastre.pressed; NumberAnimation { duration: 120 } }
-        Behavior on color { ColorAnimation { duration: 150 } }
+        // Brillo arriba
+        Rectangle {
+            anchors { left: parent.left; right: parent.right; top: parent.top; margins: 3 }
+            height: parent.height / 2 - 3
+            radius: height / 2
+            color: Qt.rgba(1, 1, 1, 0.16)
+        }
     }
 
     Text {

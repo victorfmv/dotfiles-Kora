@@ -217,9 +217,12 @@ ShellRoot {
             height: Math.min(columna.implicitHeight + 28, panel.height - 60)
             anchors { top: parent.top; right: parent.right; topMargin: 48; rightMargin: 10 }
             radius: 24
-            color: Qt.rgba(0.08, 0.07, 0.06, 0.94)
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: Qt.rgba(0.11, 0.095, 0.075, 0.96) }
+                GradientStop { position: 1.0; color: Qt.rgba(0.06, 0.05, 0.04, 0.96) }
+            }
             border.width: 1
-            border.color: Qt.rgba(0.9, 0.7, 0.31, 0.35)
+            border.color: Qt.rgba(0.9, 0.7, 0.31, 0.5)
             clip: true
 
             // Entrada: se desliza desde la derecha y aparece
@@ -428,7 +431,9 @@ ShellRoot {
                         Layout.fillWidth: true
                         Layout.preferredHeight: notifCol.implicitHeight + 20
                         radius: 18
-                        color: Qt.rgba(1, 1, 1, 0.03)
+                        color: Qt.rgba(1, 1, 1, 0.035)
+                        border.width: 1
+                        border.color: Qt.rgba(1, 0.9, 0.7, 0.08)
 
                         ColumnLayout {
                             id: notifCol
@@ -491,7 +496,9 @@ ShellRoot {
                         Layout.fillWidth: true
                         Layout.preferredHeight: monCol.implicitHeight + 24
                         radius: 18
-                        color: Qt.rgba(1, 1, 1, 0.03)
+                        color: Qt.rgba(1, 1, 1, 0.035)
+                        border.width: 1
+                        border.color: Qt.rgba(1, 0.9, 0.7, 0.08)
 
                         Column {
                             id: monCol
@@ -526,11 +533,16 @@ ShellRoot {
                                         }
                                     }
                                     Rectangle {
-                                        width: parent.width; height: 5; radius: 3
-                                        color: Qt.rgba(1, 1, 1, 0.07)
+                                        width: parent.width; height: 7; radius: 4
+                                        color: Qt.rgba(0, 0, 0, 0.3)
+                                        border.width: 1; border.color: Qt.rgba(1, 0.9, 0.7, 0.08)
                                         Rectangle {
-                                            width: parent.width * Math.max(0, Math.min(1, modelData.v)); height: parent.height; radius: 3
-                                            color: modelData.v > 0.85 ? "#e06c5a" : root.oro
+                                            width: parent.width * Math.max(0, Math.min(1, modelData.v)); height: parent.height; radius: 4
+                                            gradient: Gradient {
+                                                orientation: Gradient.Horizontal
+                                                GradientStop { position: 0.0; color: modelData.v > 0.85 ? "#b84c3d" : "#c48a2c" }
+                                                GradientStop { position: 1.0; color: modelData.v > 0.85 ? "#f08a78" : "#f3cc78" }
+                                            }
                                             Behavior on width { NumberAnimation { duration: 400; easing.type: Easing.OutCubic } }
                                         }
                                     }

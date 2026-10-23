@@ -6,7 +6,7 @@
 @define-color urgent  #e06c5a;
 
 * {
-    font-family: "JetBrains Mono NF", "JetBrainsMono Nerd Font", sans-serif;
+    font-family: "Rubik", "CaskaydiaCove Nerd Font", sans-serif;
     font-size: 13px;
     border: none;
     min-height: 0;
@@ -14,13 +14,29 @@
 
 window#waybar { background: transparent; color: @fg; }
 
+/* Pastillas con profundidad: degradado, borde dorado fino, brillo arriba y sombra */
 .modules-left > widget > *,
 .modules-center > widget > *,
 .modules-right > widget > * {
-    background: @bg;
-    border-radius: 12px;
+    background-color: transparent;
+    background-image: linear-gradient(180deg, rgba(44, 39, 31, 0.94), rgba(17, 15, 12, 0.94));
+    border: 1px solid alpha(@accent, 0.28);
+    border-radius: 13px;
+    box-shadow: inset 0 1px alpha(#ffffff, 0.07), 0 2px 5px alpha(#000000, 0.55);
     padding: 0 12px;
-    margin: 0 2px;
+    margin: 2px 3px 4px 3px;
+    transition: all 0.2s ease;
+}
+.modules-left > widget > *:hover,
+.modules-right > widget > *:hover {
+    border-color: alpha(@accent, 0.65);
+    background-image: linear-gradient(180deg, rgba(58, 50, 37, 0.96), rgba(22, 19, 15, 0.96));
+}
+
+/* Los puntos del centro resaltan un poco más */
+#custom-workspaces {
+    border-color: alpha(@accent, 0.5);
+    box-shadow: inset 0 1px alpha(#ffffff, 0.08), 0 0 8px alpha(@accent, 0.18), 0 2px 5px alpha(#000000, 0.55);
 }
 
 #custom-logo { color: @accent; font-size: 16px; }
@@ -32,15 +48,28 @@ window#waybar { background: transparent; color: @fg; }
 #clock { padding: 0 16px; }
 #battery.warning { color: @accent; }
 #battery.critical { color: @urgent; }
-#custom-power { color: @urgent; }
+#battery.charging { color: #9fd67a; }
+#custom-power { color: @urgent; border-color: alpha(@urgent, 0.45); }
+#custom-power:hover { background-image: linear-gradient(180deg, alpha(@urgent, 0.35), alpha(@urgent, 0.12)); }
 
-tooltip { background: @bg; border: 1px solid @accent; border-radius: 10px; }
+tooltip { background: rgba(20, 18, 15, 0.96); border: 1px solid alpha(@accent, 0.6); border-radius: 10px; }
+tooltip label { color: @fg; }
 #custom-workspaces { padding: 0 16px; }
+#estado > widget > *:hover { color: @accent; }
 
 /* Grupo de estado (WiFi · Bluetooth · volumen · batería) en una sola pastilla */
 #estado > widget > * { background: transparent; padding: 0 7px; margin: 0; }
 #bluetooth.disabled, #bluetooth.off { color: @muted; }
 #pulseaudio.muted { color: @muted; }
 #custom-notif { color: @fg; }
-#custom-notif.hay { color: @accent; font-weight: bold; }
+#custom-notif.hay {
+    color: #14120f;
+    font-weight: bold;
+    background-image: linear-gradient(180deg, #f0c56a, #d9a23e);
+    border-color: #f5d58f;
+    box-shadow: inset 0 1px alpha(#ffffff, 0.35), 0 0 8px alpha(@accent, 0.35), 0 2px 5px alpha(#000000, 0.55);
+}
 #custom-notif.dnd { color: @muted; }
+#mpris { color: @accent; }
+#mpris.paused { color: @muted; }
+#custom-logo { padding: 0 14px 0 12px; }

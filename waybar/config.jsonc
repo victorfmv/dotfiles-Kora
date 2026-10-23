@@ -13,7 +13,7 @@
     "modules-right": ["mpris", "tray", "group/estado", "custom/notif", "custom/power"],
 
     "custom/logo": {
-        "format": "",
+        "format": "",
         "tooltip": false,
         "on-click": "~/.config/hypr-kora/scripts/fuzzel.sh"
     },
@@ -51,8 +51,9 @@
         "locale": "es_MX.UTF-8"
     },
     "mpris": {
-        "format": "{status_icon} {title}",
-        "status-icons": { "playing": "", "paused": "" },
+        "format": "{status_icon}  {title}",
+        "format-stopped": "",
+        "status-icons": { "playing": "󰐊", "paused": "󰏤", "stopped": "" },
         "max-length": 30
     },
     "tray": { "spacing": 8 },
