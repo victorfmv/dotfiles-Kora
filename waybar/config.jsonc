@@ -28,7 +28,6 @@
             "active": "", "default": ""
         },
         "show-special": true,
-        "persistent-workspaces": { "*": 5 },
         "on-scroll-up": "hyprctl dispatch workspace m-1",
         "on-scroll-down": "hyprctl dispatch workspace m+1"
     },

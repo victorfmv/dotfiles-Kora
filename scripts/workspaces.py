@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-# Puntos de workspaces para Waybar, en grupos de 5 como Caelestia:
-# en el 1-5 se ven 1-5, en el 6 los puntos pasan a ser 6-10, etc.
+# Puntos de workspaces para Waybar: solo los que existen (se van
+# agregando conforme se abren y desaparecen al quedar vacíos).
 import json, os, socket, subprocess
 
-GRUPO = 5
 ORO, BLANCO, GRIS = "#e44b43", "#d1dcef", "#39404c"
 ICONOS = {"music": "\U000F04C7", "discord": "\U000F066F", "obs": "\U000F044B", "gaming": "\U000F02B4", "steam": "\U000F04D3"}
 
@@ -15,10 +14,10 @@ def hypr(cmd):
 def pintar():
     activo = hypr("activeworkspace")["id"]
     usados = {w["id"]: w for w in hypr("workspaces")}
-    inicio = (max(activo, 1) - 1) // GRUPO * GRUPO + 1
+    abiertos = sorted(i for i in usados if i > 0)
 
     puntos = []
-    for i in range(inicio, inicio + GRUPO):
+    for i in abiertos:
         if i == activo:
             puntos.append(f"<span color='{ORO}' size='12pt'></span>")
         elif i in usados and usados[i]["windows"] > 0:
