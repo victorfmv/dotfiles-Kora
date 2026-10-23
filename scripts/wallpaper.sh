@@ -17,6 +17,7 @@ fi
 img=$(cat "$STATE" 2>/dev/null)
 [ -f "$img" ] || img=$(ls -d "$IMGS"/* 2>/dev/null | head -1)
 [ -f "$img" ] || exit 0
+echo "$img" > "$STATE"   # la vista de workspaces lo lee de aquí
 
 base=$(basename "${img%.*}")
 media="$img"
