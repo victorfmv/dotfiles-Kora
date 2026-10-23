@@ -8,8 +8,8 @@
     "margin-right": 10,
     "spacing": 6,
 
-    "modules-left": ["custom/logo", "hyprland/workspaces", "hyprland/window"],
-    "modules-center": ["clock"],
+    "modules-left": ["custom/logo", "clock", "hyprland/window"],
+    "modules-center": ["hyprland/workspaces"],
     "modules-right": ["mpris", "tray", "pulseaudio", "backlight", "network", "battery", "custom/power"],
 
     "custom/logo": {
