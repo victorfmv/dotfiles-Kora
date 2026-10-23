@@ -12,7 +12,15 @@
     min-height: 0;
 }
 
-window#waybar { background: transparent; color: @fg; }
+/* Fondo: negro pegado al borde de arriba que se desvanece hacia abajo */
+window#waybar {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 45%, rgba(0, 0, 0, 0) 100%);
+    color: @fg;
+}
+/* Las pastillas conservan su tamaño (34 px) y la separación de los bordes */
+.modules-left, .modules-center, .modules-right { margin-top: 6px; margin-bottom: 6px; }
+.modules-left { margin-left: 10px; }
+.modules-right { margin-right: 10px; }
 
 .modules-left > widget > *,
 .modules-center > widget > *,

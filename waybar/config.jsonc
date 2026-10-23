@@ -2,10 +2,7 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 34,
-    "margin-top": 6,
-    "margin-left": 10,
-    "margin-right": 10,
+    "height": 46,
     "spacing": 6,
 
     "modules-left": ["custom/logo", "clock", "group/sistema", "hyprland/window"],
