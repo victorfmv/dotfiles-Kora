@@ -57,7 +57,7 @@ ShellRoot {
     Timer {
         id: reafirmar
         interval: 60
-        onTriggered: { root.despachar(root.pendiente); root.pendiente = ""; }
+        onTriggered: { root.terminarSalto(root.pendiente); root.pendiente = ""; }
     }
     NumberAnimation { id: animFoco; target: root; property: "foco"; duration: 300; easing.type: Easing.OutCubic }
 
@@ -70,6 +70,18 @@ ShellRoot {
 
     // Config en Lua: Hyprland.dispatch de Quickshell no sirve aquí, se usa hyprctl
     function despachar(lua) { Quickshell.execDetached(["hyprctl", "dispatch", lua]); }
+
+    // Al saltar desde la vista no se debe ver el deslizamiento de workspaces de
+    // Hyprland: se apaga mientras se cambia y se vuelve a prender después
+    // (mismos valores que config/animations.lua).
+    readonly property string slideOff: `hl.animation({ leaf = "workspaces", enabled = false })`
+    readonly property string slideOn: `hl.animation({ leaf = "workspaces", enabled = true, speed = 5, bezier = "quick", style = "slidevert" })`
+    function saltar(lua) {
+        Quickshell.execDetached(["sh", "-c", `hyprctl eval '${slideOff}'; hyprctl dispatch '${lua}'`]);
+    }
+    function terminarSalto(lua) {
+        Quickshell.execDetached(["sh", "-c", `hyprctl dispatch '${lua}'; sleep 0.3; hyprctl eval '${slideOn}'`]);
+    }
 
     function addr(t) { return t.address.startsWith("0x") ? t.address : "0x" + t.address; }
     function ventanasDe(id) {
@@ -102,7 +114,7 @@ ShellRoot {
         saliendo = true;
         pendiente = toplevel ? `hl.dsp.focus({ window = "address:${addr(toplevel)}" })`
                   : wsId !== activo ? `hl.dsp.focus({ workspace = ${wsId} })` : "";
-        if (pendiente) despachar(pendiente);
+        if (pendiente) saltar(pendiente);
         seleccion = wsId;
         animar(animFoco, wsId - grupoInicio, 380, Easing.InOutCubic);
         animar(animT, 0, 380, Easing.InOutCubic);
