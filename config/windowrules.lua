@@ -145,6 +145,9 @@ hl.window_rule({ match = { class = "^([Ss]potify)$" }, workspace = "special:musi
 -- Discord always lives in the discord workspace (Super + D)
 hl.window_rule({ match = { class = "^(vesktop|discord)$" }, workspace = "special:discord silent" })
 
+-- Steam always lives in the steam workspace (Super + S); "Launching..." sigue yéndose a gaming
+hl.window_rule({ match = { class = "^(steam)$", title = "negative:^(Launching\\.{3})$" }, workspace = "special:steam silent" })
+
 -- OBS always lives in the obs workspace (Super + O)
 hl.window_rule({ match = { class = "^(com\\.obsproject\\.Studio|obs)$" }, workspace = "special:obs silent" })
 

@@ -17,3 +17,6 @@ hl.workspace_rule({ workspace = "special:music", on_created_empty = "uwsm app --
 
 -- OBS workspace (Super + O): opens OBS the first time it is shown empty
 hl.workspace_rule({ workspace = "special:obs", on_created_empty = "uwsm app -- obs" })
+
+-- Steam workspace (Super + S): opens Steam the first time it is shown empty
+hl.workspace_rule({ workspace = "special:steam", on_created_empty = "uwsm app -- steam" })
