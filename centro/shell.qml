@@ -84,7 +84,15 @@ ShellRoot {
         command: ["brightnessctl", "-m"]
         stdout: StdioCollector { onStreamFinished: root.brillo = parseInt(text.split(",")[3]) / 100 }
     }
+    property real tocadoBrillo: 0       // cuándo se movió el deslizador (para no pelear con la lectura)
+    Timer {
+        // Seguir el brillo real (teclas Fn, hypridle…) mientras el panel está abierto
+        interval: 1000; repeat: true
+        running: root.abierto
+        onTriggered: if (Date.now() - root.tocadoBrillo > 1500) leerBrillo.running = true
+    }
     function ponerBrillo(v) {
+        tocadoBrillo = Date.now();
         brillo = Math.max(0.02, v);
         Quickshell.execDetached(["brightnessctl", "-q", "set", Math.round(brillo * 100) + "%"]);
     }
