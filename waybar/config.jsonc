@@ -78,7 +78,13 @@
         "format-charging": "󰂄 {capacity}%",
         "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"],
         "tooltip-format": "{timeTo}\nClic: modo de energía",
-        "on-click": "~/.config/hypr-kora/scripts/energia.sh"
+        "menu": "on-click",
+        "menu-file": "~/.config/hypr-kora/waybar/energia.xml",
+        "menu-actions": {
+            "rendimiento": "~/.config/hypr-kora/scripts/energia.sh performance",
+            "balanceado": "~/.config/hypr-kora/scripts/energia.sh balanced",
+            "ahorro": "~/.config/hypr-kora/scripts/energia.sh power-saver"
+        }
     },
     "group/sistema": {
         "orientation": "horizontal",

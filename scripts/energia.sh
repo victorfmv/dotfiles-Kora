@@ -1,16 +1,9 @@
 #!/usr/bin/env bash
-# Menú de modo de energía (clic en la batería de Waybar)
-F="$HOME/.config/hypr-kora/scripts/fuzzel.sh"
-pkill fuzzel && exit 0
-actual=$(powerprofilesctl get)
-marca() { [ "$actual" = "$1" ] && echo "  ●"; }
-choice=$(printf '󰓅  Rendimiento%s\n󰾅  Balanceado%s\n󰾆  Ahorro%s\n' \
-    "$(marca performance)" "$(marca balanced)" "$(marca power-saver)" \
-    | "$F" --dmenu --prompt "󰂄  " --placeholder "Modo de energía…" --lines 3 --width 25)
-case "$choice" in
-    *Rendimiento*) perfil=performance; nombre=Rendimiento ;;
-    *Balanceado*)  perfil=balanced;    nombre=Balanceado ;;
-    *Ahorro*)      perfil=power-saver; nombre=Ahorro ;;
-    *) exit 0 ;;
+# Cambia el modo de energía (lo llama el menú de la batería en Waybar): energia.sh performance|balanced|power-saver
+case "$1" in
+    performance) nombre=Rendimiento ;;
+    balanced)    nombre=Balanceado ;;
+    power-saver) nombre=Ahorro ;;
+    *) exit 1 ;;
 esac
-powerprofilesctl set "$perfil" && notify-send -a "Energía" "Modo de energía" "$nombre"
+powerprofilesctl set "$1" && notify-send -a "Energía" "Modo de energía" "$nombre"

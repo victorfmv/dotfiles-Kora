@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Menú que sale de la batería de Waybar (acciones en config.jsonc → battery.menu-actions) -->
+<interface>
+  <object class="GtkMenu" id="menu">
+    <child>
+      <object class="GtkMenuItem" id="rendimiento">
+        <property name="label">󰓅  Rendimiento</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="balanceado">
+        <property name="label">󰾅  Balanceado</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="ahorro">
+        <property name="label">󰾆  Ahorro</property>
+      </object>
+    </child>
+  </object>
+</interface>
