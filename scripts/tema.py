@@ -16,7 +16,7 @@ from pathlib import Path
 K = Path.home() / ".config/hypr-kora"
 TEMAS = K / "temas"
 ESTADO = Path.home() / ".local/state/hypr-kora/tema"
-ARCHIVOS = ["config/colors.lua", "hyprlock.conf", "scripts/workspaces.py", "waybar/config.jsonc",
+ARCHIVOS = ["config/colors.lua", "hyprlock.conf", "scripts/workspaces.py", "scripts/cava-waybar.sh", "waybar/config.jsonc",
             "waybar/style.css", "fuzzel/fuzzel.ini", "mako/config"] + \
            [str(p.relative_to(K)) for p in sorted((K / "centro").glob("*.qml"))] + \
            [str(p.relative_to(K)) for p in sorted((K / "overview").glob("*.qml"))]

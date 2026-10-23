@@ -22,8 +22,13 @@ data_format = ascii
 ascii_max_range = 100
 bar_delimiter = 59
 CFG
+# Colores de las rayitas: apagado (bajas) -> brillante (altas). scripts/tema.py los cambia con el tema.
+APAGADO="7e2b26"
+BRILLANTE="f4736c"
 pkill -f "cava -p $cfg" 2>/dev/null
-exec cava -p "$cfg" | awk -F';' '
+exec cava -p "$cfg" | awk -F';' \
+    -v r1=$((16#${APAGADO:0:2})) -v g1=$((16#${APAGADO:2:2})) -v b1=$((16#${APAGADO:4:2})) \
+    -v r2=$((16#${BRILLANTE:0:2})) -v g2=$((16#${BRILLANTE:2:2})) -v b2=$((16#${BRILLANTE:4:2})) '
 BEGIN {
     smax = 15; smin = 2.4       # tamaño (pt) de la barra más alta y de la más baja
     paso = 3.5                  # espacio fijo por barra (pt): 56 barras llenan la pastilla (230 px)
@@ -33,8 +38,8 @@ BEGIN {
 function barra(v,   s, t, r, g, b) {
     t = v / 100
     s = smin + (smax - smin) * t
-    # color: dorado apagado -> dorado brillante según la altura
-    r = int(138 + (245 - 138) * t); g = int(106 + (207 - 106) * t); b = int(42 + (122 - 42) * t)
+    # color: apagado -> brillante según la altura
+    r = int(r1 + (r2 - r1) * t); g = int(g1 + (g2 - g1) * t); b = int(b1 + (b2 - b1) * t)
     # Las altas con línea fina y las bajas con línea gruesa: así todas se ven del mismo grosor
     return sprintf("<span font_family=\"CaskaydiaCove Nerd Font Mono\" size=\"%d\" rise=\"%d\" letter_spacing=\"%d\" foreground=\"#%02x%02x%02x\">%s</span>",
         s * 1024, centro * (smax - s) * 1024, (paso - avance * s) * 1024, r, g, b, (s > 6.5 ? "│" : "┃"))
