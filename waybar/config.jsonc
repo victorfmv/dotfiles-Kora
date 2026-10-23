@@ -10,7 +10,7 @@
 
     "modules-left": ["custom/logo", "clock", "hyprland/window"],
     "modules-center": ["hyprland/workspaces"],
-    "modules-right": ["mpris", "tray", "pulseaudio", "backlight", "network", "battery", "custom/power"],
+    "modules-right": ["mpris", "tray", "network", "battery", "custom/power"],
 
     "custom/logo": {
         "format": "",
@@ -58,7 +58,7 @@
     },
     "backlight": { "format": "󰃠 {percent}%" },
     "network": {
-        "format-wifi": "  {essid}",
+        "format-wifi": "󰖩  {essid}",
         "format-ethernet": "󰈀",
         "format-disconnected": "󰖪",
         "tooltip-format": "{ifname} {ipaddr}",
