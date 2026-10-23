@@ -128,7 +128,8 @@ ShellRoot {
         emergentes.clear();
         abierto = true;
     }
-    function cerrar() { abierto = false; }
+    function cerrar() { abierto = false; menu = ""; }
+    property string menu: ""            // "wifi" | "bt" | "" — menú desplegado en el panel
 
     IpcHandler {
         target: "centro"
@@ -137,6 +138,7 @@ ShellRoot {
         function close(): void { root.cerrar(); }
         function clear(): void { root.limpiar(); }
         function dnd(): void { root.noMolestar = !root.noMolestar; }
+        function menu(m: string): void { root.abrir(); root.menu = m; }
     }
 
     FileView {
@@ -361,14 +363,18 @@ ShellRoot {
                             Layout.fillWidth: true
                             icono: Networking.wifiEnabled ? "󰖩" : "󰖪"
                             activo: Networking.wifiEnabled
-                            onClic: Networking.wifiEnabled = !Networking.wifiEnabled
+                            abre: true
+                            desplegado: root.menu === "wifi"
+                            onClic: root.menu = root.menu === "wifi" ? "" : "wifi"
                         }
                         Interruptor {
                             Layout.fillWidth: true
                             readonly property var bt: Bluetooth.defaultAdapter
                             icono: bt?.enabled ? "󰂯" : "󰂲"
                             activo: bt?.enabled ?? false
-                            onClic: if (bt) bt.enabled = !bt.enabled
+                            abre: true
+                            desplegado: root.menu === "bt"
+                            onClic: root.menu = root.menu === "bt" ? "" : "bt"
                         }
                         Interruptor {
                             Layout.fillWidth: true
@@ -403,6 +409,18 @@ ShellRoot {
                             icono: "󰒓"
                             onClic: { root.cerrar(); Quickshell.execDetached(["kitty", "-e", "nmtui"]); }
                         }
+                    }
+
+                    // ── Menús de WiFi / Bluetooth (se despliegan) ──
+                    MenuWifi {
+                        Layout.fillWidth: true
+                        abierto: root.abierto && root.menu === "wifi"
+                        visible: root.menu === "wifi"
+                    }
+                    MenuBluetooth {
+                        Layout.fillWidth: true
+                        abierto: root.abierto && root.menu === "bt"
+                        visible: root.menu === "bt"
                     }
 
                     // ── Notificaciones ──

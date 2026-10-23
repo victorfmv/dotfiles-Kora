@@ -10,12 +10,18 @@ Rectangle {
     property bool emergente: false
     signal cerrar()
 
-    implicitHeight: contenido.implicitHeight + 24
+    readonly property bool urgente: notif?.urgency === 2
+    readonly property color acento: urgente ? "#e06c5a" : "#e6b450"
+
+    implicitHeight: contenido.implicitHeight + 26
     radius: 16
-    color: emergente ? Qt.rgba(0.08, 0.07, 0.06, 0.94) : Qt.rgba(1, 1, 1, area.containsMouse ? 0.08 : 0.05)
-    border.width: emergente ? 1.5 : 0
-    border.color: notif?.urgency === 2 ? "#e06c5a" : Qt.rgba(0.9, 0.7, 0.31, 0.6)
-    Behavior on color { ColorAnimation { duration: 140 } }
+    // Más clara que el panel, con degradado para que no se vea plana
+    gradient: Gradient {
+        GradientStop { position: 0.0; color: raiz.emergente ? Qt.rgba(0.13, 0.115, 0.09, 0.98) : Qt.rgba(0.19, 0.165, 0.13, area.containsMouse ? 1 : 0.92) }
+        GradientStop { position: 1.0; color: raiz.emergente ? Qt.rgba(0.08, 0.07, 0.06, 0.98) : Qt.rgba(0.13, 0.115, 0.095, area.containsMouse ? 1 : 0.92) }
+    }
+    border.width: 1
+    border.color: emergente ? Qt.rgba(0.9, 0.7, 0.31, 0.55) : Qt.rgba(1, 0.9, 0.7, area.containsMouse ? 0.16 : 0.08)
 
     readonly property string iconoApp: {
         const img = notif?.image ?? "";
@@ -27,6 +33,13 @@ Rectangle {
         for (const c of [ic, entrada?.icon ?? "", (notif?.appName ?? "").toLowerCase()])
             if (c && Quickshell.hasThemeIcon(c)) return Quickshell.iconPath(c);
         return "";
+    }
+
+    // Barra de acento a la izquierda
+    Rectangle {
+        anchors { left: parent.left; top: parent.top; bottom: parent.bottom; topMargin: 14; bottomMargin: 14; leftMargin: 0 }
+        width: 3; radius: 2
+        color: raiz.acento
     }
 
     MouseArea {
@@ -42,54 +55,62 @@ Rectangle {
 
     Row {
         id: contenido
-        anchors { left: parent.left; right: parent.right; top: parent.top; margins: 12 }
+        anchors { left: parent.left; right: parent.right; top: parent.top; margins: 13; leftMargin: 15 }
         spacing: 12
 
         Rectangle {
-            width: 38; height: 38; radius: 11
-            color: Qt.rgba(1, 1, 1, 0.06)
+            width: 40; height: 40; radius: 12
+            color: Qt.rgba(0.9, 0.7, 0.31, 0.14)
+            border.width: 1; border.color: Qt.rgba(0.9, 0.7, 0.31, 0.25)
             clip: true
             Image {
                 anchors.fill: parent
-                anchors.margins: raiz.notif?.image ? 0 : 5
+                anchors.margins: raiz.notif?.image ? 0 : 6
                 source: raiz.iconoApp
                 fillMode: Image.PreserveAspectCrop
-                sourceSize { width: 76; height: 76 }
+                sourceSize { width: 80; height: 80 }
                 visible: status === Image.Ready
             }
             Text {
                 anchors.centerIn: parent
                 visible: !raiz.iconoApp
                 text: "󰂚"
-                color: "#e6b450"
-                font { family: "CaskaydiaCove Nerd Font"; pixelSize: 18 }
+                color: raiz.acento
+                font { family: "CaskaydiaCove Nerd Font"; pixelSize: 19 }
             }
         }
 
         Column {
-            width: parent.width - 38 - 12 - 26
-            spacing: 3
+            width: parent.width - 40 - 12 - 26
+            spacing: 4
 
-            Text {
-                width: parent.width
-                text: (raiz.notif?.appName || "Sistema") + (raiz.hace ? "  ·  " + raiz.hace : "")
-                color: "#8c8270"
-                elide: Text.ElideRight
-                font { family: "Rubik"; pixelSize: 11 }
+            Row {
+                spacing: 6
+                Text {
+                    text: (raiz.notif?.appName || "Sistema").toUpperCase()
+                    color: raiz.acento
+                    font { family: "Rubik"; pixelSize: 10; weight: Font.DemiBold; letterSpacing: 0.8 }
+                }
+                Text {
+                    visible: raiz.hace !== ""
+                    text: "·  " + raiz.hace
+                    color: "#8c8270"
+                    font { family: "Rubik"; pixelSize: 10 }
+                }
             }
             Text {
                 width: parent.width
                 text: raiz.notif?.summary ?? ""
-                color: "#f5ebd8"
+                color: "#fff8ec"
                 elide: Text.ElideRight
-                font { family: "Rubik"; pixelSize: 14; weight: Font.Medium }
+                font { family: "Rubik"; pixelSize: 14; weight: Font.DemiBold }
             }
             Text {
                 width: parent.width
                 visible: text !== ""
                 text: raiz.notif?.body ?? ""
                 textFormat: Text.StyledText
-                color: "#c9bfad"
+                color: "#b9af9c"
                 wrapMode: Text.Wrap
                 maximumLineCount: raiz.emergente ? 3 : 2
                 elide: Text.ElideRight
@@ -101,14 +122,14 @@ Rectangle {
     // Quitar
     Rectangle {
         anchors { right: parent.right; top: parent.top; margins: 10 }
-        width: 22; height: 22; radius: 11
-        color: x_area.containsMouse ? Qt.rgba(1, 1, 1, 0.14) : "transparent"
+        width: 24; height: 24; radius: 12
+        color: x_area.containsMouse ? Qt.rgba(0.9, 0.7, 0.31, 0.25) : Qt.rgba(1, 1, 1, 0.06)
         opacity: area.containsMouse || x_area.containsMouse || raiz.emergente ? 1 : 0
         Behavior on opacity { NumberAnimation { duration: 120 } }
         Text {
             anchors.centerIn: parent
             text: "󰅖"
-            color: "#c9bfad"
+            color: "#ece4d4"
             font { family: "CaskaydiaCove Nerd Font"; pixelSize: 13 }
         }
         MouseArea {
