@@ -10,7 +10,7 @@
 
     "modules-left": ["custom/logo", "clock", "hyprland/window"],
     "modules-center": ["custom/workspaces"],
-    "modules-right": ["mpris", "tray", "network", "battery", "custom/power"],
+    "modules-right": ["mpris", "tray", "group/estado", "custom/notif", "custom/power"],
 
     "custom/logo": {
         "format": "",
@@ -56,26 +56,47 @@
         "max-length": 30
     },
     "tray": { "spacing": 8 },
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": "󰝟",
-        "format-icons": { "default": ["", "", ""] },
-        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-        "on-click-right": "pavucontrol"
-    },
-    "backlight": { "format": "󰃠 {percent}%" },
     "network": {
-        "format-wifi": "󰖩  {essid}",
+        "format-wifi": "󰖩",
         "format-ethernet": "󰈀",
         "format-disconnected": "󰖪",
-        "tooltip-format": "{ifname} {ipaddr}",
-        "on-click": "kitty -e nmtui"
+        "tooltip-format": "{essid}  ·  {ipaddr}",
+        "on-click": "~/.config/hypr-kora/scripts/centro.sh",
+        "on-click-right": "kitty -e nmtui"
     },
     "battery": {
         "states": { "warning": 25, "critical": 12 },
         "format": "{icon} {capacity}%",
         "format-charging": "󰂄 {capacity}%",
         "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"]
+    },
+    "group/estado": {
+        "orientation": "horizontal",
+        "modules": ["network", "bluetooth", "pulseaudio", "battery"]
+    },
+    "bluetooth": {
+        "format": "󰂯",
+        "format-disabled": "󰂲",
+        "format-off": "󰂲",
+        "format-connected": "󰂱",
+        "tooltip-format-connected": "{device_alias}",
+        "on-click": "~/.config/hypr-kora/scripts/centro.sh"
+    },
+    "pulseaudio": {
+        "format": "{icon}",
+        "format-muted": "󰝟",
+        "format-icons": { "default": ["󰕿", "󰖀", "󰕾"] },
+        "tooltip-format": "Volumen {volume}%",
+        "on-click": "~/.config/hypr-kora/scripts/centro.sh",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    },
+    "custom/notif": {
+        "exec": "~/.config/hypr-kora/scripts/notif-waybar.sh",
+        "return-type": "json",
+        "signal": 8,
+        "interval": "once",
+        "on-click": "~/.config/hypr-kora/scripts/centro.sh",
+        "on-click-right": "qs -p ~/.config/hypr-kora/centro ipc call centro dnd"
     },
     "custom/power": {
         "format": "⏻",

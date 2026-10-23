@@ -17,7 +17,8 @@ Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-se
 | `config/workspaces.lua` | Workspaces y espacios especiales |
 | `config/monitors.lua` | eDP-1 2560x1600@240 escala 1.25 + externos a la derecha |
 | `waybar/` | Barra (`config.jsonc` + `style.css`) |
-| `mako/config` | Notificaciones |
+| `centro/` | Centro de control y notificaciones (Quickshell, reemplaza a mako): Super+X |
+| `mako/config` | (ya no se usa; quedó por si se quiere volver a mako) |
 | `fuzzel/fuzzel.ini` | Lanzador y menús |
 | `hyprlock.conf`, `hypridle.conf` | Bloqueo e inactividad |
 | `scripts/` | Portapapeles, menú de apagado, capturas, wallpaper, workspaces de Waybar, vistas |
@@ -42,7 +43,7 @@ Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-se
 | Super + L | Bloquear |
 | Super + Alt + C | Menú apagar/reiniciar |
 | Super + Shift + W | Elegir wallpaper |
-| Super + A / Shift+A | Ver última notificación / borrar todas |
+| Super + X (o A) / Super + Shift + A | Centro de control y notificaciones / borrar todas |
 | Super + Shift + B | Recargar Waybar |
 | Impr / Super + Impr | Captura de área / pantalla completa |
 

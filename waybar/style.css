@@ -36,3 +36,11 @@ window#waybar { background: transparent; color: @fg; }
 
 tooltip { background: @bg; border: 1px solid @accent; border-radius: 10px; }
 #custom-workspaces { padding: 0 16px; }
+
+/* Grupo de estado (WiFi · Bluetooth · volumen · batería) en una sola pastilla */
+#estado > widget > * { background: transparent; padding: 0 7px; margin: 0; }
+#bluetooth.disabled, #bluetooth.off { color: @muted; }
+#pulseaudio.muted { color: @muted; }
+#custom-notif { color: @fg; }
+#custom-notif.hay { color: @accent; font-weight: bold; }
+#custom-notif.dnd { color: @muted; }
