@@ -10,7 +10,7 @@
 
     "modules-left": ["custom/logo", "clock", "hyprland/window"],
     "modules-center": ["custom/workspaces"],
-    "modules-right": ["mpris", "tray", "group/estado", "custom/notif", "custom/power"],
+    "modules-right": ["custom/cava", "group/estado", "custom/notif", "custom/power"],
 
     "custom/logo": {
         "format": "",
@@ -57,6 +57,13 @@
         "max-length": 30
     },
     "tray": { "spacing": 8 },
+    "custom/cava": {
+        "exec": "~/.config/hypr-kora/scripts/cava-waybar.sh",
+        "tooltip": false,
+        "on-click": "playerctl play-pause",
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous"
+    },
     "network": {
         "format-wifi": "󰖩",
         "format-ethernet": "󰈀",
