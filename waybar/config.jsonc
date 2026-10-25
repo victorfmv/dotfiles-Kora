@@ -1,6 +1,6 @@
 // Waybar de Hyprland Kora. Recargar en vivo: Super+Shift+B
 {
-    "layer": "top",
+    "layer": "bottom",   // debajo de ventanas: pantalla completa y emergentes la tapan
     "position": "top",
     "height": 54,
     "spacing": 6,
