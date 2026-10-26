@@ -17,6 +17,13 @@ import Quickshell.Services.Notifications
 ShellRoot {
     id: root
 
+    // Sin el aviso "Config reloaded" (tema.py reescribe los colores y Quickshell recarga solo)
+    Connections {
+        target: Quickshell
+        function onReloadCompleted() { Quickshell.inhibitReloadPopup(); }
+        function onReloadFailed() { Quickshell.inhibitReloadPopup(); }
+    }
+
     readonly property color oro: "#e1754b"
     readonly property color crema: "#ebded5"
     readonly property color tenue: "#8b7c71"

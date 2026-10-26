@@ -16,6 +16,13 @@ import Quickshell.Hyprland
 ShellRoot {
     id: root
 
+    // Sin el aviso "Config reloaded" (tema.py reescribe los colores y Quickshell recarga solo)
+    Connections {
+        target: Quickshell
+        function onReloadCompleted() { Quickshell.inhibitReloadPopup(); }
+        function onReloadFailed() { Quickshell.inhibitReloadPopup(); }
+    }
+
     // Colores del tema actual, leídos en vivo de config/colors.lua (los reescribe tema.py)
     FileView {
         id: paleta
@@ -103,14 +110,14 @@ ShellRoot {
         seleccion = actualIdx;
         revelado = 0; entrada = 0; eligiendo = false;
         abierto = true;
-        animar(animT, 1, 350, Easing.OutCubic);
-        animar(animEntrada, 1.4, 1400, Easing.Linear);
+        animar(animT, 1, 160, Easing.OutCubic);
+        animar(animEntrada, 0.5, 350, Easing.Linear);
     }
     function cerrar() {
         if (!abierto || eligiendo) return;
         eligiendo = true;
-        animar(animEntrada, 0, 380, Easing.InCubic);
-        animar(animT, 0, 420, Easing.InCubic);
+        animar(animEntrada, 0, 200, Easing.InCubic);
+        animar(animT, 0, 220, Easing.InCubic);
     }
     function alternar() { abierto ? cerrar() : abrir(); }
     function cerrado() { abierto = false; }
@@ -122,7 +129,7 @@ ShellRoot {
         elegido = carpeta + "/" + imagenes.get(i, "fileName");
         const c = celda.mapToItem(null, celda.width / 2, celda.height / 2);
         origenX = c.x; origenY = c.y;
-        animar(animRevelado, 1, 850, Easing.InOutCubic);
+        animar(animRevelado, 1, 600, Easing.InOutCubic);
     }
     // El hexágono ya tapa la pantalla: cambiar el wallpaper debajo y luego desvanecer
     function aplicar() {
@@ -132,7 +139,7 @@ ShellRoot {
     Timer {
         id: esperarMpv
         interval: 1300            // lo que tarda mpvpaper en reiniciar con el video nuevo
-        onTriggered: root.animar(animT, 0, 600, Easing.InOutQuad)
+        onTriggered: root.animar(animT, 0, 450, Easing.InOutQuad)
     }
 
     function mover(d) {
@@ -237,8 +244,8 @@ ShellRoot {
                         readonly property real baseY: fila * (root.altoHex + root.separacion) + (col % 2) * (root.altoHex + root.separacion) / 2
                         readonly property real dx: (baseX + width / 2 - contenedor.width / 2) / Math.max(1, contenedor.width)
                         readonly property real dy: (baseY + height / 2 - contenedor.height / 2) / Math.max(1, contenedor.height)
-                        readonly property real retraso: Math.sqrt(dx * dx + dy * dy) * 0.55 + (index % 3) * 0.03
-                        readonly property real p: (root.entrada - retraso) / 0.6
+                        readonly property real retraso: Math.sqrt(dx * dx + dy * dy) * 0.18 + (index % 3) * 0.015
+                        readonly property real p: (root.entrada - retraso) / 0.25
                         readonly property real brote: root.rebote(p)
 
                         width: root.anchoHex
@@ -249,7 +256,7 @@ ShellRoot {
                         opacity: Math.max(0, Math.min(1, p * 2)) * (esElegido ? 1 : 1 - root.revelado)
                         scale: (0.35 + 0.65 * brote) * (esSeleccion && !root.eligiendo ? 1.07 : 1)
                         rotation: (1 - root.suave(p)) * (index % 2 ? 10 : -10)
-                        Behavior on scale { enabled: root.entrada >= 1.4; NumberAnimation { duration: 260; easing.type: Easing.OutBack } }
+                        Behavior on scale { enabled: root.entrada >= 0.5; NumberAnimation { duration: 260; easing.type: Easing.OutBack } }
 
                         Shape {
                             id: mascara
@@ -279,7 +286,7 @@ ShellRoot {
                             clip: true
                             Image {
                                 anchors.fill: parent
-                                source: "file://" + root.carpeta + "/" + celda.fileName
+                                source: celda.fileName ? "file://" + root.carpeta + "/" + celda.fileName : ""
                                 sourceSize.width: 900
                                 fillMode: Image.PreserveAspectCrop
                                 asynchronous: true
@@ -369,7 +376,7 @@ ShellRoot {
                 font.pixelSize: 22
                 font.weight: Font.DemiBold
                 font.letterSpacing: 1.5
-                opacity: root.suave(root.entrada - 0.5) * (1 - root.revelado)
+                opacity: root.suave((root.entrada - 0.2) * 4) * (1 - root.revelado)
                 style: Text.Raised
                 styleColor: Qt.rgba(0, 0, 0, 0.5)
             }
@@ -380,7 +387,7 @@ ShellRoot {
                 text: "←↑↓→  mover   ·   Enter  elegir   ·   Esc  cerrar"
                 color: root.gris
                 font.pixelSize: 13
-                opacity: root.suave(root.entrada - 0.7) * (1 - root.revelado)
+                opacity: root.suave((root.entrada - 0.3) * 4) * (1 - root.revelado)
             }
         }
 
