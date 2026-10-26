@@ -55,6 +55,7 @@
     "tray": { "spacing": 8 },
     "custom/cava": {
         "exec": "~/.config/hypr-kora/scripts/cava-waybar.sh",
+        "restart-interval": 2,
         "tooltip": false,
         "on-click": "playerctl play-pause",
         "on-scroll-up": "playerctl next",
