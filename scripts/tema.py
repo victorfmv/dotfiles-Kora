@@ -161,6 +161,11 @@ def recargar():
     # (reload_style_on_change), los puntos de workspaces releen sus colores con SIGUSR1
     # y las rayitas de cava los releen cada segundo.
     subprocess.run(["pkill", "-USR1", "-f", r"^python3 \S*scripts/workspaces\.py$"], stderr=subprocess.DEVNULL)
+    # Quickshell se recarga solo al ver el PRIMER archivo cambiar y a veces lee shell.qml
+    # antes de que tema.py lo reescriba (quedaba medio panel con el tema anterior).
+    # Recarga final cuando ya están todos escritos:
+    subprocess.Popen(["sh", "-c", f"sleep 0.4; qs -p {K}/centro ipc call centro recargar; qs -p {K}/overview ipc call overview recargar"],
+                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
 
 
 if __name__ == "__main__":

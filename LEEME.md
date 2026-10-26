@@ -65,7 +65,7 @@ Cada cambio = un commit en git (nada de `.bak`). Cambios de Caelestia van en `~/
 
 Cada fondo puede tener su propia paleta. Al elegir un fondo (Super+Shift+W o el botón del panel) se ponen sus colores solos en Waybar, el panel, la vista de workspaces, el bloqueo, los bordes y fuzzel.
 
-El cambio es en vivo: Waybar **no se reinicia** (recarga `style.css` sola con `reload_style_on_change`; `workspaces.py` relee sus colores con SIGUSR1 y `cava-waybar.sh` cada segundo). No poner colores en `waybar/config.jsonc`: ahí no se recargan.
+El cambio es en vivo: Waybar **no se reinicia** (recarga `style.css` sola con `reload_style_on_change`; `workspaces.py` relee sus colores con SIGUSR1 y `cava-waybar.sh` cada segundo). No poner colores en `waybar/config.jsonc`: ahí no se recargan. Al final, tema.py fuerza una recarga de Quickshell (`qs -p centro ipc call centro recargar`, igual con overview) porque la recarga automática a veces leía `shell.qml` antes de reescribirse y dejaba medio panel con el tema anterior.
 
 - `temas/<nombre>.json`: cada tema.
 

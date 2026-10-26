@@ -155,6 +155,8 @@ ShellRoot {
         function open(): void { root.abrir(); }
         function close(): void { root.cerrar(); }
         function scroll(dir: int): void { root.rueda(dir); }
+        // scripts/tema.py la llama al terminar de escribir todos los archivos del tema
+        function recargar(): void { Quickshell.reload(false); }
     }
 
     PanelWindow {

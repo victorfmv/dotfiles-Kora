@@ -153,6 +153,8 @@ ShellRoot {
         function close(): void { root.cerrar(); }
         function clear(): void { root.limpiar(); }
         function dnd(): void { root.noMolestar = !root.noMolestar; }
+        // scripts/tema.py la llama al terminar de escribir todos los archivos del tema
+        function recargar(): void { Quickshell.reload(false); }
         function menu(m: string): void { root.abrir(); root.menu = m; }
     }
 
