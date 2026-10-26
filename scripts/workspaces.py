@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # Puntos de workspaces para Waybar: solo los que existen (se van
 # agregando conforme se abren y desaparecen al quedar vacíos).
-import json, os, socket, subprocess
+import json, os, re, signal, socket, subprocess
 
-ORO, BLANCO, GRIS = "#e1754b", "#ebded5", "#49413c"
+ORO, BLANCO, GRIS = "#65b4e5", "#d3e0ed", "#3a424b"
 ICONOS = {"music": "\U000F04C7", "discord": "\U000F066F", "obs": "\U000F044B", "gaming": "\U000F02B4", "steam": "\U000F04D3"}
 
 
@@ -34,6 +34,17 @@ def pintar():
     print(json.dumps({"text": texto, "tooltip": f"Workspace {activo}"}), flush=True)
 
 
+def recolorear(*_):
+    # scripts/tema.py reescribe la línea de colores de este archivo y manda SIGUSR1:
+    # se releen y se repinta sin que Waybar reinicie el módulo
+    global ORO, BLANCO, GRIS
+    m = re.search(r'^ORO, BLANCO, GRIS = "(#\w+)", "(#\w+)", "(#\w+)"', open(__file__).read(), re.M)
+    if m:
+        ORO, BLANCO, GRIS = m.groups()
+    pintar()
+
+
+signal.signal(signal.SIGUSR1, recolorear)
 pintar()
 ruta = f"{os.environ['XDG_RUNTIME_DIR']}/hypr/{os.environ['HYPRLAND_INSTANCE_SIGNATURE']}/.socket2.sock"
 s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)

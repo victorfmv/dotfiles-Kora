@@ -12,7 +12,7 @@ Rectangle {
     radius: height / 2
     color: Qt.rgba(0, 0, 0, 0.28)
     border.width: 1
-    border.color: Qt.rgba(0.991, 0.76, 0.669, 0.10)
+    border.color: Qt.rgba(0.786, 0.914, 0.994, 0.10)
     clip: true
 
     Rectangle {
@@ -21,11 +21,11 @@ Rectangle {
         radius: parent.radius
         gradient: Gradient {
             orientation: Gradient.Horizontal
-            GradientStop { position: 0.0; color: raiz.apagado ? "#594e47" : "#d3653a" }
-            GradientStop { position: 1.0; color: raiz.apagado ? "#6a5e56" : "#ef9572" }
+            GradientStop { position: 0.0; color: raiz.apagado ? "#45505b" : "#53a5d9" }
+            GradientStop { position: 1.0; color: raiz.apagado ? "#54606c" : "#8dcbf2" }
         }
         border.width: 1
-        border.color: raiz.apagado ? "#796c63" : "#f4b197"
+        border.color: raiz.apagado ? "#616e7b" : "#b3ddf7"
         Behavior on width { enabled: !arrastre.pressed; NumberAnimation { duration: 120 } }
         // Brillo arriba
         Rectangle {
@@ -39,7 +39,7 @@ Rectangle {
     Text {
         anchors { right: parent.right; rightMargin: 14; verticalCenter: parent.verticalCenter }
         text: raiz.icono
-        color: raiz.value > 0.88 ? "#14110f" : "#ebded5"
+        color: raiz.value > 0.88 ? "#0f1114" : "#d3e0ed"
         font { family: "CaskaydiaCove Nerd Font"; pixelSize: 16 }
     }
 

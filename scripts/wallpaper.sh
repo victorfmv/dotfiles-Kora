@@ -40,5 +40,11 @@ tema=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get(sys.a
 # La pantalla de inicio (login) usa el mismo fondo y colores
 "$HOME/.config/hypr-kora/scripts/greeter-sync.py" >/dev/null 2>&1 &
 
-pkill -x mpvpaper; sleep 0.3; pkill -9 -x mpvpaper 2>/dev/null
-exec mpvpaper -f -o "no-audio loop hwdec=auto-safe panscan=1.0 image-display-duration=inf" '*' "$media"
+# El nuevo se lanza encima del viejo y el viejo se quita cuando el nuevo ya se ve:
+# así nunca queda la pantalla en negro mientras cambia.
+viejos=$(pgrep -x mpvpaper)
+setsid -f mpvpaper -f -o "no-audio loop hwdec=auto-safe panscan=1.0 image-display-duration=inf" '*' "$media" >/dev/null 2>&1
+[ -n "$viejos" ] || exit 0
+sleep 0.6
+kill $viejos 2>/dev/null; sleep 0.3; kill -9 $viejos 2>/dev/null
+exit 0

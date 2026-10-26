@@ -22,9 +22,9 @@ ShellRoot {
         function onReloadFailed() { Quickshell.inhibitReloadPopup(); }
     }
 
-    readonly property color oro: "#e1754b"
-    readonly property color crema: "#ebded5"
-    readonly property color gris: "#6a5e56"
+    readonly property color oro: "#65b4e5"
+    readonly property color crema: "#d3e0ed"
+    readonly property color gris: "#54606c"
 
     readonly property int grupo: 5
     readonly property real k: 0.45           // tamaño de cada pantalla en la vista
@@ -270,7 +270,7 @@ ShellRoot {
                         id: marcoPantalla
                         anchors.fill: parent
                         radius: 18 * root.t
-                        color: "#0d0b0a"
+                        color: "#0a0b0d"
                         // Sin recorte: como en niri, las ventanas de la fila que están fuera
                         // de la pantalla se asoman a los lados de la tarjeta (mismo tamaño).
                         clip: false
@@ -297,7 +297,7 @@ ShellRoot {
                             visible: pantalla.ventanas.length === 0
                             anchors.centerIn: parent
                             text: "vacío"
-                            color: Qt.rgba(0.925, 0.873, 0.835, 0.7)
+                            color: Qt.rgba(0.825, 0.88, 0.935, 0.7)
                             opacity: root.t
                             font { family: "Rubik"; pixelSize: 22; italic: true }
                         }
@@ -324,7 +324,7 @@ ShellRoot {
                                 Rectangle {
                                     anchors.fill: parent
                                     radius: 8
-                                    color: "#14110f"
+                                    color: "#0f1114"
                                     clip: true
                                     border.width: hover.containsMouse ? 2 : (mini.enfocada ? 1.5 : 0)
                                     border.color: hover.containsMouse ? root.crema : root.oro
@@ -342,8 +342,8 @@ ShellRoot {
                                         anchors { horizontalCenter: parent.horizontalCenter; bottom: parent.bottom; bottomMargin: 10 }
                                         width: Math.min(parent.width - 20, nombre.implicitWidth + 24)
                                         height: 28; radius: 14
-                                        color: Qt.rgba(0.079, 0.069, 0.061, 0.88)
-                                        border.width: 1; border.color: Qt.rgba(0.879, 0.457, 0.291, 0.5)
+                                        color: Qt.rgba(0.059, 0.07, 0.081, 0.88)
+                                        border.width: 1; border.color: Qt.rgba(0.393, 0.704, 0.897, 0.5)
                                         opacity: hover.containsMouse ? root.t : 0
                                         Behavior on opacity { NumberAnimation { duration: 150 } }
                                         Text {
@@ -373,14 +373,14 @@ ShellRoot {
                     Rectangle {
                         anchors { left: parent.left; bottom: parent.top; bottomMargin: 10 }
                         width: etiqueta.implicitWidth + 22; height: 26; radius: 13
-                        color: pantalla.esSeleccion ? root.oro : Qt.rgba(0.079, 0.069, 0.061, 0.8)
+                        color: pantalla.esSeleccion ? root.oro : Qt.rgba(0.059, 0.07, 0.081, 0.8)
                         opacity: root.t
                         Behavior on color { ColorAnimation { duration: 200 } }
                         Text {
                             id: etiqueta
                             anchors.centerIn: parent
                             text: pantalla.wsId + (pantalla.esActivo ? "  ·  aquí estás" : "")
-                            color: pantalla.esSeleccion ? "#14110f" : root.crema
+                            color: pantalla.esSeleccion ? "#0f1114" : root.crema
                             font { family: "Rubik"; pixelSize: 12; bold: true }
                         }
                     }

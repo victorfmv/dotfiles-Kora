@@ -4,6 +4,7 @@
     "position": "top",
     "height": 54,
     "spacing": 6,
+    "reload_style_on_change": true,   // style.css se aplica en vivo al cambiar de tema (sin reiniciar la barra)
 
     "modules-left": ["custom/logo", "clock", "group/sistema", "hyprland/window"],
     "modules-center": ["custom/workspaces"],
@@ -16,6 +17,7 @@
     },
     "custom/workspaces": {
         "exec": "~/.config/hypr-kora/scripts/workspaces.py",
+        "restart-interval": 1,
         "return-type": "json",
         "escape": false,
         "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'",
@@ -40,9 +42,9 @@
         "rewrite": { "": "Escritorio" }
     },
     "clock": {
-        "format": "<span color='#e1754b' weight='bold'>󰥔  {0:%H:%M}</span>",
-        "format-alt": "<span color='#e1754b' weight='bold'>󰥔  {0:%H:%M:%S}</span>",
-        "tooltip-format": "<span color='#ebded5'>{0:L%A %d de %B}</span>\n\n<tt>{calendar}</tt>",
+        "format": "󰥔  {0:%H:%M}",
+        "format-alt": "󰥔  {0:%H:%M:%S}",
+        "tooltip-format": "{0:L%A %d de %B}\n\n<tt>{calendar}</tt>",
         "interval": 1,
         "locale": "es_MX.UTF-8"
     },

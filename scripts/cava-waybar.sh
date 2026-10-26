@@ -23,17 +23,31 @@ ascii_max_range = 100
 bar_delimiter = 59
 CFG
 # Colores de las rayitas: apagado (bajas) -> brillante (altas). scripts/tema.py los cambia con el tema.
-APAGADO="80422a"
-BRILLANTE="f19774"
+APAGADO="317097"
+BRILLANTE="90cdf4"
 pkill -f "cava -p $cfg" 2>/dev/null
-exec cava -p "$cfg" | awk -F';' \
-    -v r1=$((16#${APAGADO:0:2})) -v g1=$((16#${APAGADO:2:2})) -v b1=$((16#${APAGADO:4:2})) \
-    -v r2=$((16#${BRILLANTE:0:2})) -v g2=$((16#${BRILLANTE:2:2})) -v b2=$((16#${BRILLANTE:4:2})) '
+# awk relee APAGADO/BRILLANTE de este archivo cada segundo: al cambiar de tema
+# las rayitas cambian de color solas, sin reiniciar cava ni la barra.
+exec cava -p "$cfg" | awk -F';' -v yo="$(readlink -f "$0")" -v ap="$APAGADO" -v br="$BRILLANTE" '
+function colores(a, b) {
+    r1 = strtonum("0x" substr(a, 1, 2)); g1 = strtonum("0x" substr(a, 3, 2)); b1 = strtonum("0x" substr(a, 5, 2))
+    r2 = strtonum("0x" substr(b, 1, 2)); g2 = strtonum("0x" substr(b, 3, 2)); b2 = strtonum("0x" substr(b, 5, 2))
+}
+function releer(   l, a, b) {
+    a = ap; b = br
+    while ((getline l < yo) > 0) {
+        if (l ~ /^APAGADO="/) a = substr(l, 10, 6)
+        if (l ~ /^BRILLANTE="/) b = substr(l, 12, 6)
+    }
+    close(yo)
+    ap = a; br = b; colores(a, b)
+}
 BEGIN {
     smax = 15; smin = 2.4       # tamaño (pt) de la barra más alta y de la más baja
     paso = 3.5                  # espacio fijo por barra (pt): 56 barras llenan la pastilla (230 px)
     centro = (0.928 - 0.235) / 2
     avance = 0.586
+    colores(ap, br)
 }
 function barra(v,   s, t, r, g, b) {
     t = v / 100
@@ -45,6 +59,7 @@ function barra(v,   s, t, r, g, b) {
         s * 1024, centro * (smax - s) * 1024, (paso - avance * s) * 1024, r, g, b, (s > 6.5 ? "│" : "┃"))
 }
 {
+    if (++cuadros % 30 == 0) releer()
     n = NF - 1
     # Ancla invisible al tamaño máximo para que la altura de la línea no brinque
     s = sprintf("<span size=\"%d\">\342\200\213</span>", smax * 1024)

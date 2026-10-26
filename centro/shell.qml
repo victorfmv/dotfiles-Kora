@@ -24,10 +24,10 @@ ShellRoot {
         function onReloadFailed() { Quickshell.inhibitReloadPopup(); }
     }
 
-    readonly property color oro: "#e1754b"
-    readonly property color crema: "#ebded5"
-    readonly property color tenue: "#8b7c71"
-    readonly property color fondo: "#14110f"
+    readonly property color oro: "#65b4e5"
+    readonly property color crema: "#d3e0ed"
+    readonly property color tenue: "#6f7e8d"
+    readonly property color fondo: "#0f1114"
     readonly property string iconos: "CaskaydiaCove Nerd Font"
 
     property bool abierto: false
@@ -233,11 +233,11 @@ ShellRoot {
             anchors { top: parent.top; right: parent.right; topMargin: 48; rightMargin: 10 }
             radius: 24
             gradient: Gradient {
-                GradientStop { position: 0.0; color: Qt.rgba(0.108, 0.09, 0.077, 0.99) }
-                GradientStop { position: 1.0; color: Qt.rgba(0.059, 0.049, 0.041, 0.99) }
+                GradientStop { position: 0.0; color: Qt.rgba(0.073, 0.092, 0.112, 0.99) }
+                GradientStop { position: 1.0; color: Qt.rgba(0.039, 0.05, 0.061, 0.99) }
             }
             border.width: 1
-            border.color: Qt.rgba(0.879, 0.457, 0.291, 0.5)
+            border.color: Qt.rgba(0.393, 0.704, 0.897, 0.5)
             clip: true
 
             // Entrada: se desliza desde la derecha y aparece
@@ -265,7 +265,7 @@ ShellRoot {
                         Layout.fillWidth: true
                         Layout.preferredHeight: 150
                         radius: 18
-                        color: "#0d0b0a"
+                        color: "#0a0b0d"
                         clip: true
 
                         Image {
@@ -296,7 +296,7 @@ ShellRoot {
                             radius: 18
                             gradient: Gradient {
                                 GradientStop { position: 0.35; color: "transparent" }
-                                GradientStop { position: 1.0; color: Qt.rgba(0.059, 0.049, 0.041, 0.92) }
+                                GradientStop { position: 1.0; color: Qt.rgba(0.039, 0.05, 0.061, 0.92) }
                             }
                         }
 
@@ -317,7 +317,7 @@ ShellRoot {
                             }
                             Column {
                                 Layout.fillWidth: true
-                                Text { text: "Victor"; color: "#f4e4d9"; font { family: "Rubik"; pixelSize: 16; bold: true } }
+                                Text { text: "Victor"; color: "#d7e6f6"; font { family: "Rubik"; pixelSize: 16; bold: true } }
                                 Text {
                                     text: "kora@Kora" + (root.encendido ? "  ·  encendido " + root.encendido : "")
                                     color: root.crema; opacity: 0.75
@@ -334,9 +334,9 @@ ShellRoot {
                                     required property var modelData
                                     Layout.preferredWidth: 32; Layout.preferredHeight: 32
                                     radius: 16
-                                    color: Qt.rgba(0.079, 0.069, 0.061, a.containsMouse ? 0.95 : 0.72)
+                                    color: Qt.rgba(0.059, 0.07, 0.081, a.containsMouse ? 0.95 : 0.72)
                                     border.width: 1
-                                    border.color: a.containsMouse ? "#e1754b" : Qt.rgba(0.991, 0.76, 0.669, 0.22)
+                                    border.color: a.containsMouse ? "#65b4e5" : Qt.rgba(0.786, 0.914, 0.994, 0.22)
                                     Text { anchors.centerIn: parent; text: modelData.ic; color: root.crema; font { family: root.iconos; pixelSize: 15 } }
                                     MouseArea {
                                         id: a; anchors.fill: parent; hoverEnabled: true
@@ -458,7 +458,7 @@ ShellRoot {
                         radius: 18
                         color: Qt.rgba(1, 1, 1, 0.035)
                         border.width: 1
-                        border.color: Qt.rgba(0.991, 0.76, 0.669, 0.08)
+                        border.color: Qt.rgba(0.786, 0.914, 0.994, 0.08)
 
                         ColumnLayout {
                             id: notifCol
@@ -500,11 +500,11 @@ ShellRoot {
                                     Layout.fillWidth: true; Layout.preferredHeight: 34
                                     radius: 17
                                     gradient: Gradient {
-                                        GradientStop { position: 0.0; color: Qt.rgba(0.993, 0.914, 0.857, 0.09) }
-                                        GradientStop { position: 1.0; color: Qt.rgba(0.993, 0.914, 0.857, 0.03) }
+                                        GradientStop { position: 0.0; color: Qt.rgba(0.85, 0.925, 1, 0.09) }
+                                        GradientStop { position: 1.0; color: Qt.rgba(0.85, 0.925, 1, 0.03) }
                                     }
                                     border.width: 1
-                                    border.color: root.cuantas > 0 ? Qt.rgba(0.879, 0.457, 0.291, 0.45) : Qt.rgba(0.991, 0.76, 0.669, 0.10)
+                                    border.color: root.cuantas > 0 ? Qt.rgba(0.393, 0.704, 0.897, 0.45) : Qt.rgba(0.786, 0.914, 0.994, 0.10)
                                     Text {
                                         anchors.centerIn: parent
                                         text: root.cuantas === 1 ? "1 notificación" : root.cuantas + " notificaciones"
@@ -528,7 +528,7 @@ ShellRoot {
                         radius: 18
                         color: Qt.rgba(1, 1, 1, 0.035)
                         border.width: 1
-                        border.color: Qt.rgba(0.991, 0.76, 0.669, 0.08)
+                        border.color: Qt.rgba(0.786, 0.914, 0.994, 0.08)
 
                         Column {
                             id: monCol
@@ -558,20 +558,20 @@ ShellRoot {
                                         Text {
                                             anchors.right: parent.right
                                             text: modelData.txt
-                                            color: modelData.v > 0.85 ? "#f2c14e" : root.oro
+                                            color: modelData.v > 0.85 ? "#e06c5a" : root.oro
                                             font { family: "Rubik"; pixelSize: 12; bold: true }
                                         }
                                     }
                                     Rectangle {
                                         width: parent.width; height: 7; radius: 4
                                         color: Qt.rgba(0, 0, 0, 0.3)
-                                        border.width: 1; border.color: Qt.rgba(0.991, 0.76, 0.669, 0.08)
+                                        border.width: 1; border.color: Qt.rgba(0.786, 0.914, 0.994, 0.08)
                                         Rectangle {
                                             width: parent.width * Math.max(0, Math.min(1, modelData.v)); height: parent.height; radius: 4
                                             gradient: Gradient {
                                                 orientation: Gradient.Horizontal
-                                                GradientStop { position: 0.0; color: modelData.v > 0.85 ? "#d9a52b" : "#b8552e" }
-                                                GradientStop { position: 1.0; color: modelData.v > 0.85 ? "#f7d37d" : "#ef9572" }
+                                                GradientStop { position: 0.0; color: modelData.v > 0.85 ? "#b84c3d" : "#3794cd" }
+                                                GradientStop { position: 1.0; color: modelData.v > 0.85 ? "#f08a78" : "#8dcbf2" }
                                             }
                                             Behavior on width { NumberAnimation { duration: 400; easing.type: Easing.OutCubic } }
                                         }

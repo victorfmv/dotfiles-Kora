@@ -157,9 +157,10 @@ def aplicar(nuevo):
 def recargar():
     # Quickshell (panel y vista de workspaces) se recarga solo al ver los archivos cambiar
     subprocess.run(["hyprctl", "reload"], stdout=subprocess.DEVNULL)
-    # matar justo antes de lanzar, para que nunca queden dos barras
-    subprocess.Popen(["sh", "-c", f"pkill -x waybar; sleep 0.5; pkill -x waybar; exec waybar -c {K}/waybar/config.jsonc -s {K}/waybar/style.css"],
-                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+    # Waybar NO se reinicia (la barra desaparecía ~2 s): style.css se recarga solo
+    # (reload_style_on_change), los puntos de workspaces releen sus colores con SIGUSR1
+    # y las rayitas de cava los releen cada segundo.
+    subprocess.run(["pkill", "-USR1", "-f", r"^python3 \S*scripts/workspaces\.py$"], stderr=subprocess.DEVNULL)
 
 
 if __name__ == "__main__":

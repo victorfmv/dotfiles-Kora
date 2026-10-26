@@ -1,9 +1,9 @@
 /* Waybar de Hyprland Kora — mismos colores que config/colors.lua */
-@define-color bg      rgba(20, 17, 15, 0.85);
-@define-color fg      #ebded5;
-@define-color accent  #e1754b;
-@define-color muted   #6a5e56;
-@define-color urgent  #f2c14e;
+@define-color bg      rgba(15, 17, 20, 0.85);
+@define-color fg      #d3e0ed;
+@define-color accent  #65b4e5;
+@define-color muted   #54606c;
+@define-color urgent  #e06c5a;
 
 * {
     font-family: "JetBrains Mono NF", "JetBrainsMono Nerd Font", sans-serif;
@@ -37,12 +37,13 @@ window#waybar {
 #workspaces button.active { color: @accent; font-size: 16px; }
 #workspaces button.urgent { color: @urgent; }
 #workspaces button:hover { background: alpha(@accent, 0.15); box-shadow: none; }
-#clock { padding: 0 16px; }
+#clock { padding: 0 16px; color: @accent; font-weight: bold; }
 #battery.warning { color: @accent; }
 #battery.critical { color: @urgent; }
 #custom-power { color: @urgent; }
 
 tooltip { background: @bg; border: 1px solid @accent; border-radius: 10px; }
+tooltip label { color: @fg; }
 #custom-workspaces { padding: 0 16px; }
 
 /* Grupo de estado (WiFi · Bluetooth · volumen · batería) en una sola pastilla */
