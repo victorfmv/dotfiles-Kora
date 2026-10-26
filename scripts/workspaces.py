@@ -3,7 +3,7 @@
 # agregando conforme se abren y desaparecen al quedar vacíos).
 import json, os, socket, subprocess
 
-ORO, BLANCO, GRIS = "#e44b43", "#d1dcef", "#39404c"
+ORO, BLANCO, GRIS = "#e1754b", "#ebded5", "#49413c"
 ICONOS = {"music": "\U000F04C7", "discord": "\U000F066F", "obs": "\U000F044B", "gaming": "\U000F02B4", "steam": "\U000F04D3"}
 
 

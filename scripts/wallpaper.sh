@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Wallpaper de Hyprland Kora (independiente del de Caelestia).
 #   wallpaper.sh        -> pone el último elegido
-#   wallpaper.sh pick   -> elegir con fuzzel (Super+Shift+W)
+#   wallpaper.sh pick   -> elegir en el panal de hexágonos (Super+Shift+W, fondos/shell.qml)
+#   wallpaper.sh set <imagen> -> poner esa imagen (lo usa el panal)
 # Si hay un video con el mismo nombre en ~/Vídeos/wallpapers, lo reproduce animado.
 IMGS="$HOME/Imágenes/wallpapers"
 VIDEOS="$HOME/Vídeos/wallpapers"
@@ -16,9 +17,9 @@ for v in "$VIDEOS"/*.{mp4,webm,mkv,mov}; do
 done
 
 if [ "$1" = pick ]; then
-    pkill fuzzel && exit 0
-    name=$(ls "$IMGS" | "$HOME/.config/hypr-kora/scripts/fuzzel.sh" --dmenu --prompt "󰸉  " --placeholder "Elegir wallpaper…") || exit 0
-    echo "$IMGS/$name" > "$STATE"
+    exec "$HOME/.config/hypr-kora/scripts/fondos.sh" toggle
+elif [ "$1" = set ] && [ -f "$2" ]; then
+    echo "$2" > "$STATE"
 fi
 
 img=$(cat "$STATE" 2>/dev/null)

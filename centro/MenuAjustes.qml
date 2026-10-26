@@ -101,7 +101,7 @@ Rectangle {
     implicitHeight: col.implicitHeight + 24
     radius: 18
     color: Qt.rgba(1, 1, 1, 0.04)
-    border.width: 1; border.color: Qt.rgba(1, 0.658, 0.64, 0.07)
+    border.width: 1; border.color: Qt.rgba(0.991, 0.76, 0.669, 0.07)
 
     ColumnLayout {
         id: col
@@ -110,11 +110,11 @@ Rectangle {
 
         RowLayout {
             Layout.fillWidth: true
-            Text { text: "󰒓"; color: "#e44b43"; font { family: "CaskaydiaCove Nerd Font"; pixelSize: 16 } }
+            Text { text: "󰒓"; color: "#e1754b"; font { family: "CaskaydiaCove Nerd Font"; pixelSize: 16 } }
             Text {
                 Layout.fillWidth: true
                 text: "  Ajustes"
-                color: "#ecf3ff"
+                color: "#fef4ed"
                 font { family: "Rubik"; pixelSize: 14; weight: Font.DemiBold }
             }
         }
@@ -125,9 +125,9 @@ Rectangle {
             Layout.preferredHeight: actCol.implicitHeight + 24
             radius: 14
             readonly property bool hay: raiz.pendientes > 0 || raiz.actualizando
-            color: hay ? Qt.rgba(0.892, 0.289, 0.258, 0.14) : Qt.rgba(0.85, 0.905, 1, 0.025)
+            color: hay ? Qt.rgba(0.879, 0.457, 0.291, 0.14) : Qt.rgba(0.993, 0.914, 0.857, 0.025)
             border.width: 1
-            border.color: hay ? Qt.rgba(0.892, 0.289, 0.258, 0.5) : Qt.rgba(1, 0.658, 0.64, 0.06)
+            border.color: hay ? Qt.rgba(0.879, 0.457, 0.291, 0.5) : Qt.rgba(0.991, 0.76, 0.669, 0.06)
 
             ColumnLayout {
                 id: actCol
@@ -140,7 +140,7 @@ Rectangle {
                     Text {
                         id: iconoAct
                         text: raiz.actualizando ? "󰚰" : raiz.pendientes > 0 ? "󰚰" : raiz.pendientes === -2 ? "󰖪" : raiz.pendientes === -1 ? "󰑓" : "󰄬"
-                        color: raiz.pendientes === 0 && !raiz.actualizando ? "#8fbf7a" : "#e44b43"
+                        color: raiz.pendientes === 0 && !raiz.actualizando ? "#8fbf7a" : "#e1754b"
                         font { family: "CaskaydiaCove Nerd Font"; pixelSize: 22 }
                         RotationAnimation on rotation {
                             running: raiz.pendientes === -1 || raiz.actualizando
@@ -159,7 +159,7 @@ Rectangle {
                                 : raiz.pendientes === -2 ? "No se pudo revisar"
                                 : raiz.pendientes === 0 ? (raiz.resultado === "ok" ? "¡Listo! Sistema actualizado" : "Tu sistema está al día")
                                 : raiz.pendientes + (raiz.pendientes === 1 ? " actualización disponible" : " actualizaciones disponibles")
-                            color: "#ecf3ff"
+                            color: "#fef4ed"
                             font { family: "Rubik"; pixelSize: 13; weight: Font.DemiBold }
                         }
                         Text {
@@ -170,7 +170,7 @@ Rectangle {
                                 : raiz.pendientes === -2 ? "Revisa tu conexión a internet"
                                 : raiz.pendientes > 0 ? "Programas, drivers y seguridad"
                                 : "Paquetes oficiales de CachyOS"
-                            color: raiz.resultado === "error" && !raiz.actualizando ? "#f2a54a" : "#6d7990"
+                            color: raiz.resultado === "error" && !raiz.actualizando ? "#f2c14e" : "#8b7c71"
                             font { family: "Rubik"; pixelSize: 11 }
                         }
                     }
@@ -179,14 +179,14 @@ Rectangle {
                         Layout.preferredWidth: botonTxt.implicitWidth + 24
                         Layout.preferredHeight: 32
                         radius: 16
-                        color: actArea.containsMouse ? "#f2716a" : "#e44b43"
+                        color: actArea.containsMouse ? "#ef9572" : "#e1754b"
                         scale: actArea.pressed ? 0.94 : 1
                         Behavior on scale { NumberAnimation { duration: 110 } }
                         Text {
                             id: botonTxt
                             anchors.centerIn: parent
                             text: "Actualizar"
-                            color: "#0e1115"
+                            color: "#14110f"
                             font { family: "Rubik"; pixelSize: 12; weight: Font.DemiBold }
                         }
                         MouseArea { id: actArea; anchors.fill: parent; hoverEnabled: true; cursorShape: Qt.PointingHandCursor; onClicked: raiz.empezarActualizacion() }
@@ -200,10 +200,10 @@ Rectangle {
                     Layout.preferredHeight: 4
                     radius: 2
                     clip: true
-                    color: Qt.rgba(1, 0.658, 0.64, 0.08)
+                    color: Qt.rgba(0.991, 0.76, 0.669, 0.08)
                     Rectangle {
                         width: parent.width * 0.3; height: parent.height; radius: 2
-                        color: "#e44b43"
+                        color: "#e1754b"
                         NumberAnimation on x {
                             running: raiz.actualizando
                             from: -parent.width * 0.3; to: parent.width
@@ -229,7 +229,7 @@ Rectangle {
 
                 Text {
                     text: modelData.titulo.toUpperCase()
-                    color: "#6d7990"
+                    color: "#8b7c71"
                     font { family: "Rubik"; pixelSize: 10; weight: Font.DemiBold; letterSpacing: 1.2 }
                 }
 
@@ -250,9 +250,9 @@ Rectangle {
                             Layout.preferredWidth: 1
                             Layout.preferredHeight: 58
                             radius: 14
-                            color: Qt.rgba(0.85, 0.905, 1, area.containsMouse ? 0.08 : 0.025)
+                            color: Qt.rgba(0.993, 0.914, 0.857, area.containsMouse ? 0.08 : 0.025)
                             border.width: 1
-                            border.color: area.containsMouse ? Qt.rgba(0.892, 0.289, 0.258, 0.6) : Qt.rgba(1, 0.658, 0.64, 0.06)
+                            border.color: area.containsMouse ? Qt.rgba(0.879, 0.457, 0.291, 0.6) : Qt.rgba(0.991, 0.76, 0.669, 0.06)
                             scale: area.pressed ? 0.96 : 1
                             Behavior on color { ColorAnimation { duration: 120 } }
                             Behavior on scale { NumberAnimation { duration: 110 } }
@@ -263,11 +263,11 @@ Rectangle {
                                 Rectangle {
                                     Layout.preferredWidth: 34; Layout.preferredHeight: 34
                                     radius: 11
-                                    color: area.containsMouse ? Qt.rgba(0.892, 0.289, 0.258, 0.22) : Qt.rgba(0.85, 0.905, 1, 0.06)
+                                    color: area.containsMouse ? Qt.rgba(0.879, 0.457, 0.291, 0.22) : Qt.rgba(0.993, 0.914, 0.857, 0.06)
                                     Text {
                                         anchors.centerIn: parent
                                         text: boton.modelData.ic
-                                        color: area.containsMouse ? "#e44b43" : "#d1dcef"
+                                        color: area.containsMouse ? "#e1754b" : "#ebded5"
                                         opacity: boton.falta ? 0.55 : 1
                                         font { family: "CaskaydiaCove Nerd Font"; pixelSize: 18 }
                                     }
@@ -279,14 +279,14 @@ Rectangle {
                                         width: parent.width
                                         elide: Text.ElideRight
                                         text: boton.modelData.nombre
-                                        color: boton.falta ? "#94a3bc" : "#ecf3ff"
+                                        color: boton.falta ? "#b6a69a" : "#fef4ed"
                                         font { family: "Rubik"; pixelSize: 12; weight: Font.DemiBold }
                                     }
                                     Text {
                                         width: parent.width
                                         elide: Text.ElideRight
                                         text: boton.cargando ? "Instalando…" : boton.falta ? "󰇚 Instalar" : boton.modelData.desc
-                                        color: boton.falta || boton.cargando ? "#e44b43" : "#6d7990"
+                                        color: boton.falta || boton.cargando ? "#e1754b" : "#8b7c71"
                                         font { family: boton.falta && !boton.cargando ? "CaskaydiaCove Nerd Font" : "Rubik"; pixelSize: 10 }
                                     }
                                 }

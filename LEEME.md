@@ -23,6 +23,7 @@ Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-se
 | `hyprlock.conf`, `hypridle.conf` | Bloqueo e inactividad |
 | `scripts/` | Portapapeles, menú de apagado, capturas, wallpaper, workspaces de Waybar, vistas |
 | `overview/shell.qml` | Vista de todos los workspaces (Quickshell) |
+| `fondos/shell.qml` | Selector de wallpapers: panal de hexágonos animado (Quickshell, `scripts/fondos.sh`) |
 
 ## Atajos principales
 | Atajo | Acción |
@@ -42,7 +43,7 @@ Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-se
 | Super + V | Portapapeles |
 | Super + L | Bloquear |
 | Super + Alt + C | Menú apagar/reiniciar |
-| Super + Shift + W | Elegir wallpaper |
+| Super + Shift + W | Elegir wallpaper: panal de hexágonos animado (flechas/ratón + Enter, Esc cierra) |
 | Super + X (o A) / Super + Shift + A | Centro de control y notificaciones / borrar todas |
 | Super + Shift + B | Recargar Waybar |
 | Alt + F6 (con o sin Fn) | Ventiladores al máximo / automático (`~/.local/bin/ventiladores`, no cambia el modo de energía) |
