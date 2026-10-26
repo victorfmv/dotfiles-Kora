@@ -36,6 +36,8 @@ done
 tema=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get(sys.argv[2], "dorado"))' \
     "$HOME/.config/hypr-kora/temas/fondos.json" "$base" 2>/dev/null)
 "$HOME/.config/hypr-kora/scripts/tema.py" "${tema:-dorado}" >/dev/null
+# La pantalla de inicio (login) usa el mismo fondo y colores
+"$HOME/.config/hypr-kora/scripts/greeter-sync.py" >/dev/null 2>&1 &
 
 pkill -x mpvpaper; sleep 0.3; pkill -9 -x mpvpaper 2>/dev/null
 exec mpvpaper -f -o "no-audio loop hwdec=auto-safe panscan=1.0 image-display-duration=inf" '*' "$media"
