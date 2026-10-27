@@ -59,23 +59,102 @@ Para que un fondo use un tema de colores, agrégalo a `hypr-kora/temas/fondos.js
 
 Temas incluidos: `ceniza`, `cielo`, `dorado`, `dragon`, `galaxia`, `makima`, `tinta`. Para cambiarlo a mano: `~/.config/hypr-kora/scripts/tema.py <tema>`.
 
-## Atajos principales
+## Atajos
+
+`Super` es la tecla de Windows. Todos están en [`hypr-kora/config/binds.lua`](hypr-kora/config/binds.lua).
+
+### Apps
 
 | Atajo | Acción |
 |---|---|
-| `Super` (soltar) | Lanzador (fuzzel) |
-| `Super + Enter` | Terminal |
-| `Super + Q` | Cerrar ventana |
-| `Super + ← / →` | Ventana anterior / siguiente |
-| `Super + ↑ / ↓` · `Super + 1…0` | Cambiar de workspace |
-| `Super + X` | Centro de control y notificaciones |
-| `Super + Shift + W` | Elegir wallpaper |
-| `Super + Shift + Tab` | Ver todos los workspaces |
-| `Super + V` | Portapapeles |
-| `Super + L` | Bloquear |
-| `Impr` | Captura de área |
+| `Super` (soltar) | Lanzador de apps (fuzzel) |
+| `Super + Enter` | Terminal (kitty) |
+| `Super + W` | Navegador (Brave) |
+| `Super + E` | Archivos (Dolphin) |
+| `Super + C` | Editor de código (VSCodium) |
+| `Super + T` | Editor de texto |
+| `Tecla calculadora` | Calculadora |
+| `Ctrl + Shift + Esc` | Monitor del sistema (btop) |
 
-La lista completa está en [`hypr-kora/LEEME.md`](hypr-kora/LEEME.md).
+### Ventanas
+
+| Atajo | Acción |
+|---|---|
+| `Super + Q` | Cerrar ventana |
+| `Super + Esc` | Forzar cierre (clic en la ventana) |
+| `Super + F` | Pantalla completa |
+| `Super + H` | Maximizar (deja la barra) |
+| `Super + Alt + Espacio` | Flotante / mosaico |
+| `Super + J` | Ventana a media pantalla / completa |
+| `Super + ← / →` | Ventana anterior / siguiente (fila tipo niri) |
+| `Alt + Tab` | Cambiar de ventana |
+| `Super + Shift + ← → ↑ ↓` | Mover la ventana |
+| `Super + clic izquierdo` (arrastrar) | Mover ventana |
+| `Super + clic derecho` (arrastrar) | Cambiar tamaño |
+| `Super + Tab` | Ver todas las ventanas del workspace |
+
+### Workspaces
+
+| Atajo | Acción |
+|---|---|
+| `Super + 1…0` | Ir al workspace 1…10 |
+| `Super + ↑ / ↓` | Workspace de arriba / abajo |
+| `Super + Shift + 1…0` | Mandar la ventana al workspace 1…10 |
+| `Super + Shift + Alt + 1…0` | Mandar la ventana sin seguirla |
+| `Super + Ctrl + ← / →` | Workspace anterior / siguiente del monitor |
+| `Super + Ctrl + Shift + ← / →` | Mover la ventana al workspace anterior / siguiente |
+| `Super + Ctrl + ↓` | Primer workspace vacío |
+| `Super + Shift + Tab` · `Super + rueda` | Vista de todos los workspaces con sus ventanas |
+| `Super + Shift + rueda` | Mover la ventana a otro monitor |
+
+### Espacios especiales (se abren encima y se esconden)
+
+| Atajo | Espacio | Con `Shift`: mandar la ventana ahí |
+|---|---|---|
+| `Super + M` | Música (Spotify) | `Super + Shift + M` |
+| `Super + D` | Discord | `Super + Shift + D` |
+| `Super + O` | OBS | `Super + Shift + O` |
+| `Super + G` | Juegos | `Super + Shift + G` |
+| `Super + S` | Steam | `Super + Shift + S` |
+
+### Escritorio
+
+| Atajo | Acción |
+|---|---|
+| `Super + X` (o `Super + A`) | Centro de control y notificaciones |
+| `Super + Shift + A` | Borrar todas las notificaciones |
+| `Super + Shift + W` | Elegir wallpaper (panal de hexágonos: flechas/ratón + Enter, Esc cierra) |
+| `Super + V` | Historial del portapapeles |
+| `Super + P` | Selector de color (copia el hex) |
+| `Impr` / `Super + Impr` | Captura de área / pantalla completa (se guarda en `~/Imágenes/Capturas`) |
+| `Super + L` | Bloquear pantalla |
+| `Super + Alt + C` | Menú: bloquear, cerrar sesión, suspender, reiniciar, apagar |
+| `Super + Shift + B` | Recargar Waybar si se traba |
+| `Super + +` / `Super + -` | Lupa (acercar / alejar) |
+| `Alt + F6` | Ventiladores al máximo / automático (solo Alienware, con `~/.local/bin/ventiladores`) |
+
+### Teclas de la laptop
+
+Volumen, silenciar, micrófono, play/pausa, siguiente/anterior y brillo funcionan con sus teclas (también con la pantalla bloqueada).
+
+### Gestos del touchpad
+
+| Gesto | Acción |
+|---|---|
+| 3 dedos ← → | Recorrer ventanas |
+| 3 dedos ↑ ↓ | Cambiar de workspace |
+| Pellizco con 3 dedos | Vista de todos los workspaces (abrir / cerrar) |
+| 4 dedos ↑ | Pantalla completa |
+| 4 dedos ← | Flotante |
+
+### En la barra
+
+| Clic en… | Abre |
+|---|---|
+| Batería | Panel de batería y modo de energía (Ahorro / Balanceado / Rendimiento) |
+| Engrane del centro de control | Ajustes: redes, bluetooth, sonido, apariencia, monitor del sistema y apps de CachyOS (actualizar, kernel, mantenimiento) |
+
+Sin cargador, la pantalla baja sola a 60 Hz, el fondo se queda en imagen fija y se activa el modo ahorro. Al conectar el cargador regresa todo.
 
 ## Ajustarlo a tu equipo
 
