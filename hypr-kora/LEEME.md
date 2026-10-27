@@ -1,8 +1,8 @@
 # Hyprland Kora
 
-Hyprland personalizado de Victor, **aparte** de Caelestia (`~/.config/hypr`, que no se toca).
+Hyprland personalizado de Victor. Vive en el repo `~/dotfiles` (carpeta `hypr-kora/`); `~/.config/hypr-kora` es un enlace a ella y `~/.config/hypr` un enlace a `hypr-kora`.
 Mismo programa Hyprland, otra config: `start-hyprland -- -c ~/.config/hypr-kora/hyprland.lua`.
-Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-sessions/hyprland-kora.desktop`).
+Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-sessions/hyprland-kora.desktop`, lo instala `~/dotfiles/instalar.sh`).
 
 ## Archivos
 | Archivo | Qué hace |
@@ -53,8 +53,8 @@ Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-se
 ## Si algo se rompe
 - **Revisar la config sin arrancar:** `Hyprland --verify-config -c ~/.config/hypr-kora/hyprland.lua`
 - **Ver errores en vivo:** `hyprctl configerrors`
-- **Historial de cambios:** `git -C ~/.config/hypr-kora log --oneline`
-- **Volver a la última versión buena:** `git -C ~/.config/hypr-kora checkout -- .` (descarta cambios sin guardar)
+- **Historial de cambios:** `git -C ~/dotfiles log --oneline`
+- **Volver a la última versión buena:** `git -C ~/dotfiles checkout -- .` (descarta cambios sin guardar)
 - **Pantalla negra al entrar:** Ctrl+Alt+F3, entra con tu usuario y corre el verify-config de arriba. O simplemente cierra sesión y entra a Caelestia.
 - Logs de Hyprland: `$XDG_RUNTIME_DIR/hypr/*/hyprland.log`
 

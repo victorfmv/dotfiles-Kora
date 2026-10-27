@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Hyprland Kora
+Comment=Hyprland Kora: Waybar + Quickshell, temas por wallpaper
+Exec=uwsm start -e -D Hyprland -N "Hyprland Kora" -- /usr/bin/start-hyprland -- -c @HOME@/.config/hypr-kora/hyprland.lua
+TryExec=uwsm
+DesktopNames=Hyprland
+Type=Application

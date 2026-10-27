@@ -1,0 +1,25 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+PS1='[\u@\h \W]\$ '
+# Dentro de distrobox: marcar el prompt con el nombre del contenedor
+[[ -n $CONTAINER_ID ]] && PS1='[\u@'"$CONTAINER_ID"' \W]\$ '
+export PATH="$HOME/.local/bin:$PATH"
+
+# Saludo: retrato del wallpaper actual + info con los colores del tema
+if [[ -z $CLAUDECODE && -z $CONTAINER_ID ]]; then
+    if [[ $TERM == xterm-kitty && -x ~/.local/bin/terminal-logo ]]; then
+        ~/.local/bin/terminal-logo
+    elif command -v fastfetch >/dev/null; then
+        fastfetch
+    fi
+fi
+
+# uv (si está instalado)
+[[ -f ~/.local/bin/env ]] && . ~/.local/bin/env

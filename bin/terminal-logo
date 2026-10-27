@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+# Saludo de la terminal: retrato circular + fastfetch con los colores del tema de Hyprland Kora.
+K="$HOME/.config/hypr-kora"
+WALL_STATE="$HOME/.local/state/hypr-kora/wallpaper"
+CROPS="$K/temas/logo-recortes"
+CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/terminal-logo"
+mkdir -p "$CACHE"
+
+# Retrato fijo: siempre el ángel (no cambia con el wallpaper).
+img="$HOME/Imágenes/wallpapers/angel-de-ceniza.png"
+name="$(basename "${img%.*}")"
+wall="$(cat "$WALL_STATE" 2>/dev/null)"
+
+# Colores del tema actual (fuzzel.ini siempre tiene la paleta puesta por scripts/tema.py)
+col() { local v; v=$(grep "^$1=" "$K/fuzzel/fuzzel.ini" 2>/dev/null | tail -1 | cut -d= -f2); echo "${v:0:6}" | grep -qE '^[0-9a-fA-F]{6}$' && echo "${v:0:6}" || echo "$2"; }
+primary="$(col prompt ffffff)"
+secondary="$(col selection-match c6c6c6)"
+tertiary="$(col input 919191)"
+muted="$(col placeholder 919191)"
+sgr() { printf '38;2;%d;%d;%d' "0x${1:0:2}" "0x${1:2:2}" "0x${1:4:2}"; }
+
+# Recorte: "cx cy tam" en fracciones (centro x, centro y, lado/alto de la imagen).
+crop="$(grep -m1 "^$name=" "$CROPS" 2>/dev/null | cut -d= -f2)"
+read -r cx cy sz <<<"${crop:-0.5 0.5 1.0}"
+
+logo="$CACHE/$name-ffffff.png"
+if [ -f "$img" ] && [ ! -f "$logo" ]; then
+    rm -f "$CACHE/$name"-*.png "$CACHE/$name"-*.txt
+    read -r W H < <(magick identify -format '%w %h' "$img")
+    S=$(awk "BEGIN{printf \"%d\", $H*$sz}")
+    X=$(awk "BEGIN{x=$W*$cx-$S/2; if(x<0)x=0; if(x>$W-$S)x=$W-$S; printf \"%d\", x}")
+    Y=$(awk "BEGIN{y=$H*$cy-$S/2; if(y<0)y=0; if(y>$H-$S)y=$H-$S; printf \"%d\", y}")
+    magick "$img" -crop "${S}x${S}+${X}+${Y}" +repage -resize 560x560 -alpha set \
+        \( -size 560x560 xc:none -fill white -draw "circle 280,280 280,22" \) \
+        -compose DstIn -composite \
+        "$logo" 2>/dev/null
+fi
+
+# Versión ASCII (dibujada con signos) del retrato
+COLS=40 ROWS=20
+ascii="${logo%.png}-${COLS}x${ROWS}.txt"
+[ -f "$logo" ] && [ ! -f "$ascii" ] && terminal-logo-ascii "$logo" "$COLS" "$ROWS" "$ascii"
+
+# Arte ASCII fijo (si existe, reemplaza al retrato): ~/.local/share/terminal-logo/arte.txt
+ARTE="$HOME/.local/share/terminal-logo/arte.txt"
+if [ -f "$ARTE" ]; then
+    COLS=$(awk '{ if (length > m) m = length } END { print m }' "$ARTE")
+    ROWS=$(wc -l <"$ARTE")
+    ascii="$CACHE/arte-color.txt"
+    # Degradado vertical: color principal arriba -> secundario abajo
+    awk -v p="$primary" -v s="$secondary" -v n="$ROWS" '
+        function h(x){ return index("0123456789abcdef", tolower(x)) - 1 }
+        function c(hex, i){ return h(substr(hex,i,1))*16 + h(substr(hex,i+1,1)) }
+        { t = (n > 1) ? (NR-1)/(n-1) : 0
+          r = int(c(p,1)*(1-t) + c(s,1)*t); g = int(c(p,3)*(1-t) + c(s,3)*t); b = int(c(p,5)*(1-t) + c(s,5)*t)
+          printf "\033[38;2;%d;%d;%dm%s\033[0m\n", r, g, b, $0 }' "$ARTE" >"$ascii"
+fi
+
+h=$(date +%H)
+if   [ "$h" -lt 12 ]; then saludo="Buenos días"
+elif [ "$h" -lt 19 ]; then saludo="Buenas tardes"
+else                       saludo="Buenas noches"; fi
+nombre="$(cat "$HOME/.local/state/hypr-kora/nombre" 2>/dev/null)"; nombre="${nombre:-$USER}"
+wname="$(basename "${wall%.*}")"
+pretty="$(echo "${wname%%.*}" | tr '-' ' ')"
+
+P="$(sgr "$primary")" S2="$(sgr "$secondary")" T="$(sgr "$tertiary")" M="$(sgr "$muted")"
+# Sin retrato (no hay imagen), el logo normal de la distro
+if [ -f "$ascii" ]; then
+    logo_json='"logo": { "type": "file-raw", "source": "'"$ascii"'", "width": '"$COLS"', "height": '"$ROWS"', "padding": { "top": 0, "left": 2, "right": 4 } },'
+else
+    logo_json='"logo": { "padding": { "top": 1, "left": 2, "right": 4 } },'
+fi
+cfg="$CACHE/config.jsonc"
+cat >"$cfg" <<EOF
+{
+$logo_json
+  "display": {
+    "separator": "  ",
+    "color": { "keys": "$P", "title": "$P", "output": "37" },
+    "key": { "width": 14 }
+  },
+  "modules": [
+    "break",
+    "break",
+    { "type": "custom", "format": "\u001b[1;${P}m${saludo}, ${nombre}\u001b[0m \u001b[${M}m· $(whoami)@$(hostname)\u001b[0m" },
+    { "type": "custom", "format": "\u001b[${M}m──────────────────────────────────────────\u001b[0m" },
+    { "type": "os",       "key": " sistema",  "format": "{pretty-name}" },
+    { "type": "kernel",   "key": " kernel" },
+    { "type": "wm",       "key": " ventanas", "keyColor": "$S2" },
+    { "type": "shell",    "key": " shell",    "keyColor": "$S2" },
+    { "type": "terminal", "key": " terminal", "keyColor": "$S2" },
+    { "type": "cpu",      "key": " cpu",      "keyColor": "$T", "format": "{name}" },
+    { "type": "gpu",      "key": "󰢮 gpu",      "keyColor": "$T", "format": "{name}" },
+    { "type": "memory",   "key": " memoria",  "keyColor": "$T" },
+    { "type": "disk",     "key": "󰋊 disco",    "keyColor": "$T", "folders": "/" },
+    { "type": "packages", "key": "󰏖 paquetes" },
+    { "type": "uptime",   "key": " encendido" },
+    { "type": "custom", "key": "󰸉 wallpaper", "format": "\u001b[3m${pretty}\u001b[0m" },
+    "break",
+    { "type": "colors", "symbol": "circle", "paddingLeft": 1 }
+  ]
+}
+EOF
+fastfetch -c "$cfg"

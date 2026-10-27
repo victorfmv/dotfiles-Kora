@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+"""Convierte el retrato circular del wallpaper en arte ASCII con color (ANSI truecolor).
+
+Uso: terminal-logo-ascii IMAGEN.png COLUMNAS FILAS SALIDA.txt
+"""
+import sys
+
+from PIL import Image, ImageEnhance, ImageOps
+
+RAMP = " .:-=+*#%@"
+
+src, cols, rows, out = sys.argv[1], int(sys.argv[2]), int(sys.argv[3]), sys.argv[4]
+img = Image.open(src).convert("RGBA").resize((cols, rows), Image.LANCZOS)
+alpha = img.getchannel("A")
+rgb = ImageEnhance.Color(img.convert("RGB")).enhance(1.3)
+# Contraste automático para que los wallpapers oscuros también tengan detalle
+lum = ImageOps.autocontrast(rgb.convert("L"), cutoff=2)
+
+lines = []
+for y in range(rows):
+    line, last = "", None
+    for x in range(cols):
+        if alpha.getpixel((x, y)) < 110:
+            line += " "
+            continue
+        level = lum.getpixel((x, y)) / 255
+        ch = RAMP[max(1, round(level * (len(RAMP) - 1)))]
+        r, g, b = rgb.getpixel((x, y))
+        # Aclarar un poco para que se lea sobre fondo oscuro
+        r, g, b = (min(255, int(c * 0.75 + 64)) for c in (r, g, b))
+        color = f"\033[38;2;{r};{g};{b}m"
+        if color != last:
+            line += color
+            last = color
+        line += ch
+    lines.append(line.rstrip() + "\033[0m")
+
+with open(out, "w") as f:
+    f.write("\n".join(lines) + "\n")
