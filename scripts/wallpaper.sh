@@ -29,9 +29,12 @@ echo "$img" > "$STATE"   # la vista de workspaces lo lee de aquí
 
 base=$(basename "${img%.*}")
 media="$img"
-for ext in mp4 webm mkv mov; do
-    [ -f "$VIDEOS/$base.$ext" ] && media="$VIDEOS/$base.$ext" && break
-done
+# Con batería se queda la imagen fija (el video gasta batería); con cargador, el video
+if [ "$(cat /sys/class/power_supply/AC/online 2>/dev/null)" != 0 ]; then
+    for ext in mp4 webm mkv mov; do
+        [ -f "$VIDEOS/$base.$ext" ] && media="$VIDEOS/$base.$ext" && break
+    done
+fi
 
 # Colores del tema que va con este fondo (temas/fondos.json; si no está, "dorado")
 tema=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get(sys.argv[2], "dorado"))' \
@@ -43,7 +46,7 @@ tema=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get(sys.a
 # El nuevo se lanza encima del viejo y el viejo se quita cuando el nuevo ya se ve:
 # así nunca queda la pantalla en negro mientras cambia.
 viejos=$(pgrep -x mpvpaper)
-setsid -f mpvpaper -f -o "no-audio loop hwdec=auto-safe panscan=1.0 image-display-duration=inf" '*' "$media" >/dev/null 2>&1
+setsid -f mpvpaper -f -o "no-audio loop hwdec=vaapi gpu-hwdec-interop=vaapi panscan=1.0 image-display-duration=inf" '*' "$media" >/dev/null 2>&1
 [ -n "$viejos" ] || exit 0
 sleep 0.6
 kill $viejos 2>/dev/null; sleep 0.3; kill -9 $viejos 2>/dev/null

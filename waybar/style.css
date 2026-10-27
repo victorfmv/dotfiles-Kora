@@ -1,8 +1,8 @@
 /* Waybar de Hyprland Kora — mismos colores que config/colors.lua */
-@define-color bg      rgba(15, 17, 20, 0.85);
-@define-color fg      #d3e0ed;
-@define-color accent  #65b4e5;
-@define-color muted   #54606c;
+@define-color bg      rgba(17, 18, 17, 0.85);
+@define-color fg      #dde3dd;
+@define-color accent  #91bfa8;
+@define-color muted   #5d635d;
 @define-color urgent  #e06c5a;
 
 * {

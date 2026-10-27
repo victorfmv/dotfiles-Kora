@@ -13,5 +13,6 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("qs -p " .. K .. "/fondos") -- selector de wallpapers (Super+Shift+W)
     hl.exec_cmd("hypridle -c " .. K .. "/hypridle.conf")
     hl.exec_cmd(K .. "/scripts/wallpaper.sh")
+    hl.exec_cmd(K .. "/scripts/ahorro.sh") -- 60 Hz + fondo fijo + power-saver con batería
     hl.exec_cmd("xhost +SI:localuser:root")
 end)
