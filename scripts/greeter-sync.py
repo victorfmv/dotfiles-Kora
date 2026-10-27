@@ -7,7 +7,7 @@ Escribe ~/.local/state/hypr-kora/greeter/{greeter.toml,wallpaper.png}.
 /var/lib/noctalia-greeter/greeter.toml es un enlace a ese greeter.toml (lo crea
 scripts/instalar-greeter.sh una sola vez con sudo), así que no hace falta sudo aquí.
 """
-import importlib.util, json, subprocess
+import importlib.util, json, os, subprocess
 from pathlib import Path
 
 K = Path.home() / ".config/hypr-kora"
@@ -52,7 +52,7 @@ def main():
         f"# Generado por ~/.config/hypr-kora/scripts/greeter-sync.py (tema: {nombre}). No editar a mano.",
         "",
         "[user]",
-        'default = "kora"',
+        f'default = "{os.environ.get("USER", "")}"',
         "",
         "[appearance]",
         'scheme = "Synced"',

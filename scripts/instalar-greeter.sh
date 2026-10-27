@@ -3,7 +3,7 @@
 # scripts/greeter-sync.py, para que cambie sola con cada wallpaper.
 #   sudo bash ~/.config/hypr-kora/scripts/instalar-greeter.sh
 set -e
-U=kora
+U=${SUDO_USER:-$USER}
 H=/home/$U
 DIR=/var/lib/noctalia-greeter
 GEN=$H/.local/state/hypr-kora/greeter

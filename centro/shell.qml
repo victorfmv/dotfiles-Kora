@@ -158,6 +158,13 @@ ShellRoot {
         function menu(m: string): void { root.abrir(); root.menu = m; }
     }
 
+    // Nombre para mostrar (lo pide instalar.sh) y equipo; sin archivo, el usuario
+    FileView { id: archivoNombre; blockLoading: true; path: Quickshell.env("HOME") + "/.local/state/hypr-kora/nombre" }
+    FileView { id: archivoEquipo; blockLoading: true; path: "/etc/hostname" }
+    readonly property string usuario: Quickshell.env("USER") ?? ""
+    readonly property string nombre: archivoNombre.text().trim() || usuario
+    readonly property string equipo: archivoEquipo.text().trim()
+
     FileView {
         id: estadoWallpaper
         path: Quickshell.env("HOME") + "/.local/state/hypr-kora/wallpaper"
@@ -319,9 +326,9 @@ ShellRoot {
                             }
                             Column {
                                 Layout.fillWidth: true
-                                Text { text: "Victor"; color: "#e3eae3"; font { family: "Rubik"; pixelSize: 16; bold: true } }
+                                Text { text: root.nombre; color: "#e3eae3"; font { family: "Rubik"; pixelSize: 16; bold: true } }
                                 Text {
-                                    text: "kora@Kora" + (root.encendido ? "  ·  encendido " + root.encendido : "")
+                                    text: root.usuario + "@" + root.equipo + (root.encendido ? "  ·  encendido " + root.encendido : "")
                                     color: root.crema; opacity: 0.75
                                     font { family: "Rubik"; pixelSize: 11 }
                                 }
