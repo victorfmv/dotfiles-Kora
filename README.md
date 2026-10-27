@@ -1,4 +1,4 @@
-# dotfiles · Hyprland Kora
+# dotfiles-Kora · Hyprland Kora
 
 Mi escritorio de Linux: **Hyprland** con config en Lua, **Waybar**, paneles hechos en **Quickshell** y colores que cambian solos según el wallpaper.
 
@@ -21,7 +21,7 @@ Mi escritorio de Linux: **Hyprland** con config en Lua, **Waybar**, paneles hech
 Funciona en **Arch y derivadas** (CachyOS, EndeavourOS, Manjaro…).
 
 ```bash
-git clone https://github.com/victorfmv/dotfiles.git ~/dotfiles
+git clone https://github.com/victorfmv/dotfiles-Kora.git ~/dotfiles
 cd ~/dotfiles
 ./instalar.sh
 ```
