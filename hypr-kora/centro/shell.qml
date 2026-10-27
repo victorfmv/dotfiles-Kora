@@ -104,7 +104,7 @@ ShellRoot {
         Quickshell.execDetached(["brightnessctl", "-q", "set", Math.round(brillo * 100) + "%"]);
     }
 
-    property real cpu: 0; property real ram: 0; property real disco: 0; property real temp: 0
+    property real cpu: 0; property real ram: 0; property real disco: 0
     property var cpuPrevio: [0, 0]
     property string encendido: ""
     Process {
@@ -113,7 +113,6 @@ ShellRoot {
             "awk '/^cpu /{print $2+$3+$4+$5+$6+$7+$8, $5+$6}' /proc/stat;" +
             "awk '/MemTotal/{t=$2}/MemAvailable/{a=$2}END{print t, a}' /proc/meminfo;" +
             "df -P / | awk 'NR==2{print $5+0}';" +
-            "for z in /sys/class/thermal/thermal_zone*; do [ \"$(cat $z/type)\" = x86_pkg_temp ] && cat $z/temp; done | head -1;" +
             "awk '{s=int($1); h=int(s/3600); m=int(s%3600/60); print (h? h \" h \" : \"\") m \" min\"}' /proc/uptime"]
         stdout: StdioCollector {
             onStreamFinished: {
@@ -125,8 +124,7 @@ ShellRoot {
                 const [mt, ma] = l[1].split(" ").map(Number);
                 root.ram = 1 - ma / mt;
                 root.disco = Number(l[2]) / 100;
-                root.temp = Number(l[3]) / 1000;
-                root.encendido = l[4] ?? "";
+                root.encendido = l[3] ?? "";
             }
         }
     }
@@ -550,8 +548,7 @@ ShellRoot {
                                 model: [
                                     { ic: "󰻠", nombre: "CPU", v: root.cpu, txt: Math.round(root.cpu * 100) + "%" },
                                     { ic: "󰍛", nombre: "Memoria", v: root.ram, txt: Math.round(root.ram * 100) + "%" },
-                                    { ic: "󰋊", nombre: "Disco", v: root.disco, txt: Math.round(root.disco * 100) + "%" },
-                                    { ic: "󰔏", nombre: "Temperatura", v: Math.min(1, root.temp / 100), txt: Math.round(root.temp) + "°C" }
+                                    { ic: "󰋊", nombre: "Disco", v: root.disco, txt: Math.round(root.disco * 100) + "%" }
                                 ]
                                 Column {
                                     required property var modelData
