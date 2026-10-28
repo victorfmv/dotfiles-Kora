@@ -43,7 +43,7 @@ window#waybar {
 #custom-power { color: @urgent; }
 
 tooltip { background: @bg; border: 1px solid @accent; border-radius: 10px; }
-tooltip label { color: @fg; }
+tooltip label { color: @fg; padding: 10px 14px; }
 #custom-workspaces { padding: 0 16px; }
 
 /* Grupo de estado (WiFi · Bluetooth · volumen · batería) en una sola pastilla */

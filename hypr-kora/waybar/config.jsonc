@@ -44,9 +44,24 @@
     "clock": {
         "format": "󰥔  {0:%H:%M}",
         "format-alt": "󰥔  {0:%H:%M:%S}",
-        "tooltip-format": "{0:L%A %d de %B}\n\n<tt>{calendar}</tt>",
+        "tooltip-format": "<span size='14pt' color='#91bfa8'><b>{0:L%A %d de %B}</b></span>\n<span color='#5d635d'>─────────────────────</span>\n<tt><big>{calendar}</big></tt>",
         "interval": 1,
-        "locale": "es_MX.UTF-8"
+        "locale": "es_MX.UTF-8",
+        "calendar": {
+            "mode": "month",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#dde3dd'><b>{}</b></span>",
+                "weekdays": "<span color='#91bfa8'><b>{}</b></span>",
+                "days": "<span color='#dde3dd'>{}</span>",
+                "today": "<span background='#91bfa8' color='#111211'><b>{}</b></span>"
+            }
+        },
+        "actions": {
+            "on-scroll-up": "shift_down",
+            "on-scroll-down": "shift_up",
+            "on-click-right": "mode"
+        }
     },
     "mpris": {
         "format": "{status_icon}  {title}",
