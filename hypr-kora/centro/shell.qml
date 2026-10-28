@@ -104,29 +104,11 @@ ShellRoot {
         Quickshell.execDetached(["brightnessctl", "-q", "set", Math.round(brillo * 100) + "%"]);
     }
 
-    property real cpu: 0; property real ram: 0; property real disco: 0
-    property var cpuPrevio: [0, 0]
     property string encendido: ""
     Process {
         id: leerSistema
-        command: ["sh", "-c",
-            "awk '/^cpu /{print $2+$3+$4+$5+$6+$7+$8, $5+$6}' /proc/stat;" +
-            "awk '/MemTotal/{t=$2}/MemAvailable/{a=$2}END{print t, a}' /proc/meminfo;" +
-            "df -P / | awk 'NR==2{print $5+0}';" +
-            "awk '{s=int($1); h=int(s/3600); m=int(s%3600/60); print (h? h \" h \" : \"\") m \" min\"}' /proc/uptime"]
-        stdout: StdioCollector {
-            onStreamFinished: {
-                const l = text.trim().split("\n");
-                const [tot, idle] = l[0].split(" ").map(Number);
-                const [pt, pi] = root.cpuPrevio;
-                if (pt) root.cpu = 1 - (idle - pi) / Math.max(1, tot - pt);
-                root.cpuPrevio = [tot, idle];
-                const [mt, ma] = l[1].split(" ").map(Number);
-                root.ram = 1 - ma / mt;
-                root.disco = Number(l[2]) / 100;
-                root.encendido = l[3] ?? "";
-            }
-        }
+        command: ["awk", "{s=int($1); h=int(s/3600); m=int(s%3600/60); print (h? h \" h \" : \"\") m \" min\"}", "/proc/uptime"]
+        stdout: StdioCollector { onStreamFinished: root.encendido = text.trim() }
     }
     Timer {
         interval: 2000; repeat: true; triggeredOnStart: true
@@ -523,65 +505,6 @@ ShellRoot {
                                     Layout.preferredWidth: 46; implicitHeight: 34
                                     icono: "󰎟"
                                     onClic: root.limpiar()
-                                }
-                            }
-                        }
-                    }
-
-                    // ── Monitor del sistema ──
-                    Rectangle {
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: monCol.implicitHeight + 24
-                        radius: 18
-                        color: Qt.rgba(1, 1, 1, 0.035)
-                        border.width: 1
-                        border.color: Qt.rgba(0.865, 0.935, 0.9, 0.08)
-
-                        Column {
-                            id: monCol
-                            anchors { left: parent.left; right: parent.right; top: parent.top; margins: 14 }
-                            spacing: 12
-
-                            Text { text: "Monitor del sistema"; color: root.tenue; font { family: "Rubik"; pixelSize: 12; weight: Font.Medium } }
-
-                            Repeater {
-                                model: [
-                                    { ic: "󰻠", nombre: "CPU", v: root.cpu, txt: Math.round(root.cpu * 100) + "%" },
-                                    { ic: "󰍛", nombre: "Memoria", v: root.ram, txt: Math.round(root.ram * 100) + "%" },
-                                    { ic: "󰋊", nombre: "Disco", v: root.disco, txt: Math.round(root.disco * 100) + "%" }
-                                ]
-                                Column {
-                                    required property var modelData
-                                    width: monCol.width
-                                    spacing: 6
-                                    Item {
-                                        width: parent.width; height: 16
-                                        Row {
-                                            spacing: 10
-                                            Text { text: modelData.ic; color: root.oro; font { family: root.iconos; pixelSize: 13 } }
-                                            Text { text: modelData.nombre; color: root.crema; font { family: "Rubik"; pixelSize: 12 } }
-                                        }
-                                        Text {
-                                            anchors.right: parent.right
-                                            text: modelData.txt
-                                            color: modelData.v > 0.85 ? "#e06c5a" : root.oro
-                                            font { family: "Rubik"; pixelSize: 12; bold: true }
-                                        }
-                                    }
-                                    Rectangle {
-                                        width: parent.width; height: 7; radius: 4
-                                        color: Qt.rgba(0, 0, 0, 0.3)
-                                        border.width: 1; border.color: Qt.rgba(0.865, 0.935, 0.9, 0.08)
-                                        Rectangle {
-                                            width: parent.width * Math.max(0, Math.min(1, modelData.v)); height: parent.height; radius: 4
-                                            gradient: Gradient {
-                                                orientation: Gradient.Horizontal
-                                                GradientStop { position: 0.0; color: modelData.v > 0.85 ? "#b84c3d" : "#6aa085" }
-                                                GradientStop { position: 1.0; color: modelData.v > 0.85 ? "#f08a78" : "#b0d4c2" }
-                                            }
-                                            Behavior on width { NumberAnimation { duration: 400; easing.type: Easing.OutCubic } }
-                                        }
-                                    }
                                 }
                             }
                         }
