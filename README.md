@@ -126,11 +126,12 @@ Temas incluidos: `ceniza`, `cielo`, `dorado`, `dragon`, `galaxia`, `makima`, `ti
 | `Super + Shift + W` | Elegir wallpaper (panal de hexágonos: flechas/ratón + Enter, Esc cierra) |
 | `Super + V` | Historial del portapapeles |
 | `Super + P` | Selector de color (copia el hex) |
-| `Impr` / `Super + Impr` | Captura de área / pantalla completa (se guarda en `~/Imágenes/Capturas`) |
+| `Impr` (`F10` en la laptop) / `Super + Impr` | Captura de área / pantalla completa (se guarda en `~/Imágenes/Capturas`; si ya hay una abierta, se ignora) |
 | `Super + L` | Bloquear pantalla |
 | `Super + Alt + C` | Menú: bloquear, cerrar sesión, suspender, reiniciar, apagar |
 | `Super + Shift + B` | Recargar Waybar si se traba |
 | `Super + +` / `Super + -` | Lupa (acercar / alejar) |
+| Ratón sobre el reloj | Calendario: rueda = cambiar de mes, clic derecho = ver el año, clic izquierdo = segundos |
 | `Alt + F6` | Ventiladores al máximo / automático (solo Alienware, con `~/.local/bin/ventiladores`) |
 
 ### Teclas de la laptop
