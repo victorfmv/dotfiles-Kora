@@ -12,8 +12,17 @@ def hypr(cmd):
 
 
 def pintar():
-    activo = hypr("activeworkspace")["id"]
-    usados = {w["id"]: w for w in hypr("workspaces")}
+    try:
+        _pintar()
+    except Exception:
+        pass  # un dato raro de Hyprland no debe tumbar el módulo
+
+
+def _pintar():
+    activo = hypr("activeworkspace").get("id", 0)
+    todos = hypr("workspaces")
+    # los especiales (special:steam...) a veces llegan sin "id"
+    usados = {w["id"]: w for w in todos if "id" in w}
     abiertos = sorted(i for i in usados if i > 0)
 
     puntos = []
@@ -26,7 +35,7 @@ def pintar():
             puntos.append(f"<span color='{GRIS}' size='10pt'></span>")
 
     especiales = [ICONOS.get(w["name"].removeprefix("special:"), "")
-                  for w in usados.values() if w["name"].startswith("special:")]
+                  for w in todos if w["name"].startswith("special:")]
     texto = "   ".join(puntos)
     if especiales:
         texto += "    " + "   ".join(f"<span color='{BLANCO}'>{e}</span>" for e in especiales)
