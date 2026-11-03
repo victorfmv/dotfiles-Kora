@@ -10,5 +10,8 @@ case "$1" in
     full) grim "$file" ;;
     *)    grim -g "$(slurp)" "$file" || exit 1 ;;
 esac
+# Soltar el candado ANTES: wl-copy se queda vivo sirviendo el portapapeles y, si lo
+# heredaba (fd 9), trababa todas las capturas siguientes hasta copiar otra cosa.
+exec 9>&-
 wl-copy < "$file"
 notify-send -i "$file" "Captura guardada" "$file"

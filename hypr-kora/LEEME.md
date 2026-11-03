@@ -49,7 +49,7 @@ Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-se
 | Super + Shift + B | Recargar Waybar |
 | Alt + F6 (con o sin Fn) | Ventiladores al máximo / automático (`~/.local/bin/ventiladores`, no cambia el modo de energía) |
 | Clic en la batería | Panel de batería y modo de energía (Ahorro / Balanceado / Rendimiento) que sale bajo la barra (`centro/Energia.qml`, `scripts/energia.sh`) |
-| Impr o F10 / Super + Impr o Super + F10 | Captura de área / pantalla completa |
+| Impr (F10 en el Alienware) / Super + Impr | Captura de área / pantalla completa |
 
 ## Si algo se rompe
 - **Revisar la config sin arrancar:** `Hyprland --verify-config -c ~/.config/hypr-kora/hyprland.lua`

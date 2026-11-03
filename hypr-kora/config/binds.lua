@@ -123,8 +123,6 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%- && qs -p
 hl.bind(mainMod .. " + P",     hl.dsp.exec_cmd("hyprpicker -a -n"))
 hl.bind("Print",               hl.dsp.exec_cmd(SCRIPTS .. "screenshot.sh area"))
 hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd(SCRIPTS .. "screenshot.sh full"))
-hl.bind("F10",                 hl.dsp.exec_cmd(SCRIPTS .. "screenshot.sh area"))
-hl.bind(mainMod .. " + F10",   hl.dsp.exec_cmd(SCRIPTS .. "screenshot.sh full"))
 
 -- Theming and Wallpaper
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(SCRIPTS .. "wallpaper.sh pick"))
