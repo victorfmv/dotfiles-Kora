@@ -32,7 +32,7 @@ window#waybar {
     margin: 0 2px;
 }
 
-#custom-logo { color: @accent; font-size: 16px; }
+#custom-logo { color: @accent; font-size: 16px; padding: 0 15px 0 9px; }  /* el glifo de Arch viene cargado a la derecha */
 #workspaces button { color: @fg; padding: 0 6px; background: transparent; font-size: 11px; }
 #workspaces button.empty { color: alpha(@muted, 0.7); }
 #workspaces button.active { color: @accent; font-size: 16px; }
