@@ -72,8 +72,12 @@ def tabla(base, tema):
             elif clase == "qt":
                 v = ",".join(f"{c:.3f}" for c in nuevo) if tema.get("acento_h") is not None else k
                 v = norm_qt(v)
+                # se mueve el azul un poquito, arriba o abajo (si ya está en 1 no puede subir: antes se ciclaba)
+                orig, n = [float(x) for x in v.split(",")], 0
                 while usados.get(("qt", v), k) != k:
-                    p = [float(x) for x in v.split(",")]; p[2] = min(1, p[2] + 0.002); v = norm_qt(",".join(map(str, p)))
+                    n += 1
+                    d = 0.002 * ((n + 1) // 2) * (1 if n % 2 else -1)
+                    p = orig[:]; p[2] = min(1, max(0, p[2] + d)); v = norm_qt(",".join(map(str, p)))
                 usados[("qt", v)] = k
             else:
                 v = ",".join(str(round(c * 255)) for c in nuevo)
