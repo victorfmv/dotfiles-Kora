@@ -1,0 +1,14 @@
+{
+ "nombre": "Asfalto",
+ "descripcion": "Para chica-del-deportivo: cobre salmón de los faros sobre gris ciruela de la calle mojada, alertas ámbar",
+ "acento_h": 15,
+ "acento_s": 0.6,
+ "acento_l": 0.04,
+ "neutro_h": 330,
+ "neutro_s": 0.12,
+ "especiales": {
+  "e06c5a": "f2b84e",
+  "b84c3d": "d9962b",
+  "f08a78": "f7d07d"
+ }
+}
