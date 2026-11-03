@@ -68,32 +68,99 @@ ShellRoot {
         sortField: FolderListModel.Name
     }
 
-    // ── Panal: filas, columnas y tamaño de cada hexágono (con la parte plana arriba) ──
+    // ── Panal simétrico (hexágonos con la parte plana arriba) ──
+    // Siempre un número impar de columnas, cada una centrada en vertical y con cantidades
+    // en espejo (p. ej. 3-4-5-6-5-6-5-6-5-4-3): el panal queda parejo de izquierda a
+    // derecha y de arriba a abajo. Si sobran huecos se quitan de 2 en 2 en las columnas
+    // de las orillas (una arriba y otra abajo), y se redondean las esquinas como un
+    // hexágono grande. De todas las formas posibles se queda la de hexágonos más grandes.
     readonly property int total: imagenes.count
-    // Se prueban de 2 a 6 filas y se queda la que da hexágonos más grandes:
-    // así el panal se reparte por toda la pantalla y no se amontona al centro.
     readonly property real separacion: 14
     readonly property real libreW: vista.width - 90           // márgenes a los lados
     readonly property real libreH: vista.height - 210         // barra arriba, nombre y ayuda abajo
-    function tamHex(f) {
-        const c = Math.max(1, Math.ceil(total / f));
+
+    function tamPanal(k) {
+        const c = k.length, K = Math.max(...k);
         return Math.min(560,
             (libreW - separacion * (c - 1)) / (0.75 * (c - 1) + 1),
-            (libreH - separacion * f) / ((f + (c > 1 ? 0.5 : 0)) * 0.866));
+            ((libreH + separacion) / K - separacion) / 0.866);
     }
-    readonly property int filas: {
-        let mejor = 1, tam = 0;
-        for (let f = 1; f <= Math.min(6, Math.max(1, total)); f++) {
-            const t = tamHex(f);
-            if (t > tam + 0.5) { tam = t; mejor = f; }
+    // Quita "d" hexágonos sin romper la simetría (null si no se puede)
+    function recortar(k, d, centro) {
+        k = k.slice();
+        const c = k.length, m = Math.floor(c / 2);
+        if (c === 1) return (k[0] - d >= 1) ? [k[0] - d] : null;
+        while (d >= 4) {
+            let hecho = false;
+            for (let j = 0; j < m && !hecho; j++) {
+                if (k[j] - 2 >= 1 && k[j] - 2 >= k[j + 1] - 1 && (j === 0 || k[j - 1] <= k[j] - 1)) {
+                    k[j] -= 2; k[c - 1 - j] -= 2; d -= 4; hecho = true;
+                }
+            }
+            if (!hecho) return null;
+        }
+        if (d === 2 && centro && k[m] - 2 >= 1) { k[m] -= 2; d = 0; }
+        return d === 0 ? k : null;
+    }
+    // El contorno debe "subir" hacia el centro (sin dientes sueltos)
+    function parejo(k) {
+        const K = Math.max(...k), m = Math.floor(k.length / 2);
+        for (let j = 0; j < m; j++)
+            if (Math.floor((K - k[j]) / 2) < Math.floor((K - k[j + 1]) / 2)) return false;
+        return true;
+    }
+    readonly property var conteos: {
+        const n = total;
+        if (n <= 0) return [1];
+        let mejor = [n], puntos = -1;
+        for (let centro = 0; centro < 2; centro++) {          // 2ª vuelta: se vale quitar del centro
+            for (let c = 1; c <= n; c += 2) {
+                for (let L = 1; L <= n + 1; L++) {
+                    for (let e = 0; e < (c > 1 ? 2 : 1); e++) {
+                        const base = [];
+                        for (let j = 0; j < c; j++) base.push(L - ((j + e) % 2));
+                        if (Math.min(...base) < 1) continue;
+                        const cap = base.reduce((a, b) => a + b, 0);
+                        if (cap < n) continue;
+                        const k = recortar(base, cap - n, centro === 1);
+                        if (!k || !parejo(k)) continue;
+                        // más grande gana; con poco huecos quitados mejor; quitar del centro castiga
+                        const p = tamPanal(k) * (centro ? 0.8 : 1) - (cap - n) * 0.01;
+                        if (p > puntos) { puntos = p; mejor = k; }
+                    }
+                }
+            }
         }
         return mejor;
     }
-    readonly property int columnas: Math.max(1, Math.ceil(total / filas))
-    readonly property real anchoHex: tamHex(filas)
+    readonly property int columnas: conteos.length
+    readonly property int filas: Math.max(...conteos)
+    // Para cada índice: columna, fila dentro de la columna y desplazamiento (en medias celdas)
+    readonly property var posiciones: {
+        const r = [], K = filas;
+        for (let j = 0; j < conteos.length; j++)
+            for (let f = 0; f < conteos[j]; f++)
+                r.push({ col: j, fila: f, alto: (K - conteos[j]) / 2 + f });
+        return r;
+    }
+    readonly property real anchoHex: tamPanal(conteos)
     readonly property real altoHex: anchoHex * 0.866
     readonly property real anchoPanal: anchoHex * (0.75 * (columnas - 1) + 1) + separacion * (columnas - 1)
-    readonly property real altoPanal: (altoHex + separacion) * (filas + (columnas > 1 ? 0.5 : 0)) - separacion
+    readonly property real altoPanal: (altoHex + separacion) * filas - separacion
+
+    // Flechas ← →: a la columna de al lado, al hexágono que quede a la misma altura
+    function moverLado(d) {
+        if (eligiendo || total === 0) return;
+        const p = posiciones[seleccion];
+        if (!p) return;
+        const j = p.col + d;
+        if (j < 0 || j >= columnas) return;
+        let inicio = 0;
+        for (let i = 0; i < j; i++) inicio += conteos[i];
+        const desp = (filas - conteos[j]) / 2;
+        const f = Math.max(0, Math.min(conteos[j] - 1, Math.round(p.alto - desp + (d > 0 ? 0.01 : -0.01))));
+        seleccion = inicio + f;
+    }
 
     function nombreBonito(archivo) {
         const s = archivo.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " ");
@@ -217,8 +284,8 @@ ShellRoot {
 
             Keys.onPressed: e => {
                 if (e.key === Qt.Key_Escape) root.cerrar();
-                else if (e.key === Qt.Key_Left || e.key === Qt.Key_H) root.mover(-root.filas);
-                else if (e.key === Qt.Key_Right || e.key === Qt.Key_L) root.mover(root.filas);
+                else if (e.key === Qt.Key_Left || e.key === Qt.Key_H) root.moverLado(-1);
+                else if (e.key === Qt.Key_Right || e.key === Qt.Key_L) root.moverLado(1);
                 else if (e.key === Qt.Key_Up || e.key === Qt.Key_K) root.mover(-1);
                 else if (e.key === Qt.Key_Down || e.key === Qt.Key_J) root.mover(1);
                 else if (e.key === Qt.Key_Tab) root.mover(1);
@@ -248,15 +315,15 @@ ShellRoot {
                         id: celda
                         required property int index
                         required property string fileName
-                        readonly property int col: Math.floor(index / root.filas)
-                        readonly property int fila: index % root.filas
+                        readonly property var pos: root.posiciones[index] ?? { col: 0, fila: 0, alto: 0 }
+                        readonly property int col: pos.col
                         readonly property bool esSeleccion: index === root.seleccion
                         readonly property bool esActual: root.carpeta + "/" + fileName === root.actual
                         readonly property bool esElegido: root.eligiendo && root.revelado > 0 && esSeleccion
 
                         // La ola sale del centro del panal
                         readonly property real baseX: col * (root.anchoHex * 0.75 + root.separacion)
-                        readonly property real baseY: fila * (root.altoHex + root.separacion) + (col % 2) * (root.altoHex + root.separacion) / 2
+                        readonly property real baseY: pos.alto * (root.altoHex + root.separacion)
                         readonly property real dx: (baseX + width / 2 - contenedor.width / 2) / Math.max(1, contenedor.width)
                         readonly property real dy: (baseY + height / 2 - contenedor.height / 2) / Math.max(1, contenedor.height)
                         readonly property real retraso: Math.sqrt(dx * dx + dy * dy) * 0.18 + (index % 3) * 0.015
