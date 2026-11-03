@@ -38,7 +38,7 @@ hl.config({
         },
     },
     decoration = {
-        dim_special = 0.3,
+        dim_special = 0,         -- sin oscurecer: si no, tapa la barra (Waybar va en la capa "bottom")
         rounding = 10,
         active_opacity = 0.82,   -- apps tipo vidrio difuminado
         inactive_opacity = 0.75,
@@ -49,7 +49,7 @@ hl.config({
             vibrancy = 0.2,
             noise = 0.02,
             popups = true,
-            special = true,
+            special = false,     -- sin desenfoque en especiales: también tapaba la barra
         },
     },
 })
