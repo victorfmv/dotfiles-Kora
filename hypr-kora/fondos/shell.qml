@@ -70,12 +70,27 @@ ShellRoot {
 
     // ── Panal: filas, columnas y tamaño de cada hexágono (con la parte plana arriba) ──
     readonly property int total: imagenes.count
-    readonly property int filas: total <= 8 ? 2 : total <= 15 ? 3 : 4
-    readonly property int columnas: Math.max(1, Math.ceil(total / filas))
+    // Se prueban de 2 a 6 filas y se queda la que da hexágonos más grandes:
+    // así el panal se reparte por toda la pantalla y no se amontona al centro.
     readonly property real separacion: 14
-    readonly property real anchoHex: Math.min(420,
-        (vista.width * 0.88 - separacion * (columnas - 1)) / (0.75 * (columnas - 1) + 1),
-        (vista.height * 0.72 - separacion * filas) / ((filas + 0.5) * 0.866))
+    readonly property real libreW: vista.width - 90           // márgenes a los lados
+    readonly property real libreH: vista.height - 210         // barra arriba, nombre y ayuda abajo
+    function tamHex(f) {
+        const c = Math.max(1, Math.ceil(total / f));
+        return Math.min(560,
+            (libreW - separacion * (c - 1)) / (0.75 * (c - 1) + 1),
+            (libreH - separacion * f) / ((f + (c > 1 ? 0.5 : 0)) * 0.866));
+    }
+    readonly property int filas: {
+        let mejor = 1, tam = 0;
+        for (let f = 1; f <= Math.min(6, Math.max(1, total)); f++) {
+            const t = tamHex(f);
+            if (t > tam + 0.5) { tam = t; mejor = f; }
+        }
+        return mejor;
+    }
+    readonly property int columnas: Math.max(1, Math.ceil(total / filas))
+    readonly property real anchoHex: tamHex(filas)
     readonly property real altoHex: anchoHex * 0.866
     readonly property real anchoPanal: anchoHex * (0.75 * (columnas - 1) + 1) + separacion * (columnas - 1)
     readonly property real altoPanal: (altoHex + separacion) * (filas + (columnas > 1 ? 0.5 : 0)) - separacion
@@ -223,7 +238,7 @@ ShellRoot {
                 width: root.anchoPanal
                 height: root.altoPanal
                 anchors.centerIn: parent
-                anchors.verticalCenterOffset: -24
+                anchors.verticalCenterOffset: -30
 
                 Repeater {
                     id: panal

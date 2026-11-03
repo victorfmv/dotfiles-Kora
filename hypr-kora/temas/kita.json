@@ -1,0 +1,7 @@
+{
+ "nombre": "Kita",
+ "descripcion": "Para kita-en-el-jardin: coral del cabello de Kita sobre verde de jardín",
+ "acento_h": 12, "acento_s": 0.9, "acento_l": 0.03,
+ "neutro_h": 145, "neutro_s": 0.35,
+ "especiales": {"e06c5a": "b07ae0", "b84c3d": "8d55c2", "f08a78": "cfa6f0"}
+}

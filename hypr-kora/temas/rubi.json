@@ -1,0 +1,7 @@
+{
+ "nombre": "Rubí",
+ "descripcion": "Para texas-gotica: rojo rubí de los ojos y pétalos sobre gris gótico, alertas en ámbar",
+ "acento_h": 343, "acento_s": 0.85, "acento_l": -0.03,
+ "neutro_h": 330, "neutro_s": 0.08,
+ "especiales": {"e06c5a": "f2b84e", "b84c3d": "d9962b", "f08a78": "f7d07d"}
+}

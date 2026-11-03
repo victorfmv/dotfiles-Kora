@@ -1,0 +1,7 @@
+{
+ "nombre": "Láser",
+ "descripcion": "Para chisa-escarlata: rojo neón de los hilos sobre blanco y negro frío, alertas en ámbar",
+ "acento_h": 3, "acento_s": 1.0, "acento_l": 0.06,
+ "neutro_h": 220, "neutro_s": 0.08,
+ "especiales": {"e06c5a": "f2b84e", "b84c3d": "d9962b", "f08a78": "f7d07d"}
+}
