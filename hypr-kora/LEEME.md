@@ -44,11 +44,11 @@ Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-se
 | Super + L | Bloquear |
 | Super + Alt + C | Menú apagar/reiniciar |
 | Super + Shift + W | Elegir wallpaper: panal de hexágonos animado (flechas/ratón + Enter, Esc cierra) |
-| Super + X (o A) / Super + Shift + A | Centro de control y notificaciones / borrar todas |
+| Super + X / Super + Shift + X | Centro de control y notificaciones / borrar todas |
 | Super + Shift + B | Recargar Waybar |
 | Alt + F6 (con o sin Fn) | Ventiladores al máximo / automático (`~/.local/bin/ventiladores`, no cambia el modo de energía) |
 | Clic en la batería | Panel de batería y modo de energía (Ahorro / Balanceado / Rendimiento) que sale bajo la barra (`centro/Energia.qml`, `scripts/energia.sh`) |
-| Impr / Super + Impr | Captura de área / pantalla completa |
+| Impr o F10 / Super + Impr o Super + F10 | Captura de área / pantalla completa |
 
 ## Si algo se rompe
 - **Revisar la config sin arrancar:** `Hyprland --verify-config -c ~/.config/hypr-kora/hyprland.lua`

@@ -11,12 +11,18 @@ hl.workspace_rule({ workspace = "3", monitor = MONITOR1, default = true, persist
 -- For other layouts such as scrolling, see example below
 -- hl.workspace_rule({ workspace = "1", monitor = MONITOR1, default = true, persistent = true, layout = "scrolling" })
 
--- Music workspace (Super + M): opens Spotify the first time it is shown empty
-hl.workspace_rule({ workspace = "special:music", on_created_empty = "uwsm app -- spotify-launcher" })
+-- Workspaces especiales que abren su app la primera vez que se muestran vacíos
+-- (Super + M = Spotify, Super + O = OBS, Super + S = Steam).
+-- Antes era on_created_empty en workspace_rule; Hyprland 0.57 lo marcó obsoleto.
+local apps_al_crear = {
+    ["special:music"] = "uwsm app -- spotify-launcher",
+    ["special:obs"]   = "uwsm app -- obs",
+    ["special:steam"] = "uwsm app -- steam",
+}
 
-
--- OBS workspace (Super + O): opens OBS the first time it is shown empty
-hl.workspace_rule({ workspace = "special:obs", on_created_empty = "uwsm app -- obs" })
-
--- Steam workspace (Super + S): opens Steam the first time it is shown empty
-hl.workspace_rule({ workspace = "special:steam", on_created_empty = "uwsm app -- steam" })
+hl.on("workspace.created", function(ws)
+    local cmd = ws and apps_al_crear[ws.name]
+    if cmd and ws.is_empty then
+        hl.exec_cmd(cmd, { workspace = ws.name })
+    end
+end)

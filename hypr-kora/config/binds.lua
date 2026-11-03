@@ -134,8 +134,7 @@ hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(SCRIPTS .. "clipboard.sh"))
 
 -- Notifications
 hl.bind(mainMod .. " + X",         hl.dsp.exec_cmd("~/.config/hypr-kora/scripts/centro.sh"))  -- centro de control y notificaciones
-hl.bind(mainMod .. " + A",         hl.dsp.exec_cmd("~/.config/hypr-kora/scripts/centro.sh"))
-hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd("~/.config/hypr-kora/scripts/centro.sh clear"))  -- borrar todas
+hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd("~/.config/hypr-kora/scripts/centro.sh clear"))  -- borrar todas
 
 -- Barra: recargar Waybar si se trabó
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("pkill waybar; sleep 0.5; waybar -c ~/.config/hypr-kora/waybar/config.jsonc -s ~/.config/hypr-kora/waybar/style.css"))
