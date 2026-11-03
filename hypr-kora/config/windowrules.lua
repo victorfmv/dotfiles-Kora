@@ -142,7 +142,7 @@ hl.window_rule({
 hl.layer_rule({
   name = "kora-blur",
   match = {
-    namespace = "^(waybar|launcher|kora-overview)$",
+    namespace = "^(waybar|launcher|kora-overview|kora-osd)$",
   },
   ignore_alpha = 0.3,
   blur = true,
