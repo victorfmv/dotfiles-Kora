@@ -1,0 +1,7 @@
+{
+ "nombre": "Espectro",
+ "descripcion": "Para gengar-de-luna: humo morado de fondo con el naranja de los faroles y los ojos",
+ "acento_h": 22, "acento_s": 1.0, "acento_l": 0.0,
+ "neutro_h": 278, "neutro_s": 1.15,
+ "especiales": {"e06c5a": "e85d9e", "b84c3d": "c23f7f", "f08a78": "f59ac4"}
+}

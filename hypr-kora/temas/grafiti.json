@@ -1,0 +1,7 @@
+{
+ "nombre": "Grafiti",
+ "descripcion": "Para grafiti-rosa: rosa chicle del cabello y la pintura, alertas en turquesa del grafiti",
+ "acento_h": 338, "acento_s": 0.9, "acento_l": 0.04,
+ "neutro_h": 330, "neutro_s": 0.55,
+ "especiales": {"e06c5a": "4fc7d6", "b84c3d": "2fa3b3", "f08a78": "8fdfe8"}
+}

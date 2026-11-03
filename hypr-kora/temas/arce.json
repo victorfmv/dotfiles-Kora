@@ -1,0 +1,7 @@
+{
+ "nombre": "Arce",
+ "descripcion": "Para palacio-de-arce: rojo de arce japonés sobre tinta gris, alertas en ámbar",
+ "acento_h": 355, "acento_s": 1.0, "acento_l": -0.02,
+ "neutro_h": 0, "neutro_s": 0.07,
+ "especiales": {"e06c5a": "f2b84e", "b84c3d": "d9962b", "f08a78": "f7d07d"}
+}
