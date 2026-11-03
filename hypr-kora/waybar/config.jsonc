@@ -7,7 +7,7 @@
     "spacing": 6,
     "reload_style_on_change": true,   // style.css se aplica en vivo al cambiar de tema (sin reiniciar la barra)
 
-    "modules-left": ["custom/logo", "clock", "group/sistema", "hyprland/window"],
+    "modules-left": ["custom/logo", "clock", "group/sistema", "custom/ventana"],
     "modules-center": ["custom/workspaces"],
     "modules-right": ["custom/cava", "group/estado", "custom/notif", "custom/power"],
 
@@ -33,6 +33,12 @@
         "show-special": true,
         "on-scroll-up": "hyprctl dispatch workspace m-1",
         "on-scroll-down": "hyprctl dispatch workspace m+1"
+    },
+    "custom/ventana": {   // ventana enfocada; a diferencia de hyprland/window también ve los workspaces especiales
+        "exec": "~/.config/hypr-kora/scripts/ventana.py",
+        "restart-interval": 1,
+        "return-type": "json",
+        "escape": false
     },
     "hyprland/window": {
         "format": "{title}",

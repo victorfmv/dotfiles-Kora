@@ -60,5 +60,5 @@ tooltip label { color: @fg; padding: 10px 14px; }
 #sistema > widget > * { background: transparent; padding: 0 7px; margin: 0; }
 #temperature.critical { color: @urgent; }
 /* Título de ventana y rayitas con el mismo ancho para que los lados queden en espejo */
-#window, #custom-cava { min-width: 230px; }
-#window { padding: 0 14px; }
+#custom-ventana, #custom-cava { min-width: 230px; }
+#custom-ventana { padding: 0 14px; }
