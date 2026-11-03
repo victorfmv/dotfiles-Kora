@@ -9,7 +9,7 @@ hl.config({
     general = {
         layout = "scrolling", -- ventanas en fila horizontal, tipo niri
         gaps_in = 3,
-        gaps_out = { top = 0, right = 8, bottom = 8, left = 8 }, -- arriba 0: el degradado de Waybar ya cubre ese hueco
+        gaps_out = { top = 8, right = 8, bottom = 8, left = 8 }, -- 8 por todos lados (igual que la barra flotante)
         border_size = 2,
         extend_border_grab_area = 10,
         resize_on_border = true,

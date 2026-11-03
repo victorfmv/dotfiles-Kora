@@ -12,15 +12,16 @@
     min-height: 0;
 }
 
-/* Fondo: negro pegado al borde de arriba que se desvanece hasta el borde de las ventanas */
+/* Fondo: barra flotante lisa con las mismas esquinas (10 px) y separación (8 px) que las ventanas */
 window#waybar {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.75) 55%, rgba(0, 0, 0, 0.35) 100%);
+    background: rgba(6, 7, 6, 0.72);
+    border-radius: 10px;
     color: @fg;
 }
-/* Las pastillas conservan su tamaño (34 px) y la separación de los bordes */
-.modules-left, .modules-center, .modules-right { margin-top: 6px; margin-bottom: 14px; }  /* 14 = 6 + hueco hasta las ventanas */
-.modules-left { margin-left: 10px; }
-.modules-right { margin-right: 10px; }
+/* Pastillas de 34 px centradas: 7 + 34 + 7 = 48 de alto */
+.modules-left, .modules-center, .modules-right { margin-top: 7px; margin-bottom: 7px; }
+.modules-left { margin-left: 7px; }
+.modules-right { margin-right: 7px; }
 
 .modules-left > widget > *,
 .modules-center > widget > *,
