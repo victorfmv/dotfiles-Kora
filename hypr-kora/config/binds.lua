@@ -112,8 +112,8 @@ hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),     { locked = true
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
 -- Brightness
-hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl set 5%+"),   { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl set 5%+ && qs -p " .. os.getenv("HOME") .. "/.config/hypr-kora/osd ipc call osd brillo"),   { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%- && qs -p " .. os.getenv("HOME") .. "/.config/hypr-kora/osd ipc call osd brillo"), { locked = true, repeating = true })
 
 -------------------
 ---- UTILITIES ----

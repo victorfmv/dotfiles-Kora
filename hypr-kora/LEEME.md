@@ -18,7 +18,7 @@ Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-se
 | `config/monitors.lua` | eDP-1 2560x1600@240 escala 1.25 + externos a la derecha |
 | `waybar/` | Barra (`config.jsonc` + `style.css`) |
 | `centro/` | Centro de control y notificaciones (Quickshell, reemplaza a mako): Super+X |
-| `osd/` | Indicador de volumen abajo al centro tipo Windows (Quickshell, escucha a Pipewire; colores de `config/colors.lua`) |
+| `osd/` | Indicador de volumen y brillo abajo al centro tipo Windows (Quickshell; volumen = Pipewire, brillo = teclas vía `ipc call osd brillo`; colores de `config/colors.lua`) |
 | `mako/config` | (ya no se usa; quedó por si se quiere volver a mako) |
 | `fuzzel/fuzzel.ini` | Lanzador y menús |
 | `hyprlock.conf`, `hypridle.conf` | Bloqueo e inactividad |

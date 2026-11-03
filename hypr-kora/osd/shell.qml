@@ -1,8 +1,9 @@
-// Indicador de volumen de Hyprland Kora (tipo Windows): una pastilla abajo al centro
-// que aparece al subir/bajar/silenciar el volumen y se esconde sola.
+// Indicador de volumen y brillo de Hyprland Kora (tipo Windows): una pastilla abajo al centro
+// que aparece al subir/bajar/silenciar el volumen o cambiar el brillo y se esconde sola.
+// El brillo lo avisan las teclas (binds.lua: ipc call osd brillo), así hypridle no lo dispara.
 // Escucha a Pipewire directo, así que sale con las teclas, el panel o cualquier app.
 // Colores en vivo de config/colors.lua (los reescribe tema.py). No recibe clics.
-// Probar:  qs -p ~/.config/hypr-kora/osd ipc call osd mostrar
+// Probar:  qs -p ~/.config/hypr-kora/osd ipc call osd mostrar|brillo
 import QtQuick
 import Quickshell
 import Quickshell.Io
@@ -50,9 +51,29 @@ ShellRoot {
 
     Connections {
         target: root.salida?.audio ?? null
-        function onVolumeChanged() { if (root.listo) root.mostrar(); }
-        function onMutedChanged() { if (root.listo) root.mostrar(); }
+        function onVolumeChanged() { if (root.listo) { root.modo = "volumen"; root.mostrar(); } }
+        function onMutedChanged() { if (root.listo) { root.modo = "volumen"; root.mostrar(); } }
     }
+
+    // ── Brillo ──
+    property real brillo: 0
+    Process {
+        id: leerBrillo
+        command: ["brightnessctl", "-m"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                const v = parseInt(text.split(",")[3]);
+                if (!isNaN(v)) { root.brillo = v / 100; root.modo = "brillo"; root.mostrar(); }
+            }
+        }
+    }
+
+    // ── Qué se muestra ──
+    property string modo: "volumen"
+    readonly property bool esBrillo: modo === "brillo"
+    readonly property real valor: esBrillo ? brillo : volumen
+    readonly property bool apagado: !esBrillo && mudo
+    readonly property int numero: Math.round(valor * 100)
 
     property bool visible_: false
     function mostrar() { visible_ = true; ocultar.restart(); }
@@ -60,10 +81,16 @@ ShellRoot {
 
     IpcHandler {
         target: "osd"
-        function mostrar(): void { root.mostrar(); }
+        function mostrar(): void { root.modo = "volumen"; root.mostrar(); }
+        function brillo(): void { leerBrillo.running = true; }
     }
 
     function icono() {
+        if (esBrillo) {
+            if (numero < 34) return "󰃞";
+            if (numero < 67) return "󰃟";
+            return "󰃠";
+        }
         if (mudo || porcentaje === 0) return "󰝟";
         if (porcentaje < 34) return "󰕿";
         if (porcentaje < 67) return "󰖀";
@@ -107,7 +134,7 @@ ShellRoot {
                 anchors { left: parent.left; leftMargin: 22; verticalCenter: parent.verticalCenter }
                 width: 26
                 text: root.icono()
-                color: root.mudo ? Qt.rgba(root.crema.r, root.crema.g, root.crema.b, 0.45) : root.acento
+                color: root.apagado ? Qt.rgba(root.crema.r, root.crema.g, root.crema.b, 0.45) : root.acento
                 font { family: root.iconos; pixelSize: 22 }
             }
 
@@ -117,7 +144,7 @@ ShellRoot {
                 anchors { right: parent.right; rightMargin: 22; verticalCenter: parent.verticalCenter }
                 width: 34
                 horizontalAlignment: Text.AlignRight
-                text: root.mudo ? "—" : root.porcentaje
+                text: root.apagado ? "—" : root.numero
                 color: root.crema
                 font { pixelSize: 16; weight: Font.DemiBold; features: { "tnum": 1 } }
             }
@@ -138,9 +165,9 @@ ShellRoot {
 
                 Rectangle {
                     anchors { left: parent.left; top: parent.top; bottom: parent.bottom }
-                    width: root.volumen > 0 ? Math.max(parent.height, parent.width * root.volumen) : 0
+                    width: root.valor > 0 ? Math.max(parent.height, parent.width * root.valor) : 0
                     radius: parent.radius
-                    opacity: root.mudo ? 0.35 : 1
+                    opacity: root.apagado ? 0.35 : 1
                     gradient: Gradient {
                         orientation: Gradient.Horizontal
                         GradientStop { position: 0.0; color: root.acento2 }
