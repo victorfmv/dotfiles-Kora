@@ -1,0 +1,7 @@
+{
+ "nombre": "Brasa",
+ "descripcion": "Para caballero-carmesi: rojo brasa de las chispas sobre negro, alertas en amarillo",
+ "acento_h": 9, "acento_s": 1.0, "acento_l": -0.02,
+ "neutro_h": 5, "neutro_s": 0.15,
+ "especiales": {"e06c5a": "f2d24e", "b84c3d": "d9b02b", "f08a78": "f7e07d"}
+}

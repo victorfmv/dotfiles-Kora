@@ -1,0 +1,7 @@
+{
+ "nombre": "Otoño",
+ "descripcion": "Para sombrilla-de-otono: rojo vino de las hojas de arce sobre penumbra granate, alertas en ámbar",
+ "acento_h": 346, "acento_s": 0.85, "acento_l": 0.0,
+ "neutro_h": 345, "neutro_s": 0.55,
+ "especiales": {"e06c5a": "f2b84e", "b84c3d": "d9962b", "f08a78": "f7d07d"}
+}
