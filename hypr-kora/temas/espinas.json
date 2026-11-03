@@ -1,0 +1,14 @@
+{
+ "nombre": "Espinas",
+ "descripcion": "Para corona-de-espinas: rojo bermellón del fondo sobre negro café, alertas en amarillo",
+ "acento_h": 7,
+ "acento_s": 0.95,
+ "acento_l": -0.02,
+ "neutro_h": 12,
+ "neutro_s": 0.2,
+ "especiales": {
+  "e06c5a": "f2d24e",
+  "b84c3d": "d9b02b",
+  "f08a78": "f7e07d"
+ }
+}

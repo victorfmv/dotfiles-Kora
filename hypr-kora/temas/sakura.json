@@ -1,0 +1,14 @@
+{
+ "nombre": "Sakura",
+ "descripcion": "Para estacion-de-primavera: rosa de los cerezos sobre azul cielo y mar",
+ "acento_h": 318,
+ "acento_s": 0.55,
+ "acento_l": 0.1,
+ "neutro_h": 204,
+ "neutro_s": 1.0,
+ "especiales": {
+  "e06c5a": "f2b84e",
+  "b84c3d": "d9962b",
+  "f08a78": "f7d07d"
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "nombre": "Pabellón",
+ "descripcion": "Para pabellon-del-viento: rojo laca del pabellón sobre verde de estanque",
+ "acento_h": 8,
+ "acento_s": 0.75,
+ "acento_l": 0.02,
+ "neutro_h": 105,
+ "neutro_s": 0.3,
+ "especiales": {
+  "e06c5a": "f2b84e",
+  "b84c3d": "d9962b",
+  "f08a78": "f7d07d"
+ }
+}

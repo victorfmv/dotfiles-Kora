@@ -1,0 +1,14 @@
+{
+ "nombre": "Sangre",
+ "descripcion": "Para asesina-carmesi: rojo sangre del bosque sobre negro rojizo, alertas en ámbar",
+ "acento_h": 4,
+ "acento_s": 1.0,
+ "acento_l": -0.04,
+ "neutro_h": 2,
+ "neutro_s": 0.3,
+ "especiales": {
+  "e06c5a": "f2b84e",
+  "b84c3d": "d9962b",
+  "f08a78": "f7d07d"
+ }
+}

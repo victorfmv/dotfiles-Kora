@@ -1,0 +1,14 @@
+{
+ "nombre": "Cerezo",
+ "descripcion": "Para tren-de-los-cerezos: lila de los cerezos sobre azul acero del andén",
+ "acento_h": 290,
+ "acento_s": 0.4,
+ "acento_l": 0.1,
+ "neutro_h": 208,
+ "neutro_s": 0.45,
+ "especiales": {
+  "e06c5a": "f2b84e",
+  "b84c3d": "d9962b",
+  "f08a78": "f7d07d"
+ }
+}
