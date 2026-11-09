@@ -84,6 +84,10 @@ enlazar bin/terminal-logo-ascii  "$HOME/.local/bin/terminal-logo-ascii"
 mkdir -p "$HOME/Imágenes/wallpapers" "$HOME/Vídeos/wallpapers" "$HOME/Imágenes/Capturas" \
          "$HOME/.local/state/hypr-kora"
 
+# Modo Familiar prendido de entrada (barra en islas, ventanas transparentes sin bordes).
+# Se apaga con ~/.config/hypr-kora/scripts/familiar.sh
+touch "$HOME/.local/state/hypr-kora/familiar"
+
 # Nombre que sale en el panel y en el saludo de la terminal
 NOMBRE="$HOME/.local/state/hypr-kora/nombre"
 if [ ! -s "$NOMBRE" ] && [ -t 0 ]; then

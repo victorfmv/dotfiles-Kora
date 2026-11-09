@@ -24,10 +24,10 @@ ShellRoot {
         function onReloadFailed() { Quickshell.inhibitReloadPopup(); }
     }
 
-    readonly property color oro: "#91bfa8"
-    readonly property color crema: "#dde3dd"
-    readonly property color tenue: "#7b827b"
-    readonly property color fondo: "#111211"
+    readonly property color oro: "#e68750"
+    readonly property color crema: "#e4d2ee"
+    readonly property color tenue: "#826e8e"
+    readonly property color fondo: "#120f14"
     readonly property string iconos: "CaskaydiaCove Nerd Font"
 
     property bool abierto: false
@@ -222,11 +222,11 @@ ShellRoot {
             anchors { top: parent.top; right: parent.right; topMargin: 48; rightMargin: 10 }
             radius: 24
             gradient: Gradient {
-                GradientStop { position: 0.0; color: Qt.rgba(0.088, 0.097, 0.088, 0.99) }
-                GradientStop { position: 1.0; color: Qt.rgba(0.048, 0.053, 0.048, 0.99) }
+                GradientStop { position: 0.0; color: Qt.rgba(0.098, 0.072, 0.113, 0.99) }
+                GradientStop { position: 1.0; color: Qt.rgba(0.053, 0.039, 0.061, 0.99) }
             }
             border.width: 1
-            border.color: Qt.rgba(0.565, 0.745, 0.655, 0.5)
+            border.color: Qt.rgba(0.9, 0.526, 0.31, 0.5)
             clip: true
 
             // Entrada: se desliza desde la derecha y aparece
@@ -254,7 +254,7 @@ ShellRoot {
                         Layout.fillWidth: true
                         Layout.preferredHeight: 150
                         radius: 18
-                        color: "#0b0c0b"
+                        color: "#0c0a0d"
                         clip: true
 
                         Image {
@@ -285,7 +285,7 @@ ShellRoot {
                             radius: 18
                             gradient: Gradient {
                                 GradientStop { position: 0.35; color: "transparent" }
-                                GradientStop { position: 1.0; color: Qt.rgba(0.048, 0.053, 0.048, 0.92) }
+                                GradientStop { position: 1.0; color: Qt.rgba(0.053, 0.039, 0.061, 0.92) }
                             }
                         }
 
@@ -306,7 +306,7 @@ ShellRoot {
                             }
                             Column {
                                 Layout.fillWidth: true
-                                Text { text: root.nombre; color: "#e3eae3"; font { family: "Rubik"; pixelSize: 16; bold: true } }
+                                Text { text: root.nombre; color: "#ebd6f7"; font { family: "Rubik"; pixelSize: 16; bold: true } }
                                 Text {
                                     text: root.usuario + "@" + root.equipo + (root.encendido ? "  ·  encendido " + root.encendido : "")
                                     color: root.crema; opacity: 0.75
@@ -323,9 +323,9 @@ ShellRoot {
                                     required property var modelData
                                     Layout.preferredWidth: 32; Layout.preferredHeight: 32
                                     radius: 16
-                                    color: Qt.rgba(0.068, 0.073, 0.068, a.containsMouse ? 0.95 : 0.72)
+                                    color: Qt.rgba(0.073, 0.058, 0.082, a.containsMouse ? 0.95 : 0.72)
                                     border.width: 1
-                                    border.color: a.containsMouse ? "#91bfa8" : Qt.rgba(0.865, 0.935, 0.9, 0.22)
+                                    border.color: a.containsMouse ? "#e68750" : Qt.rgba(1, 0.81, 0.7, 0.22)
                                     Text { anchors.centerIn: parent; text: modelData.ic; color: root.crema; font { family: root.iconos; pixelSize: 15 } }
                                     MouseArea {
                                         id: a; anchors.fill: parent; hoverEnabled: true
@@ -447,7 +447,7 @@ ShellRoot {
                         radius: 18
                         color: Qt.rgba(1, 1, 1, 0.035)
                         border.width: 1
-                        border.color: Qt.rgba(0.865, 0.935, 0.9, 0.08)
+                        border.color: Qt.rgba(1, 0.81, 0.7, 0.08)
 
                         ColumnLayout {
                             id: notifCol
@@ -489,11 +489,11 @@ ShellRoot {
                                     Layout.fillWidth: true; Layout.preferredHeight: 34
                                     radius: 17
                                     gradient: Gradient {
-                                        GradientStop { position: 0.0; color: Qt.rgba(0.906, 0.944, 0.906, 0.09) }
-                                        GradientStop { position: 1.0; color: Qt.rgba(0.906, 0.944, 0.906, 0.03) }
+                                        GradientStop { position: 0.0; color: Qt.rgba(0.945, 0.85, 1, 0.09) }
+                                        GradientStop { position: 1.0; color: Qt.rgba(0.945, 0.85, 1, 0.03) }
                                     }
                                     border.width: 1
-                                    border.color: root.cuantas > 0 ? Qt.rgba(0.565, 0.745, 0.655, 0.45) : Qt.rgba(0.865, 0.935, 0.9, 0.10)
+                                    border.color: root.cuantas > 0 ? Qt.rgba(0.9, 0.526, 0.31, 0.45) : Qt.rgba(1, 0.81, 0.7, 0.10)
                                     Text {
                                         anchors.centerIn: parent
                                         text: root.cuantas === 1 ? "1 notificación" : root.cuantas + " notificaciones"
@@ -516,4 +516,5 @@ ShellRoot {
 
     // ───────────── Batería y modo de energía (clic en la batería de Waybar) ─────────────
     Energia {}
+    Notas {}
 }

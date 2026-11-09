@@ -51,17 +51,17 @@
     "clock": {
         "format": "󰥔  {0:%H:%M}",
         "format-alt": "󰥔  {0:%H:%M:%S}",
-        "tooltip-format": "<span size='14pt' color='#91bfa8'><b>{0:L%A %d de %B}</b></span>\n<span color='#5d635d'>─────────────────────</span>\n<tt><big>{calendar}</big></tt>",
+        "tooltip-format": "<span size='14pt' color='#e68750'><b>{0:L%A %d de %B}</b></span>\n<span color='#63536d'>─────────────────────</span>\n<tt><big>{calendar}</big></tt>",
         "interval": 1,
         "locale": "es_MX.UTF-8",
         "calendar": {
             "mode": "month",
             "on-scroll": 1,
             "format": {
-                "months": "<span color='#dde3dd'><b>{}</b></span>",
-                "weekdays": "<span color='#91bfa8'><b>{}</b></span>",
-                "days": "<span color='#dde3dd'>{}</span>",
-                "today": "<span background='#91bfa8' color='#111211'><b>{}</b></span>"
+                "months": "<span color='#e4d2ee'><b>{}</b></span>",
+                "weekdays": "<span color='#e68750'><b>{}</b></span>",
+                "days": "<span color='#e4d2ee'>{}</span>",
+                "today": "<span background='#e68750' color='#120f14'><b>{}</b></span>"
             }
         },
         "actions": {

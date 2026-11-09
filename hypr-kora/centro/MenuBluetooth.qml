@@ -21,7 +21,7 @@ Rectangle {
     implicitHeight: col.implicitHeight + 24
     radius: 18
     color: Qt.rgba(1, 1, 1, 0.04)
-    border.width: 1; border.color: Qt.rgba(0.865, 0.935, 0.9, 0.07)
+    border.width: 1; border.color: Qt.rgba(1, 0.81, 0.7, 0.07)
 
     function icono(d) {
         const i = d.icon ?? "";
@@ -41,11 +41,11 @@ Rectangle {
 
         RowLayout {
             Layout.fillWidth: true
-            Text { text: "󰂯"; color: "#91bfa8"; font { family: "CaskaydiaCove Nerd Font"; pixelSize: 16 } }
+            Text { text: "󰂯"; color: "#e68750"; font { family: "CaskaydiaCove Nerd Font"; pixelSize: 16 } }
             Text {
                 Layout.fillWidth: true
                 text: "  Bluetooth"
-                color: "#f3f8f3"
+                color: "#f8ecff"
                 font { family: "Rubik"; pixelSize: 14; weight: Font.DemiBold }
             }
             Switch {
@@ -60,7 +60,7 @@ Rectangle {
             Layout.topMargin: 6; Layout.bottomMargin: 6
             horizontalAlignment: Text.AlignHCenter
             text: !raiz.adaptador ? "No hay Bluetooth" : raiz.adaptador.enabled ? "Buscando dispositivos…" : "Bluetooth apagado"
-            color: "#7b827b"
+            color: "#826e8e"
             font { family: "Rubik"; pixelSize: 12; italic: true }
         }
 
@@ -74,9 +74,9 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 42
                 radius: 12
-                color: modelData.connected ? Qt.rgba(0.565, 0.745, 0.655, 0.18) : Qt.rgba(0.906, 0.944, 0.906, area.containsMouse ? 0.07 : 0.025)
+                color: modelData.connected ? Qt.rgba(0.9, 0.526, 0.31, 0.18) : Qt.rgba(0.945, 0.85, 1, area.containsMouse ? 0.07 : 0.025)
                 border.width: 1
-                border.color: modelData.connected ? Qt.rgba(0.565, 0.745, 0.655, 0.6) : Qt.rgba(0.865, 0.935, 0.9, area.containsMouse ? 0.22 : 0.06)
+                border.color: modelData.connected ? Qt.rgba(0.9, 0.526, 0.31, 0.6) : Qt.rgba(1, 0.81, 0.7, area.containsMouse ? 0.22 : 0.06)
                 Behavior on color { ColorAnimation { duration: 120 } }
 
                 RowLayout {
@@ -84,25 +84,25 @@ Rectangle {
                     spacing: 10
                     Text {
                         text: raiz.icono(disp.modelData)
-                        color: disp.modelData.connected ? "#91bfa8" : "#dde3dd"
+                        color: disp.modelData.connected ? "#e68750" : "#e4d2ee"
                         font { family: "CaskaydiaCove Nerd Font"; pixelSize: 16 }
                     }
                     Text {
                         Layout.fillWidth: true
                         text: disp.modelData.name || disp.modelData.deviceName
                         elide: Text.ElideRight
-                        color: disp.modelData.connected ? "#f3f8f3" : "#dde3dd"
+                        color: disp.modelData.connected ? "#f8ecff" : "#e4d2ee"
                         font { family: "Rubik"; pixelSize: 13; weight: disp.modelData.connected ? Font.DemiBold : Font.Normal }
                     }
                     Text {
                         visible: disp.modelData.batteryAvailable && disp.modelData.connected
                         text: "󰁹 " + Math.round(disp.modelData.battery * 100) + "%"
-                        color: "#7b827b"
+                        color: "#826e8e"
                         font { family: "CaskaydiaCove Nerd Font"; pixelSize: 11 }
                     }
                     Text {
                         text: disp.ocupado ? "conectando…" : disp.modelData.connected ? "conectado" : disp.modelData.paired ? "vinculado" : "nuevo"
-                        color: disp.modelData.connected ? "#91bfa8" : "#7b827b"
+                        color: disp.modelData.connected ? "#e68750" : "#826e8e"
                         font { family: "Rubik"; pixelSize: 11 }
                     }
                 }

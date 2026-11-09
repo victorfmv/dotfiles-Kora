@@ -23,8 +23,8 @@ ascii_max_range = 100
 bar_delimiter = 59
 CFG
 # Colores de las rayitas: apagado (bajas) -> brillante (altas). scripts/tema.py los cambia con el tema.
-APAGADO="547a67"
-BRILLANTE="b3d6c4"
+APAGADO="8a4d2a"
+BRILLANTE="f5a77a"
 pkill -f "cava -p $cfg" 2>/dev/null
 # awk relee APAGADO/BRILLANTE de este archivo cada segundo: al cambiar de tema
 # las rayitas cambian de color solas, sin reiniciar cava ni la barra.

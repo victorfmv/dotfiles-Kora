@@ -11,17 +11,17 @@ Rectangle {
     signal cerrar()
 
     readonly property bool urgente: notif?.urgency === 2
-    readonly property color acento: urgente ? "#e06c5a" : "#91bfa8"
+    readonly property color acento: urgente ? "#e85d9e" : "#e68750"
 
     implicitHeight: contenido.implicitHeight + 26
     radius: 16
     // Más clara que el panel, con degradado para que no se vea plana
     gradient: Gradient {
-        GradientStop { position: 0.0; color: raiz.emergente ? Qt.rgba(0.105, 0.115, 0.105, 0.98) : Qt.rgba(0.152, 0.168, 0.152, area.containsMouse ? 1 : 0.92) }
-        GradientStop { position: 1.0; color: raiz.emergente ? Qt.rgba(0.068, 0.073, 0.068, 0.98) : Qt.rgba(0.108, 0.117, 0.108, area.containsMouse ? 1 : 0.92) }
+        GradientStop { position: 0.0; color: raiz.emergente ? Qt.rgba(0.116, 0.087, 0.133, 0.98) : Qt.rgba(0.169, 0.126, 0.195, area.containsMouse ? 1 : 0.92) }
+        GradientStop { position: 1.0; color: raiz.emergente ? Qt.rgba(0.073, 0.058, 0.082, 0.98) : Qt.rgba(0.118, 0.092, 0.133, area.containsMouse ? 1 : 0.92) }
     }
     border.width: 1
-    border.color: emergente ? Qt.rgba(0.565, 0.745, 0.655, 0.55) : Qt.rgba(0.865, 0.935, 0.9, area.containsMouse ? 0.16 : 0.08)
+    border.color: emergente ? Qt.rgba(0.9, 0.526, 0.31, 0.55) : Qt.rgba(1, 0.81, 0.7, area.containsMouse ? 0.16 : 0.08)
 
     readonly property string iconoApp: {
         const img = notif?.image ?? "";
@@ -60,8 +60,8 @@ Rectangle {
 
         Rectangle {
             width: 40; height: 40; radius: 12
-            color: Qt.rgba(0.565, 0.745, 0.655, 0.14)
-            border.width: 1; border.color: Qt.rgba(0.565, 0.745, 0.655, 0.25)
+            color: Qt.rgba(0.9, 0.526, 0.31, 0.14)
+            border.width: 1; border.color: Qt.rgba(0.9, 0.526, 0.31, 0.25)
             clip: true
             Image {
                 anchors.fill: parent
@@ -94,14 +94,14 @@ Rectangle {
                 Text {
                     visible: raiz.hace !== ""
                     text: "·  " + raiz.hace
-                    color: "#7b827b"
+                    color: "#826e8e"
                     font { family: "Rubik"; pixelSize: 10 }
                 }
             }
             Text {
                 width: parent.width
                 text: raiz.notif?.summary ?? ""
-                color: "#f3f8f3"
+                color: "#f8ecff"
                 elide: Text.ElideRight
                 font { family: "Rubik"; pixelSize: 14; weight: Font.DemiBold }
             }
@@ -110,7 +110,7 @@ Rectangle {
                 visible: text !== ""
                 text: raiz.notif?.body ?? ""
                 textFormat: Text.StyledText
-                color: "#a7aea7"
+                color: "#af9abb"
                 wrapMode: Text.Wrap
                 maximumLineCount: raiz.emergente ? 3 : 2
                 elide: Text.ElideRight
@@ -123,13 +123,13 @@ Rectangle {
     Rectangle {
         anchors { right: parent.right; top: parent.top; margins: 10 }
         width: 24; height: 24; radius: 12
-        color: x_area.containsMouse ? Qt.rgba(0.565, 0.745, 0.655, 0.25) : Qt.rgba(1, 1, 1, 0.06)
+        color: x_area.containsMouse ? Qt.rgba(0.9, 0.526, 0.31, 0.25) : Qt.rgba(1, 1, 1, 0.06)
         opacity: area.containsMouse || x_area.containsMouse || raiz.emergente ? 1 : 0
         Behavior on opacity { NumberAnimation { duration: 120 } }
         Text {
             anchors.centerIn: parent
             text: "󰅖"
-            color: "#dde3dd"
+            color: "#e4d2ee"
             font { family: "CaskaydiaCove Nerd Font"; pixelSize: 13 }
         }
         MouseArea {

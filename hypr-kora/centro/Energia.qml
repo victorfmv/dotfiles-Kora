@@ -10,10 +10,10 @@ import Quickshell.Services.UPower
 Scope {
     id: energia
 
-    readonly property color oro: "#91bfa8"
-    readonly property color crema: "#dde3dd"
-    readonly property color tenue: "#7b827b"
-    readonly property color fondo: "#111211"
+    readonly property color oro: "#e68750"
+    readonly property color crema: "#e4d2ee"
+    readonly property color tenue: "#826e8e"
+    readonly property color fondo: "#120f14"
     readonly property string iconos: "CaskaydiaCove Nerd Font"
 
     property bool abierto: false
@@ -92,11 +92,11 @@ Scope {
                 height: columna.implicitHeight + 22
                 radius: 16
                 gradient: Gradient {
-                    GradientStop { position: 0.0; color: Qt.rgba(0.088, 0.097, 0.088, 0.99) }
-                    GradientStop { position: 1.0; color: Qt.rgba(0.048, 0.053, 0.048, 0.99) }
+                    GradientStop { position: 0.0; color: Qt.rgba(0.098, 0.072, 0.113, 0.99) }
+                    GradientStop { position: 1.0; color: Qt.rgba(0.053, 0.039, 0.061, 0.99) }
                 }
                 border.width: 1
-                border.color: Qt.rgba(0.565, 0.745, 0.655, 0.5)
+                border.color: Qt.rgba(0.9, 0.526, 0.31, 0.5)
 
                 y: energia.abierto ? 0 : -height * 0.6
                 opacity: energia.abierto ? 1 : 0
@@ -120,12 +120,12 @@ Scope {
                         Rectangle {
                             Layout.preferredWidth: 34; Layout.preferredHeight: 34
                             radius: 11
-                            color: Qt.rgba(0.565, 0.745, 0.655, 0.14)
-                            border.width: 1; border.color: Qt.rgba(0.565, 0.745, 0.655, 0.3)
+                            color: Qt.rgba(0.9, 0.526, 0.31, 0.14)
+                            border.width: 1; border.color: Qt.rgba(0.9, 0.526, 0.31, 0.3)
                             Text {
                                 anchors.centerIn: parent
                                 text: energia.iconoBateria
-                                color: energia.nivel < 0.15 && !energia.cargando ? "#e06c5a" : energia.oro
+                                color: energia.nivel < 0.15 && !energia.cargando ? "#e85d9e" : energia.oro
                                 font { family: energia.iconos; pixelSize: 17 }
                             }
                         }
@@ -134,7 +134,7 @@ Scope {
                             spacing: 2
                             Text {
                                 text: Math.round(energia.nivel * 100) + "%"
-                                color: "#f3f8f3"
+                                color: "#f8ecff"
                                 font { family: "Rubik"; pixelSize: 16; bold: true }
                             }
                             Text {
@@ -152,14 +152,14 @@ Scope {
                         Layout.fillWidth: true
                         Layout.preferredHeight: 4
                         radius: 2
-                        color: Qt.rgba(0.865, 0.935, 0.9, 0.08)
+                        color: Qt.rgba(1, 0.81, 0.7, 0.08)
                         Rectangle {
                             width: parent.width * energia.nivel
                             height: parent.height
                             radius: 2
                             gradient: Gradient {
                                 orientation: Gradient.Horizontal
-                                GradientStop { position: 0.0; color: "#669b80" }
+                                GradientStop { position: 0.0; color: "#b8612f" }
                                 GradientStop { position: 1.0; color: energia.oro }
                             }
                             Behavior on width { NumberAnimation { duration: 400; easing.type: Easing.OutCubic } }
@@ -191,11 +191,11 @@ Scope {
                                 radius: 12
                                 opacity: disponible ? 1 : 0.35
                                 gradient: Gradient {
-                                    GradientStop { position: 0.0; color: boton.activo ? "#a1cbb6" : Qt.rgba(0.152, 0.168, 0.152, zona.containsMouse ? 1 : 0.85) }
-                                    GradientStop { position: 1.0; color: boton.activo ? "#79a58f" : Qt.rgba(0.108, 0.117, 0.108, zona.containsMouse ? 1 : 0.85) }
+                                    GradientStop { position: 0.0; color: boton.activo ? "#f09763" : Qt.rgba(0.169, 0.126, 0.195, zona.containsMouse ? 1 : 0.85) }
+                                    GradientStop { position: 1.0; color: boton.activo ? "#c9703c" : Qt.rgba(0.118, 0.092, 0.133, zona.containsMouse ? 1 : 0.85) }
                                 }
                                 border.width: 1
-                                border.color: boton.activo ? "#bddbcc" : zona.containsMouse ? Qt.rgba(0.565, 0.745, 0.655, 0.6) : Qt.rgba(0.865, 0.935, 0.9, 0.1)
+                                border.color: boton.activo ? "#f5b18a" : zona.containsMouse ? Qt.rgba(0.9, 0.526, 0.31, 0.6) : Qt.rgba(1, 0.81, 0.7, 0.1)
                                 scale: zona.pressed ? 0.95 : 1
                                 Behavior on scale { NumberAnimation { duration: 100 } }
 
@@ -205,7 +205,7 @@ Scope {
                                     Rectangle {
                                         anchors.horizontalCenter: parent.horizontalCenter
                                         width: 26; height: 26; radius: 13
-                                        color: boton.activo ? Qt.rgba(0.068, 0.073, 0.068, 0.2) : Qt.rgba(0.565, 0.745, 0.655, 0.14)
+                                        color: boton.activo ? Qt.rgba(0.073, 0.058, 0.082, 0.2) : Qt.rgba(0.9, 0.526, 0.31, 0.14)
                                         Text {
                                             anchors.centerIn: parent
                                             text: boton.modelData.ic

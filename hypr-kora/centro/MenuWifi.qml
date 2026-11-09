@@ -21,7 +21,7 @@ Rectangle {
     implicitHeight: col.implicitHeight + 24
     radius: 18
     color: Qt.rgba(1, 1, 1, 0.04)
-    border.width: 1; border.color: Qt.rgba(0.865, 0.935, 0.9, 0.07)
+    border.width: 1; border.color: Qt.rgba(1, 0.81, 0.7, 0.07)
 
     function iconoSenal(s) { return s > 0.75 ? "󰤨" : s > 0.5 ? "󰤥" : s > 0.25 ? "󰤢" : "󰤟"; }
 
@@ -33,11 +33,11 @@ Rectangle {
         // Encabezado con interruptor
         RowLayout {
             Layout.fillWidth: true
-            Text { text: "󰖩"; color: "#91bfa8"; font { family: "CaskaydiaCove Nerd Font"; pixelSize: 16 } }
+            Text { text: "󰖩"; color: "#e68750"; font { family: "CaskaydiaCove Nerd Font"; pixelSize: 16 } }
             Text {
                 Layout.fillWidth: true
                 text: "  WiFi"
-                color: "#f3f8f3"
+                color: "#f8ecff"
                 font { family: "Rubik"; pixelSize: 14; weight: Font.DemiBold }
             }
             Switch { encendido: Networking.wifiEnabled; onCambiar: Networking.wifiEnabled = !Networking.wifiEnabled }
@@ -49,7 +49,7 @@ Rectangle {
             Layout.topMargin: 6; Layout.bottomMargin: 6
             horizontalAlignment: Text.AlignHCenter
             text: Networking.wifiEnabled ? "Buscando redes…" : "WiFi apagado"
-            color: "#7b827b"
+            color: "#826e8e"
             font { family: "Rubik"; pixelSize: 12; italic: true }
         }
 
@@ -68,9 +68,9 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 42
                     radius: 12
-                    color: red.modelData.connected ? Qt.rgba(0.565, 0.745, 0.655, 0.18) : Qt.rgba(0.906, 0.944, 0.906, filaArea.containsMouse ? 0.07 : 0.025)
+                    color: red.modelData.connected ? Qt.rgba(0.9, 0.526, 0.31, 0.18) : Qt.rgba(0.945, 0.85, 1, filaArea.containsMouse ? 0.07 : 0.025)
                     border.width: 1
-                    border.color: red.modelData.connected ? Qt.rgba(0.565, 0.745, 0.655, 0.6) : Qt.rgba(0.865, 0.935, 0.9, filaArea.containsMouse ? 0.22 : 0.06)
+                    border.color: red.modelData.connected ? Qt.rgba(0.9, 0.526, 0.31, 0.6) : Qt.rgba(1, 0.81, 0.7, filaArea.containsMouse ? 0.22 : 0.06)
                     Behavior on color { ColorAnimation { duration: 120 } }
 
                     RowLayout {
@@ -78,25 +78,25 @@ Rectangle {
                         spacing: 10
                         Text {
                             text: raiz.iconoSenal(red.modelData.signalStrength)
-                            color: red.modelData.connected ? "#91bfa8" : "#dde3dd"
+                            color: red.modelData.connected ? "#e68750" : "#e4d2ee"
                             font { family: "CaskaydiaCove Nerd Font"; pixelSize: 16 }
                         }
                         Text {
                             Layout.fillWidth: true
                             text: red.modelData.name
                             elide: Text.ElideRight
-                            color: red.modelData.connected ? "#f3f8f3" : "#dde3dd"
+                            color: red.modelData.connected ? "#f8ecff" : "#e4d2ee"
                             font { family: "Rubik"; pixelSize: 13; weight: red.modelData.connected ? Font.DemiBold : Font.Normal }
                         }
                         Text {
                             text: red.conectando ? "conectando…" : red.modelData.connected ? "conectado" : red.modelData.known ? "guardada" : ""
-                            color: red.modelData.connected ? "#91bfa8" : "#7b827b"
+                            color: red.modelData.connected ? "#e68750" : "#826e8e"
                             font { family: "Rubik"; pixelSize: 11 }
                         }
                         Text {
                             visible: red.protegida
                             text: "󰌾"
-                            color: "#7b827b"
+                            color: "#826e8e"
                             font { family: "CaskaydiaCove Nerd Font"; pixelSize: 12 }
                         }
                     }
@@ -121,14 +121,14 @@ Rectangle {
                     Layout.preferredHeight: 40
                     radius: 12
                     color: Qt.rgba(0, 0, 0, 0.35)
-                    border.width: 1; border.color: "#91bfa8"
+                    border.width: 1; border.color: "#e68750"
 
                     TextInput {
                         id: clave
                         anchors { fill: parent; leftMargin: 14; rightMargin: 50 }
                         verticalAlignment: TextInput.AlignVCenter
                         echoMode: TextInput.Password
-                        color: "#f3f8f3"
+                        color: "#f8ecff"
                         font { family: "Rubik"; pixelSize: 13 }
                         focus: parent.visible
                         onVisibleChanged: if (visible) forceActiveFocus()
@@ -137,7 +137,7 @@ Rectangle {
                             visible: !clave.text
                             anchors.verticalCenter: parent.verticalCenter
                             text: "Contraseña"
-                            color: "#5d635d"
+                            color: "#63536d"
                             font: clave.font
                         }
                     }
@@ -145,14 +145,14 @@ Rectangle {
                         id: conectarBtn
                         anchors { right: parent.right; verticalCenter: parent.verticalCenter; rightMargin: 5 }
                         width: 36; height: 30; radius: 10
-                        color: "#91bfa8"
+                        color: "#e68750"
                         function enviar() {
                             if (!clave.text) return;
                             red.modelData.connectWithPsk(clave.text);
                             clave.text = "";
                             raiz.pidiendo = "";
                         }
-                        Text { anchors.centerIn: parent; text: "󰁔"; color: "#111211"; font { family: "CaskaydiaCove Nerd Font"; pixelSize: 15 } }
+                        Text { anchors.centerIn: parent; text: "󰁔"; color: "#120f14"; font { family: "CaskaydiaCove Nerd Font"; pixelSize: 15 } }
                         MouseArea { anchors.fill: parent; cursorShape: Qt.PointingHandCursor; onClicked: conectarBtn.enviar() }
                     }
                 }
@@ -164,7 +164,7 @@ Rectangle {
             Layout.alignment: Qt.AlignRight
             Layout.topMargin: 2
             text: "Más opciones de red  →"
-            color: masArea.containsMouse ? "#91bfa8" : "#7b827b"
+            color: masArea.containsMouse ? "#e68750" : "#826e8e"
             font { family: "Rubik"; pixelSize: 11 }
             MouseArea {
                 id: masArea; anchors.fill: parent; hoverEnabled: true; cursorShape: Qt.PointingHandCursor
