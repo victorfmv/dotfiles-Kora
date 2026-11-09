@@ -141,10 +141,10 @@ hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("~/.config/hypr-kora/scripts/
 ---- WORKSPACES & MONITORS ----
 -------------------------------
 
--- Focus on workspace number (Super + N)
+-- Focus on workspace number (Super + N); si hay un especial abierto, primero lo cierra
 for i = 1, NUM_WPM do
     local key = i % 10
-    hl.bind(mainMod .. " + " .. digitCode(key), hl.dsp.focus({ workspace = i }))
+    hl.bind(mainMod .. " + " .. digitCode(key), hl.dsp.exec_cmd("~/.config/hypr-kora/scripts/ir-workspace.sh " .. i))
 end
 
 -- Focus on workspace number
