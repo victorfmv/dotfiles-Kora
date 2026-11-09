@@ -55,7 +55,6 @@ Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-se
 
 `scripts/familiar.sh` lo prende/apaga (`on` / `off` para forzar). Crea o borra `~/.local/state/hypr-kora/familiar`, hace `hyprctl reload` y relanza la barra:
 
-- **Dock** abajo al centro (`dock/shell.qml`, Quickshell): íconos que crecen con el ratón, puntito en las apps abiertas, clic abre/enfoca (o muestra su workspace especial), clic central abre otra ventana. Apps fijas en la lista `fijas` del inicio del archivo.
 - **Barra** en islas redondas translúcidas, letra Rubik, reloj al centro: `waybar/familiar.jsonc` (incluye `config.jsonc` y solo cambia el acomodo) + `waybar/familiar.css` (importa `style.css`, así toma los colores del tema).
 - **Ventanas** (`config/familiar.lua`, va al final de hyprland.lua): esquinas 16 tipo squircle, sombra suave, borde de 1 px con el acento del tema casi transparente.
 

@@ -11,7 +11,7 @@ if FAMILIAR then
         general = {
             border_size = 1,
             gaps_in = 5,
-            gaps_out = { top = 6, right = 12, bottom = 6, left = 12 },
+            gaps_out = { top = 6, right = 12, bottom = 12, left = 12 },
             col = {
                 active_border = { colors = { suave } },
                 inactive_border = "rgba(ffffff12)",
