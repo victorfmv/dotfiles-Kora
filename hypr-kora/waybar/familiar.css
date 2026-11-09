@@ -1,0 +1,43 @@
+/* Waybar del modo Familiar: islas redondas y translúcidas, letra suave.
+   Los colores salen de style.css (@bg, @fg, @accent…), que tema.py cambia con cada fondo.
+   Aquí NO van colores fijos del tema, solo blanco/negro con transparencia. */
+@import url("style.css");
+
+* { font-family: "Rubik", "JetBrainsMono Nerd Font", sans-serif; font-size: 13px; }
+
+/* Sin barra de fondo: cada grupo es su propia isla flotante (40 = 3 + 34 + 3) */
+window#waybar { background: transparent; border-radius: 0; }
+.modules-left, .modules-center, .modules-right { margin: 3px 0; }
+.modules-left { margin-left: 0; }
+.modules-right { margin-right: 0; }
+
+.modules-left > widget > *,
+.modules-center > widget > *,
+.modules-right > widget > * {
+    background: alpha(@bg, 0.62);
+    border: 1px solid alpha(@fg, 0.10);
+    border-radius: 999px;
+    padding: 0 14px;
+    margin: 0 3px;
+}
+
+/* Botones redondos: logo, notificaciones y apagar */
+#custom-logo, #custom-notif, #custom-power {
+    min-width: 34px;
+    padding: 0;
+    font-size: 15px;
+}
+#custom-logo { padding-right: 4px; color: @accent; }
+#custom-power { color: alpha(@urgent, 0.85); font-size: 14px; }
+#custom-logo:hover, #custom-notif:hover, #custom-power:hover { background: alpha(@accent, 0.22); }
+
+/* El reloj, isla del centro: limpio y en color del texto (no del acento) */
+#clock { color: @fg; font-weight: 500; padding: 0 20px; }
+
+#custom-ventana, #custom-cava { min-width: 0; }
+#custom-ventana { padding: 0 16px; font-weight: 500; }
+#custom-cava { padding: 0 14px; color: alpha(@accent, 0.9); }
+#custom-workspaces { padding: 0 14px; }
+#estado > widget > * { padding: 0 6px; }
+
+tooltip { background: alpha(@bg, 0.92); border: 1px solid alpha(@fg, 0.12); border-radius: 14px; }

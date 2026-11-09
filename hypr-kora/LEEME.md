@@ -46,10 +46,20 @@ Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-se
 | Super + Alt + C | Menú apagar/reiniciar |
 | Super + Shift + W | Elegir wallpaper: panal de hexágonos animado (flechas/ratón + Enter, Esc cierra) |
 | Super + X / Super + Shift + X | Centro de control y notificaciones / borrar todas |
-| Super + Shift + B | Recargar Waybar |
+| Super + Shift + B | Recargar Waybar (`scripts/barra.sh`: elige la normal o la del modo Familiar) |
 | Alt + F6 (con o sin Fn) | Ventiladores al máximo / automático (`~/.local/bin/ventiladores`, no cambia el modo de energía) |
 | Clic en la batería | Panel de batería y modo de energía (Ahorro / Balanceado / Rendimiento) que sale bajo la barra (`centro/Energia.qml`, `scripts/energia.sh`) |
 | Impr (F10 en el Alienware) / Super + Impr | Captura de área / pantalla completa |
+
+## Modo Familiar (estética tipo macOS)
+
+`scripts/familiar.sh` lo prende/apaga (`on` / `off` para forzar). Crea o borra `~/.local/state/hypr-kora/familiar`, hace `hyprctl reload` y relanza la barra:
+
+- **Dock** abajo al centro (`dock/shell.qml`, Quickshell): íconos que crecen con el ratón, puntito en las apps abiertas, clic abre/enfoca (o muestra su workspace especial), clic central abre otra ventana. Apps fijas en la lista `fijas` del inicio del archivo.
+- **Barra** en islas redondas translúcidas, letra Rubik, reloj al centro: `waybar/familiar.jsonc` (incluye `config.jsonc` y solo cambia el acomodo) + `waybar/familiar.css` (importa `style.css`, así toma los colores del tema).
+- **Ventanas** (`config/familiar.lua`, va al final de hyprland.lua): esquinas 16 tipo squircle, sombra suave, borde de 1 px con el acento del tema casi transparente.
+
+Todo sigue los colores del fondo actual. Apagarlo deja todo como estaba.
 
 ## Si algo se rompe
 - **Revisar la config sin arrancar:** `Hyprland --verify-config -c ~/.config/hypr-kora/hyprland.lua`

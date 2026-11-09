@@ -159,6 +159,9 @@ def aplicar(nuevo):
 
 
 def recargar():
+    # La Waybar del modo Familiar importa style.css: tocar su css para que lo recargue también
+    if (K / "waybar/familiar.css").exists():
+        (K / "waybar/familiar.css").touch()
     # Quickshell (panel y vista de workspaces) se recarga solo al ver los archivos cambiar
     subprocess.run(["hyprctl", "reload"], stdout=subprocess.DEVNULL)
     # Waybar NO se reinicia (la barra desaparecía ~2 s): style.css se recarga solo
