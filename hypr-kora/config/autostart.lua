@@ -8,6 +8,7 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
     hl.exec_cmd("nm-applet --indicator")
     hl.exec_cmd(K .. "/scripts/barra.sh") -- Waybar normal o la del modo Familiar
+    hl.exec_cmd(K .. "/scripts/video-solido.sh") -- navegador sólido mientras suena un video
     hl.exec_cmd("qs -p " .. K .. "/overview") -- vista de workspaces (Super+Shift+Tab / pellizco)
     hl.exec_cmd("qs -p " .. K .. "/centro") -- notificaciones + centro de control (reemplaza a mako)
     hl.exec_cmd("qs -p " .. K .. "/fondos") -- selector de wallpapers (Super+Shift+W)

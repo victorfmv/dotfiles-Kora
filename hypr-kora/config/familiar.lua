@@ -37,9 +37,7 @@ if FAMILIAR then
     hl.layer_rule({ name = "kora-osd-nitido", match = { namespace = "^(kora-osd)$" }, blur = false })
 end
 
--- Navegador sólido: Hyprland solo puede transparentar la ventana COMPLETA, así que los videos
--- e imágenes también se veían con el fondo detrás. (La terminal sí queda con fondo transparente
--- y texto sólido porque kitty lo hace por su cuenta.)
-if FAMILIAR then
-    hl.window_rule({ match = { class = "^(firefox|zen|brave-browser|chromium|google-chrome)$" }, opacity = "1.0 override 1.0 override" })
-end
+-- Navegador: transparente, pero sólido mientras suena un video. Hyprland solo puede transparentar
+-- la ventana COMPLETA (los videos se veían con el fondo detrás), así que scripts/video-solido.sh
+-- escucha a Brave por MPRIS y le pone/quita la etiqueta "video" a sus ventanas.
+hl.window_rule({ match = { tag = "video" }, opacity = "1.0 override 1.0 override" })
