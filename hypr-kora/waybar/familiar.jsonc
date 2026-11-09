@@ -1,5 +1,6 @@
 // Waybar del modo Familiar (scripts/familiar.sh). Toma todo de config.jsonc y solo cambia
-// el acomodo: más delgada, menos módulos, el reloj al centro como "isla".
+// el acomodo: más delgada, reloj al centro y los lados EN ESPEJO (Victor lo quiere simétrico):
+//   logo ↔ apagar · ventana ↔ rayitas (mismo ancho) · workspaces ↔ estado (mismo ancho)
 {
     "include": ["~/.config/hypr-kora/waybar/config.jsonc"],
     "height": 40,
@@ -7,5 +8,9 @@
     "spacing": 4,
     "modules-left": ["custom/logo", "custom/ventana", "custom/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["custom/cava", "group/estado", "custom/notif", "custom/power"]
+    "modules-right": ["group/estado", "custom/cava", "custom/power"],
+    "group/estado": {
+        "orientation": "horizontal",
+        "modules": ["network", "bluetooth", "pulseaudio", "battery", "custom/notif"]
+    }
 }

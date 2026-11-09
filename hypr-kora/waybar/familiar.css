@@ -27,17 +27,21 @@ window#waybar { background: transparent; border-radius: 0; }
     padding: 0;
     font-size: 15px;
 }
-#custom-logo { padding-right: 4px; color: @accent; }
+#custom-logo { min-width: 30px; padding: 0 4px 0 0; color: @accent; }  /* 30 + 4 = 34: igual de ancho que el botón de apagar (el glifo de Arch va cargado a la derecha) */
 #custom-power { color: alpha(@urgent, 0.85); font-size: 14px; }
 #custom-logo:hover, #custom-notif:hover, #custom-power:hover { background: alpha(@accent, 0.22); }
 
 /* El reloj, isla del centro: limpio y en color del texto (no del acento) */
 #clock { color: @fg; font-weight: 500; padding: 0 20px; }
 
-#custom-ventana, #custom-cava { min-width: 0; }
-#custom-ventana { padding: 0 16px; font-weight: 500; }
-#custom-cava { padding: 0 14px; color: alpha(@accent, 0.9); }
-#custom-workspaces { padding: 0 14px; }
+/* Simetría: cada isla de la izquierda tiene su pareja del mismo ancho a la derecha */
+#custom-ventana, #custom-cava { min-width: 230px; padding: 0 14px; }
+#custom-ventana { font-weight: 500; }
+#custom-cava { color: alpha(@accent, 0.9); }
+#custom-workspaces, #estado { min-width: 210px; padding: 0 14px; }
 #estado > widget > * { padding: 0 6px; }
+#estado > widget:first-child > * { margin-left: 0; }
+/* La campanita va dentro de la isla de estado: sin pastilla propia */
+#estado #custom-notif { min-width: 0; padding: 0 6px; font-size: 13px; background: transparent; }
 
 tooltip { background: alpha(@bg, 0.92); border: 1px solid alpha(@fg, 0.12); border-radius: 14px; }
