@@ -5,17 +5,11 @@ FAMILIAR = f ~= nil
 if f then f:close() end
 
 if FAMILIAR then
-    -- Borde casi invisible: el acento del tema con poca opacidad
-    local suave = KORA.accent:gsub("%x%x%)$", "55)")
     hl.config({
         general = {
-            border_size = 1,
+            border_size = 0,         -- sin bordes
             gaps_in = 5,
             gaps_out = { top = 6, right = 12, bottom = 12, left = 12 },
-            col = {
-                active_border = { colors = { suave } },
-                inactive_border = "rgba(ffffff12)",
-            },
         },
         decoration = {
             rounding = 16,
@@ -29,4 +23,10 @@ if FAMILIAR then
             },
         },
     })
+end
+
+-- Ventanas transparentes de verdad (se ve el fondo nítido, sin difuminar).
+-- La barra y los paneles conservan su desenfoque (eso va por layer_rule, no por ventana).
+if FAMILIAR then
+    hl.window_rule({ match = { class = ".*" }, no_blur = true })
 end
