@@ -4,6 +4,7 @@
 import json, os, re, signal, socket, subprocess
 
 ORO, BLANCO, GRIS = "#e68750", "#e4d2ee", "#453a4b"
+MONO = "CaskaydiaCove Nerd Font Mono"
 ICONOS = {"music": "\U000F04C7", "discord": "\U000F066F", "obs": "\U000F044B", "gaming": "\U000F02B4", "steam": "\U000F04D3"}
 
 
@@ -28,17 +29,20 @@ def _pintar():
     puntos = []
     for i in abiertos:
         if i == activo:
-            puntos.append(f"<span color='{ORO}' size='12pt'></span>")
+            puntos.append(f"<span color='{ORO}' size='17pt'></span>")
         elif i in usados and usados[i]["windows"] > 0:
-            puntos.append(f"<span color='{BLANCO}' size='10pt'></span>")
+            puntos.append(f"<span color='{BLANCO}' size='14pt'></span>")
         else:
-            puntos.append(f"<span color='{GRIS}' size='10pt'></span>")
+            puntos.append(f"<span color='{GRIS}' size='14pt'></span>")
 
     especiales = [ICONOS.get(w["name"].removeprefix("special:"), "")
                   for w in todos if w["name"].startswith("special:")]
-    texto = "   ".join(puntos)
+    # Todo en la letra Mono: cada ícono queda centrado en su casilla y los espacios miden
+    # lo mismo, así la isla queda pareja (mismo aire a cada lado) con cualquier cantidad
+    texto = "  ".join(puntos)
     if especiales:
-        texto += "    " + "   ".join(f"<span color='{BLANCO}'>{e}</span>" for e in especiales)
+        texto += "    " + "  ".join(f"<span color='{BLANCO}' size='14pt'>{e}</span>" for e in especiales)
+    texto = f"<span font_family='{MONO}'>{texto}</span>"
 
     print(json.dumps({"text": texto, "tooltip": f"Workspace {activo}"}), flush=True)
 

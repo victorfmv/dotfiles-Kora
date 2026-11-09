@@ -37,7 +37,7 @@ window#waybar { background: transparent; border-radius: 0; }
 #custom-ventana, #custom-cava { min-width: 0; }
 #custom-ventana { padding: 0 16px; font-weight: 500; }
 #custom-cava { padding: 0 14px; color: alpha(@accent, 0.9); }
-#custom-workspaces { padding: 0 15px 0 12px; }  /* los íconos Nerd Font dejan aire a su izquierda: así queda el mismo espacio a cada lado */
+#custom-workspaces { padding: 0 14px; }
 #estado > widget > * { padding: 0 6px; }
 
 tooltip { background: alpha(@bg, 0.92); border: 1px solid alpha(@fg, 0.12); border-radius: 14px; }
