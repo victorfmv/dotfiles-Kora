@@ -19,4 +19,7 @@ else
 fi
 hyprctl reload >/dev/null          # config/familiar.lua: esquinas, sombras, bordes, márgenes
 setsid -f "$K/scripts/barra.sh" >/dev/null 2>&1
+# Paneles de Quickshell (centro, notificaciones, notas, volumen) releen el modo
+qs -p "$K/centro" ipc call centro recargar >/dev/null 2>&1
+qs -p "$K/osd" ipc call osd recargar >/dev/null 2>&1
 echo "Modo Familiar: $modo"

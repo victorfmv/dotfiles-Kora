@@ -30,3 +30,9 @@ end
 if FAMILIAR then
     hl.window_rule({ match = { class = ".*" }, no_blur = true })
 end
+
+-- El indicador de volumen/brillo también transparente sin difuminar (el centro y las
+-- notificaciones ya no llevan desenfoque; su transparencia la pone centro/Modo.qml)
+if FAMILIAR then
+    hl.layer_rule({ name = "kora-osd-nitido", match = { namespace = "^(kora-osd)$" }, blur = false })
+end

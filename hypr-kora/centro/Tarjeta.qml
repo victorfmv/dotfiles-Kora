@@ -17,8 +17,8 @@ Rectangle {
     radius: 16
     // Más clara que el panel, con degradado para que no se vea plana
     gradient: Gradient {
-        GradientStop { position: 0.0; color: raiz.emergente ? Qt.rgba(0.116, 0.087, 0.133, 0.98) : Qt.rgba(0.169, 0.126, 0.195, area.containsMouse ? 1 : 0.92) }
-        GradientStop { position: 1.0; color: raiz.emergente ? Qt.rgba(0.073, 0.058, 0.082, 0.98) : Qt.rgba(0.118, 0.092, 0.133, area.containsMouse ? 1 : 0.92) }
+        GradientStop { position: 0.0; color: raiz.emergente ? Qt.rgba(0.116, 0.087, 0.133, Modo.op(0.98, 0.74)) : Qt.rgba(0.169, 0.126, 0.195, area.containsMouse ? Modo.op(1, 0.7) : Modo.op(0.92, 0.5)) }
+        GradientStop { position: 1.0; color: raiz.emergente ? Qt.rgba(0.073, 0.058, 0.082, Modo.op(0.98, 0.74)) : Qt.rgba(0.118, 0.092, 0.133, area.containsMouse ? Modo.op(1, 0.7) : Modo.op(0.92, 0.5)) }
     }
     border.width: 1
     border.color: emergente ? Qt.rgba(0.9, 0.526, 0.31, 0.55) : Qt.rgba(1, 0.81, 0.7, area.containsMouse ? 0.16 : 0.08)

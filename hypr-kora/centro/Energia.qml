@@ -92,8 +92,8 @@ Scope {
                 height: columna.implicitHeight + 22
                 radius: 16
                 gradient: Gradient {
-                    GradientStop { position: 0.0; color: Qt.rgba(0.098, 0.072, 0.113, 0.99) }
-                    GradientStop { position: 1.0; color: Qt.rgba(0.053, 0.039, 0.061, 0.99) }
+                    GradientStop { position: 0.0; color: Qt.rgba(0.098, 0.072, 0.113, Modo.op(0.99, 0.74)) }
+                    GradientStop { position: 1.0; color: Qt.rgba(0.053, 0.039, 0.061, Modo.op(0.99, 0.74)) }
                 }
                 border.width: 1
                 border.color: Qt.rgba(0.9, 0.526, 0.31, 0.5)

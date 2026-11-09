@@ -36,6 +36,15 @@ ShellRoot {
     readonly property color fondo: colorKora("bg", "#111211")
     readonly property string iconos: "CaskaydiaCove Nerd Font"
 
+    // Modo Familiar (scripts/familiar.sh): pastilla más transparente y sin desenfoque
+    property bool familiar: false
+    FileView {
+        path: Quickshell.env("HOME") + "/.local/state/hypr-kora/familiar"
+        printErrors: false
+        onLoaded: root.familiar = true
+        onLoadFailed: root.familiar = false
+    }
+
     // ── Audio ──
     readonly property var salida: Pipewire.defaultAudioSink
     PwObjectTracker { objects: [root.salida] }
@@ -83,6 +92,7 @@ ShellRoot {
         target: "osd"
         function mostrar(): void { root.modo = "volumen"; root.mostrar(); }
         function brillo(): void { leerBrillo.running = true; }
+        function recargar(): void { Quickshell.reload(false); }
     }
 
     function icono() {
@@ -124,7 +134,7 @@ ShellRoot {
             Behavior on scale { NumberAnimation { duration: 240; easing.type: Easing.OutBack } }
 
             radius: height / 2
-            color: Qt.rgba(root.fondo.r, root.fondo.g, root.fondo.b, 0.86)
+            color: Qt.rgba(root.fondo.r, root.fondo.g, root.fondo.b, root.familiar ? 0.62 : 0.86)
             border.width: 1
             border.color: Qt.rgba(root.acento.r, root.acento.g, root.acento.b, 0.45)
 
