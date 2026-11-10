@@ -79,12 +79,14 @@ Scope {
             anchors { right: parent.right; bottom: parent.bottom; rightMargin: 14; bottomMargin: 14 }
             radius: 20
             gradient: Gradient {
-                GradientStop { position: 0.0; color: Qt.rgba(0.098, 0.072, 0.113, Modo.op(0.97, 0.74)) }
-                GradientStop { position: 1.0; color: Qt.rgba(0.053, 0.039, 0.061, Modo.op(0.97, 0.74)) }
+                GradientStop { position: 0.0; color: Qt.rgba(0.098, 0.072, 0.113, Modo.op(0.97, 0.6)) }
+                GradientStop { position: 1.0; color: Qt.rgba(0.053, 0.039, 0.061, Modo.op(0.97, 0.6)) }
             }
-            border.width: 1
+            border.width: Modo.familiar ? 0 : 1
             border.color: Qt.rgba(0.9, 0.526, 0.31, 0.45)
             clip: true
+
+            Vidrio { radio: parent.radius; activo: Modo.familiar }  // burbuja de vidrio (modo Familiar)
 
             // Entrada: sube desde abajo, crece un poco y aparece
             opacity: notas.abierto ? 1 : 0

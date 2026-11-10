@@ -134,9 +134,11 @@ ShellRoot {
             Behavior on scale { NumberAnimation { duration: 240; easing.type: Easing.OutBack } }
 
             radius: height / 2
-            color: Qt.rgba(root.fondo.r, root.fondo.g, root.fondo.b, root.familiar ? 0.62 : 0.86)
-            border.width: 1
+            color: Qt.rgba(root.fondo.r, root.fondo.g, root.fondo.b, root.familiar ? 0.5 : 0.86)
+            border.width: root.familiar ? 0 : 1
             border.color: Qt.rgba(root.acento.r, root.acento.g, root.acento.b, 0.45)
+
+            Vidrio { radio: parent.radius; activo: root.familiar }  // burbuja de vidrio (modo Familiar)
 
             // Ícono
             Text {
