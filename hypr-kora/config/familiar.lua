@@ -47,3 +47,8 @@ hl.window_rule({ match = { tag = "video" }, opacity = "1.0 override 1.0 override
 if FAMILIAR then
     hl.layer_rule({ name = "kora-waybar-emergentes", match = { namespace = "^(waybar)$" }, blur_popups = false })
 end
+
+-- Lanzador (fuzzel) transparente sin difuminar, como burbuja de vidrio (fuzzel/familiar.ini)
+if FAMILIAR then
+    hl.layer_rule({ name = "kora-lanzador-nitido", match = { namespace = "^(launcher)$" }, blur = false })
+end
