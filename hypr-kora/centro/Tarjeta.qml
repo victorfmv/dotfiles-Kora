@@ -17,13 +17,13 @@ Rectangle {
     readonly property color acento: urgente ? "#e85d9e" : "#e68750"
 
     implicitHeight: contenido.implicitHeight + 26
-    radius: mac ? 20 : 16
+    radius: mac ? 24 : 16
     // Más clara que el panel, con degradado para que no se vea plana
     gradient: Gradient {
-        GradientStop { position: 0.0; color: raiz.emergente ? Qt.rgba(0.116, 0.087, 0.133, Modo.op(0.98, 0.74)) : Qt.rgba(0.169, 0.126, 0.195, area.containsMouse ? Modo.op(1, 0.7) : Modo.op(0.92, 0.5)) }
-        GradientStop { position: 1.0; color: raiz.emergente ? Qt.rgba(0.073, 0.058, 0.082, Modo.op(0.98, 0.74)) : Qt.rgba(0.118, 0.092, 0.133, area.containsMouse ? Modo.op(1, 0.7) : Modo.op(0.92, 0.5)) }
+        GradientStop { position: 0.0; color: raiz.mac ? Qt.rgba(0.116, 0.087, 0.133, area.containsMouse ? 0.5 : 0.38) : raiz.emergente ? Qt.rgba(0.116, 0.087, 0.133, Modo.op(0.98, 0.74)) : Qt.rgba(0.169, 0.126, 0.195, area.containsMouse ? Modo.op(1, 0.7) : Modo.op(0.92, 0.5)) }
+        GradientStop { position: 1.0; color: raiz.mac ? Qt.rgba(0.073, 0.058, 0.082, area.containsMouse ? 0.58 : 0.46) : raiz.emergente ? Qt.rgba(0.073, 0.058, 0.082, Modo.op(0.98, 0.74)) : Qt.rgba(0.118, 0.092, 0.133, area.containsMouse ? Modo.op(1, 0.7) : Modo.op(0.92, 0.5)) }
     }
-    border.width: 1
+    border.width: mac ? 0 : 1   // en modo mac el borde es el aro de vidrio de abajo
     border.color: mac ? Qt.rgba(1, 0.81, 0.7, area.containsMouse || x_area.containsMouse ? 0.22 : 0.14)
                       : emergente ? Qt.rgba(0.9, 0.526, 0.31, 0.55) : Qt.rgba(1, 0.81, 0.7, area.containsMouse ? 0.16 : 0.08)
 
@@ -40,6 +40,44 @@ Rectangle {
         for (const c of [ic, entrada?.icon ?? "", (notif?.appName ?? "").toLowerCase()])
             if (c && Quickshell.hasThemeIcon(c)) return Quickshell.iconPath(c);
         return "";
+    }
+
+    // ── Burbuja de vidrio (modo Familiar, estilo Apple) ──
+    // Brillo suave en la mitad de arriba
+    Rectangle {
+        visible: raiz.mac
+        anchors { left: parent.left; right: parent.right; top: parent.top }
+        height: parent.height * 0.55
+        radius: parent.radius
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: Qt.rgba(1, 1, 1, 0.09) }
+            GradientStop { position: 1.0; color: Qt.rgba(1, 1, 1, 0) }
+        }
+    }
+    // Aro de luz en el borde: fuerte arriba a la izquierda, casi nada en medio y un reflejo abajo
+    Canvas {
+        id: aro
+        anchors.fill: parent
+        visible: raiz.mac
+        // blanco con transparencia (armado así para que tema.py no lo tiña)
+        function blanco(a) { return "rgba" + "(255, 255, 255, " + a + ")"; }
+        onPaint: {
+            const c = getContext("2d");
+            c.reset();
+            const o = 0.75, w = width, h = height, r = raiz.radius - o;
+            const g = c.createLinearGradient(0, 0, w * 0.3, h);
+            g.addColorStop(0.0, blanco(0.7));
+            g.addColorStop(0.5, blanco(0.08));
+            g.addColorStop(1.0, blanco(0.32));
+            c.strokeStyle = g;
+            c.lineWidth = 1.3;
+            c.beginPath();
+            c.roundedRect(o, o, w - 2 * o, h - 2 * o, r, r);
+            c.stroke();
+        }
+        onWidthChanged: requestPaint()
+        onHeightChanged: requestPaint()
+        onVisibleChanged: requestPaint()
     }
 
     // Barra de acento a la izquierda

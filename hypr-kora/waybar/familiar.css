@@ -40,5 +40,14 @@ window#waybar { background: transparent; border-radius: 0; }
 #custom-workspaces { padding: 0 14px; }
 #estado > widget > * { padding: 0 6px; }
 
-tooltip { background: alpha(@bg, 0.74); border: 1px solid alpha(@accent, 0.35); border-radius: 20px; }  /* transparente, sin difuminar (familiar.lua) */
-tooltip label { padding: 16px 22px 14px 22px; }
+/* Calendario: burbuja de vidrio estilo Apple (transparente, sin difuminar: familiar.lua).
+   Borde de luz más fuerte arriba con sombras internas, como el de las notificaciones. */
+tooltip {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0) 55%), alpha(@bg, 0.66);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 26px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 1px 0 0 rgba(255, 255, 255, 0.12),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.22);
+}
+tooltip label { padding: 16px 22px 14px 22px; text-shadow: none; }
+tooltip * { text-shadow: none; }
