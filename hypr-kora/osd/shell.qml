@@ -135,7 +135,7 @@ ShellRoot {
         signal cambiar(real v)
         signal tocarIcono()
 
-        width: 46
+        width: 30
         height: 176
 
         Text {
@@ -192,10 +192,10 @@ ShellRoot {
 
             // Ícono abajo, dentro del relleno
             Text {
-                anchors { horizontalCenter: parent.horizontalCenter; bottom: parent.bottom; bottomMargin: 12 }
+                anchors { horizontalCenter: parent.horizontalCenter; bottom: parent.bottom; bottomMargin: 8 }
                 text: barra.icono
                 color: barra.valor > 0.12 && !barra.apagado ? root.fondo : root.crema
-                font { family: root.iconos; pixelSize: 20 }
+                font { family: root.iconos; pixelSize: 15 }
                 Behavior on color { ColorAnimation { duration: 150 } }
                 MouseArea {
                     anchors.fill: parent
@@ -210,7 +210,7 @@ ShellRoot {
     // Medidas del panel
     readonly property int oreja: 24       // curva hacia adentro donde el panel se une con la orilla
     readonly property int esquina: 26     // esquinas redondas del lado de afuera
-    readonly property real anchoPanel: columna.width + 34
+    readonly property real anchoPanel: columna.width + 40
     readonly property real altoPanel: columna.height + 36
     // Cuánto ha salido el panel (0 = metido en la orilla, 1 = afuera)
     property real salida_: root.visible_ ? 1 : 0
@@ -280,7 +280,7 @@ ShellRoot {
 
             Column {
                 id: columna
-                x: 17
+                x: 20
                 anchors.verticalCenter: parent.verticalCenter
                 spacing: 16
 
