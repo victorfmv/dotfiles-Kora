@@ -51,17 +51,18 @@
     "clock": {
         "format": "󰥔  {0:%H:%M}",
         "format-alt": "󰥔  {0:%H:%M:%S}",
-        "tooltip-format": "<span size='14pt' color='#e68750'><b>{0:L%A %d de %B}</b></span>\n<span color='#63536d'>─────────────────────</span>\n<tt><big>{calendar}</big></tt>",
+        // Calendar al pasar el ratón: día grande, fecha, y el mes con hoy resaltado suave
+        "tooltip-format": "<span font_family='Rubik' size='22pt' weight='600' color='#e4d2ee' text_transform='capitalize'>{0:L%A}</span>\n<span font_family='Rubik' size='11.5pt' color='#e68750'>{0:L%d de %B · %Y}</span>\n<span size='5pt'> </span>\n<span line_height='1.45' font_family='JetBrainsMono Nerd Font' size='11.5pt'>{calendar}</span>",
         "interval": 1,
         "locale": "es_MX.UTF-8",
         "calendar": {
             "mode": "month",
             "on-scroll": 1,
             "format": {
-                "months": "<span color='#e4d2ee'><b>{}</b></span>",
-                "weekdays": "<span color='#e68750'><b>{}</b></span>",
+                "months": "<span color='#e4d2ee' text_transform='capitalize'><b>{}</b></span>",
+                "weekdays": "<span color='#63536d' size='10pt'><b>{}</b></span>",
                 "days": "<span color='#e4d2ee'>{}</span>",
-                "today": "<span background='#e68750' color='#120f14'><b>{}</b></span>"
+                "today": "<span color='#e68750' weight='900' underline='single' underline_color='#e68750'>{}</span>"
             }
         },
         "actions": {
