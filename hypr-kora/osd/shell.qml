@@ -1,6 +1,7 @@
-// Indicador de volumen y brillo de Hyprland Kora (estilo Caelestia): un panel pegado al borde
-// derecho, centrado en la altura, con dos barras verticales (volumen y brillo) lado a lado.
-// Sale deslizándose desde la orilla al cambiar cualquiera de los dos y se esconde solo;
+// Indicador de volumen y brillo de Hyprland Kora (estilo Caelestia): un panel que sale de la
+// orilla derecha de la pantalla (pegado a ella, con esquinas curvas hacia adentro donde se une),
+// con dos barras verticales, volumen arriba y brillo abajo.
+// Crece desde la orilla al cambiar cualquiera de los dos y se vuelve a meter solo;
 // con el ratón encima no se esconde y las barras se pueden arrastrar (clic en el ícono de
 // volumen = silenciar).
 // El brillo lo avisan las teclas (binds.lua: ipc call osd brillo), así hypridle no lo dispara.
@@ -8,6 +9,7 @@
 // Colores en vivo de config/colors.lua (los reescribe tema.py).
 // Probar:  qs -p ~/.config/hypr-kora/osd ipc call osd mostrar|brillo
 import QtQuick
+import QtQuick.Shapes
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
@@ -134,7 +136,7 @@ ShellRoot {
         signal tocarIcono()
 
         width: 46
-        height: 214
+        height: 176
 
         Text {
             id: numero
@@ -205,43 +207,82 @@ ShellRoot {
         }
     }
 
+    // Medidas del panel
+    readonly property int oreja: 24       // curva hacia adentro donde el panel se une con la orilla
+    readonly property int esquina: 26     // esquinas redondas del lado de afuera
+    readonly property real anchoPanel: columna.width + 34
+    readonly property real altoPanel: columna.height + 36
+    // Cuánto ha salido el panel (0 = metido en la orilla, 1 = afuera)
+    property real salida_: root.visible_ ? 1 : 0
+    Behavior on salida_ { NumberAnimation { duration: 340; easing.type: Easing.OutCubic } }
+
     PanelWindow {
         id: ventana
-        visible: root.visible_ || caja.opacity > 0
-        anchors.right: true                     // solo a la derecha: queda centrado en la altura
-        implicitWidth: caja.width + 24
-        implicitHeight: caja.height + 20
+        visible: root.visible_ || root.salida_ > 0.001
+        anchors.right: true                     // pegado a la orilla derecha, centrado en la altura
+        implicitWidth: root.anchoPanel + 2
+        implicitHeight: root.altoPanel + 2 * root.oreja
         color: "transparent"
         exclusionMode: ExclusionMode.Ignore
         WlrLayershell.layer: WlrLayer.Overlay
         WlrLayershell.namespace: "kora-osd"
         WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
-        mask: Region { item: caja }
+        mask: Region { item: zona }
 
-        Rectangle {
-            id: caja
-            width: fila.width + 32
-            height: fila.height + 32
-            anchors.verticalCenter: parent.verticalCenter
-            // Entra deslizándose desde la orilla derecha
-            x: root.visible_ ? parent.width - width - 12 : parent.width + 4
-            opacity: root.visible_ ? 1 : 0
-            Behavior on x { NumberAnimation { duration: 280; easing.type: Easing.OutCubic } }
-            Behavior on opacity { NumberAnimation { duration: 200 } }
-
-            radius: 30
-            color: Qt.rgba(root.fondo.r, root.fondo.g, root.fondo.b, root.familiar ? 0.5 : 0.86)
-            border.width: root.familiar ? 0 : 1
-            border.color: Qt.rgba(root.acento.r, root.acento.g, root.acento.b, 0.45)
-
-            Vidrio { radio: parent.radius; activo: root.familiar }  // burbuja de vidrio (modo Familiar)
-
+        // Zona que recibe el ratón: solo lo que ya salió del panel
+        Item {
+            id: zona
+            x: parent.width - width
+            y: root.oreja
+            width: root.anchoPanel * root.salida_
+            height: root.altoPanel
             HoverHandler { id: sobre; onHoveredChanged: if (hovered) ocultar.restart() }
+        }
 
-            Row {
-                id: fila
-                anchors.centerIn: parent
-                spacing: 14
+        // Forma: panel pegado a la orilla con "orejas" curvas arriba y abajo (tipo Caelestia)
+        Shape {
+            id: forma
+            anchors.fill: parent
+            preferredRendererType: Shape.CurveRenderer
+            readonly property real ancho: width
+            readonly property real w: root.anchoPanel * root.salida_
+            readonly property real e: Math.min(root.oreja, w)
+            readonly property real r: Math.min(root.esquina, w / 2)
+            readonly property real t: root.oreja                // arriba del panel
+            readonly property real b: root.oreja + root.altoPanel  // abajo del panel
+
+            ShapePath {
+                fillColor: Qt.rgba(root.fondo.r, root.fondo.g, root.fondo.b, root.familiar ? 0.6 : 0.92)
+                strokeColor: root.familiar ? Qt.rgba(1, 1, 1, 0.22) : Qt.rgba(root.acento.r, root.acento.g, root.acento.b, 0.4)
+                strokeWidth: 1
+                startX: forma.ancho; startY: forma.t - forma.e
+                // oreja de arriba (curva hacia adentro)
+                PathArc { x: forma.ancho - forma.e; y: forma.t; radiusX: forma.e; radiusY: forma.e; direction: PathArc.Clockwise }
+                PathLine { x: forma.ancho - forma.w + forma.r; y: forma.t }
+                PathArc { x: forma.ancho - forma.w; y: forma.t + forma.r; radiusX: forma.r; radiusY: forma.r; direction: PathArc.Counterclockwise }
+                PathLine { x: forma.ancho - forma.w; y: forma.b - forma.r }
+                PathArc { x: forma.ancho - forma.w + forma.r; y: forma.b; radiusX: forma.r; radiusY: forma.r; direction: PathArc.Counterclockwise }
+                PathLine { x: forma.ancho - forma.e; y: forma.b }
+                // oreja de abajo
+                PathArc { x: forma.ancho; y: forma.b + forma.e; radiusX: forma.e; radiusY: forma.e; direction: PathArc.Clockwise }
+                PathLine { x: forma.ancho; y: forma.t - forma.e }
+            }
+        }
+
+        // Contenido: sale junto con el panel (recortado a lo que ya salió)
+        Item {
+            x: parent.width - root.anchoPanel * root.salida_
+            y: root.oreja
+            width: root.anchoPanel * root.salida_
+            height: root.altoPanel
+            clip: true
+            opacity: Math.min(1, root.salida_ * 1.6)
+
+            Column {
+                id: columna
+                x: 17
+                anchors.verticalCenter: parent.verticalCenter
+                spacing: 16
 
                 Barra {
                     valor: root.volumen
