@@ -59,6 +59,10 @@ Se elige en la pantalla de inicio como **Hyprland Kora** (`/usr/share/wayland-se
 - **Barra** en islas redondas translúcidas, letra Rubik, reloj al centro: `waybar/familiar.jsonc` (incluye `config.jsonc` y solo cambia el acomodo) + `waybar/familiar.css` (importa `style.css`, así toma los colores del tema).
 - **Ventanas** (`config/familiar.lua`, va al final de hyprland.lua): esquinas 16 tipo squircle, sombra suave, borde de 1 px con el acento del tema casi transparente.
 
+- **Lanzador** (Super o logo de la barra): `lanzador/shell.qml`, sale de la orilla de abajo al centro, pegado a ella (estilo Caelestia). Escribir busca, ↑/↓ elige, Enter abre, Esc o clic afuera cierra; recuerda las apps más usadas. Los menús de apagar y portapapeles siguen con fuzzel (`fuzzel/familiar.ini`, vidrio).
+- **Volumen y brillo** (`osd/shell.qml`): salen de la orilla derecha, volumen arriba y brillo abajo, arrastrables.
+- **Notificaciones, calendario, centro, notas, batería**: burbuja de vidrio (`centro/Vidrio.qml`).
+
 Todo sigue los colores del fondo actual. Apagarlo deja todo como estaba.
 
 ## Si algo se rompe
