@@ -41,3 +41,9 @@ end
 -- la ventana COMPLETA (los videos se veían con el fondo detrás), así que scripts/video-solido.sh
 -- escucha a Brave por MPRIS y le pone/quita la etiqueta "video" a sus ventanas.
 hl.window_rule({ match = { tag = "video" }, opacity = "1.0 override 1.0 override" })
+
+-- Emergentes de la barra (el calendario del reloj): transparentes sin difuminar, como los paneles.
+-- Las islas de la barra conservan su desenfoque.
+if FAMILIAR then
+    hl.layer_rule({ name = "kora-waybar-emergentes", match = { namespace = "^(waybar)$" }, blur_popups = false })
+end

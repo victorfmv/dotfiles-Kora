@@ -40,5 +40,5 @@ window#waybar { background: transparent; border-radius: 0; }
 #custom-workspaces { padding: 0 14px; }
 #estado > widget > * { padding: 0 6px; }
 
-tooltip { background: alpha(@bg, 0.9); border: 1px solid alpha(@accent, 0.35); border-radius: 20px; }
+tooltip { background: alpha(@bg, 0.74); border: 1px solid alpha(@accent, 0.35); border-radius: 20px; }  /* transparente, sin difuminar (familiar.lua) */
 tooltip label { padding: 16px 22px 14px 22px; }
