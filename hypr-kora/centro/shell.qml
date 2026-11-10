@@ -152,21 +152,48 @@ ShellRoot {
         onFileChanged: reload()
     }
 
-    // ───────────── Emergentes (arriba a la derecha) ─────────────
+    // ───────────── Emergentes (salen de la esquina de arriba a la derecha) ─────────────
     PanelWindow {
-        visible: emergentes.count > 0
-        anchors { top: true; right: true }
-        margins { top: 6; right: 10 }
-        implicitWidth: 380
-        implicitHeight: pila.implicitHeight + 10
+        id: ventanaEmergentes
+        readonly property int anchoPanel: 404
+        readonly property real altoLleno: emergentes.count > 0 ? pila.implicitHeight + 24 : 0
+        property real altoVisto: altoLleno
+        Behavior on altoVisto { NumberAnimation { duration: 320; easing.type: Easing.OutCubic } }
+
+        visible: emergentes.count > 0 || altoVisto > 0.5
+        anchors { top: true; right: true }     // pegado a la esquina (encima de la barra)
+        implicitWidth: anchoPanel + 26
+        implicitHeight: Math.max(altoLleno, altoVisto) + 26
         color: "transparent"
-        exclusionMode: ExclusionMode.Normal
+        exclusionMode: ExclusionMode.Ignore
         WlrLayershell.layer: WlrLayer.Overlay
         WlrLayershell.namespace: "kora-notif"
+        mask: Region { item: zonaEmergentes }
+
+        Item {
+            id: zonaEmergentes
+            x: parent.width - width
+            width: ventanaEmergentes.anchoPanel
+            height: ventanaEmergentes.altoVisto
+        }
+
+        Esquina {
+            ancho: ventanaEmergentes.anchoPanel
+            alto: ventanaEmergentes.altoVisto
+            relleno: Qt.rgba(0.073, 0.058, 0.082, Modo.op(0.97, 0.95))
+            borde: Modo.familiar ? Qt.rgba(1, 1, 1, 0.2) : Qt.rgba(0.9, 0.526, 0.31, 0.45)
+        }
+
+        Item {
+            x: parent.width - width
+            width: ventanaEmergentes.anchoPanel
+            height: ventanaEmergentes.altoVisto
+            clip: true
 
         Column {
             id: pila
-            width: parent.width
+            x: 12; y: 12
+            width: parent.width - 24
             spacing: 8
             move: Transition { NumberAnimation { properties: "y"; duration: 200; easing.type: Easing.OutCubic } }
 
@@ -199,12 +226,15 @@ ShellRoot {
                 }
             }
         }
+        }
     }
 
     // ───────────── Panel (Super + X) ─────────────
+    property real salidaPanel: root.abierto ? 1 : 0
+    Behavior on salidaPanel { NumberAnimation { duration: 340; easing.type: Easing.OutCubic } }
     PanelWindow {
         id: panel
-        visible: root.abierto || caja.opacity > 0
+        visible: root.abierto || root.salidaPanel > 0.001
         anchors { top: true; bottom: true; left: true; right: true }
         color: "transparent"
         exclusionMode: ExclusionMode.Ignore
@@ -215,33 +245,31 @@ ShellRoot {
         // Clic afuera cierra
         MouseArea { anchors.fill: parent; onClicked: root.cerrar() }
 
-        Rectangle {
+        // Fondo pegado a la esquina de arriba a la derecha, con curvas donde toca las orillas
+        Esquina {
+            ancho: caja.width
+            alto: caja.height
+            relleno: Qt.rgba(0.073, 0.058, 0.082, Modo.op(0.97, 0.95))
+            borde: Modo.familiar ? Qt.rgba(1, 1, 1, 0.2) : Qt.rgba(0.9, 0.526, 0.31, 0.45)
+        }
+
+        Item {
             id: caja
+            readonly property real altoLleno: Math.min(columna.implicitHeight + 28, panel.height - 40)
             width: 430
-            height: Math.min(columna.implicitHeight + 28, panel.height - 60)
-            anchors { top: parent.top; right: parent.right; topMargin: 48; rightMargin: 10 }
-            radius: 24
-            gradient: Gradient {
-                GradientStop { position: 0.0; color: Qt.rgba(0.098, 0.072, 0.113, Modo.op(0.99, 0.6)) }
-                GradientStop { position: 1.0; color: Qt.rgba(0.053, 0.039, 0.061, Modo.op(0.99, 0.6)) }
-            }
-            border.width: Modo.familiar ? 0 : 1
-            border.color: Qt.rgba(0.9, 0.526, 0.31, 0.5)
+            // Entrada: crece hacia abajo desde la esquina
+            height: altoLleno * root.salidaPanel
+            anchors { top: parent.top; right: parent.right }
             clip: true
-
-            Vidrio { radio: parent.radius; activo: Modo.familiar }  // burbuja de vidrio (modo Familiar)
-
-            // Entrada: se desliza desde la derecha y aparece
-            opacity: root.abierto ? 1 : 0
-            transform: Translate { x: root.abierto ? 0 : 40; Behavior on x { NumberAnimation { duration: 260; easing.type: Easing.OutCubic } } }
-            Behavior on opacity { NumberAnimation { duration: 200 } }
 
             MouseArea { anchors.fill: parent }   // que los clics adentro no cierren
             focus: true
             Keys.onEscapePressed: root.cerrar()
 
             Flickable {
-                anchors { fill: parent; margins: 14 }
+                anchors { left: parent.left; right: parent.right; bottom: parent.bottom; margins: 14 }
+                height: caja.altoLleno - 28
+                opacity: Math.min(1, root.salidaPanel * 1.5)
                 contentHeight: columna.implicitHeight
                 boundsBehavior: Flickable.StopAtBounds
                 clip: true
