@@ -17,6 +17,9 @@ Scope {
     readonly property string iconos: "CaskaydiaCove Nerd Font"
 
     property bool abierto: false
+    // Cuánto ha salido el panel de la esquina (0 = metido, 1 = afuera)
+    property real salida: abierto ? 1 : 0
+    Behavior on salida { NumberAnimation { duration: 320; easing.type: Easing.OutCubic } }
     property bool guardado: true
 
     IpcHandler {
@@ -45,7 +48,7 @@ Scope {
 
     PanelWindow {
         id: ventana
-        visible: notas.abierto || caja.opacity > 0
+        visible: notas.abierto || notas.salida > 0.001
         anchors { top: true; bottom: true; left: true; right: true }
         color: "transparent"
         exclusionMode: ExclusionMode.Ignore
@@ -64,37 +67,38 @@ Scope {
             font: editor.font
         }
 
+        // Fondo pegado a la esquina de abajo a la derecha, con curvas donde toca las orillas
+        Esquina {
+            abajo: true
+            ancho: caja.width
+            alto: marco.height
+            relleno: Qt.rgba(0.073, 0.058, 0.082, Modo.op(0.97, 0.95))
+            borde: Modo.familiar ? Qt.rgba(1, 1, 1, 0.2) : Qt.rgba(0.9, 0.526, 0.31, 0.45)
+        }
+
+        // Marco que crece hacia arriba desde la esquina (recorta la caja mientras sale)
+        Item {
+            id: marco
+            anchors { right: parent.right; bottom: parent.bottom }
+            width: caja.width
+            height: caja.height * notas.salida
+            clip: true
+
         Rectangle {
             id: caja
             readonly property int relleno: 14
             readonly property int anchoMin: 280
             readonly property int anchoMax: Math.min(460, ventana.width - 40)
-            readonly property int altoMax: ventana.height - 80
+            readonly property int altoMax: ventana.height - 60
 
             width: Math.max(anchoMin, Math.min(anchoMax, medida.implicitWidth + relleno * 2 + 28))
             height: Math.min(altoMax, encabezado.height + Math.max(22, editor.implicitHeight) + relleno * 2 + 19)
             Behavior on width { NumberAnimation { duration: 180; easing.type: Easing.OutCubic } }
             Behavior on height { NumberAnimation { duration: 180; easing.type: Easing.OutCubic } }
 
-            anchors { right: parent.right; bottom: parent.bottom; rightMargin: 14; bottomMargin: 14 }
-            radius: 20
-            gradient: Gradient {
-                GradientStop { position: 0.0; color: Qt.rgba(0.098, 0.072, 0.113, Modo.op(0.97, 0.6)) }
-                GradientStop { position: 1.0; color: Qt.rgba(0.053, 0.039, 0.061, Modo.op(0.97, 0.6)) }
-            }
-            border.width: Modo.familiar ? 0 : 1
-            border.color: Qt.rgba(0.9, 0.526, 0.31, 0.45)
-            clip: true
-
-            Vidrio { radio: parent.radius; activo: Modo.familiar }  // burbuja de vidrio (modo Familiar)
-
-            // Entrada: sube desde abajo, crece un poco y aparece
-            opacity: notas.abierto ? 1 : 0
-            scale: notas.abierto ? 1 : 0.92
-            transformOrigin: Item.BottomRight
-            transform: Translate { y: notas.abierto ? 0 : 24; Behavior on y { NumberAnimation { duration: 260; easing.type: Easing.OutCubic } } }
-            Behavior on opacity { NumberAnimation { duration: 200 } }
-            Behavior on scale { NumberAnimation { duration: 260; easing.type: Easing.OutBack } }
+            anchors { top: parent.top; right: parent.right }
+            color: "transparent"
+            opacity: Math.min(1, notas.salida * 1.5)
 
             MouseArea { anchors.fill: parent; onClicked: editor.forceActiveFocus() }   // que los clics adentro no cierren
 
@@ -187,6 +191,7 @@ Scope {
                     }
                 }
             }
+        }
         }
 
         onVisibleChanged: if (visible) editor.forceActiveFocus()

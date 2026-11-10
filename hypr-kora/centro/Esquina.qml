@@ -2,6 +2,7 @@
 // orilla de arriba y la de la derecha, y donde se une con cada orilla hace una curva hacia adentro
 // ("oreja"), así parece que sale de la esquina. La esquina de afuera (abajo a la izquierda) es redonda.
 // Se pone llenando la ventana; ancho/alto son los del panel, medidos desde la esquina.
+// abajo: true → la esquina de ABAJO a la derecha (la misma forma volteada).
 import QtQuick
 import QtQuick.Shapes
 
@@ -13,6 +14,9 @@ Shape {
     property real esquina: 26
     property color relleno: Qt.rgba(0.073, 0.058, 0.082, 0.9)
     property color borde: Qt.rgba(1, 1, 1, 0.2)
+    property bool abajo: false
+
+    transform: Scale { yScale: forma.abajo ? -1 : 1; origin.y: forma.height / 2 }
 
     anchors.fill: parent
     preferredRendererType: Shape.CurveRenderer
